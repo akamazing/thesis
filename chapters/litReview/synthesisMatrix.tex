@@ -1,0 +1,200 @@
+\setenumerate{leftmargin=17pt, labelindent=0pt, itemindent=0pt, topsep=0pt, noitemsep}
+
+\begin{singlespace}
+ \begin{longtable}[c]{| p{3cm} | p{5.5cm} | p{3cm} | p{3cm} |}
+  \hline
+  %  \multicolumn{4}{|c|}{Begin of Table}\\
+  %
+  %  \hline
+
+  Paper & MRs used & Algorithms/Test Cases & Result of MT \\
+  \hline
+  \endfirsthead
+  \hline
+  \multicolumn{4}{|c|}{Continuation of Table \ref{long}}                                                                       \\
+  \hline
+  Paper & MRs used & Algorithms/Test Cases & Result of MT \\
+  \hline
+  \endhead
+
+  Application of Metamorphic Testing to Supervised Classifiers               &
+  MRs for classification algorithms:
+  \begin{enumerate}
+   % \begin{itemize}[leftmargin=10pt, labelindent=0pt, itemindent=0pt, itemsep=0em]
+   \item Consistency with affine transformation.
+   \item Permutation of class labels.
+   \item Permutation of attributes.
+   \item Addition of uninformative/informative attributes.
+   \item Consistency with re-prediction.
+   \item Addition of training samples.
+   \item Addition of classes by duplicating/re-labeling samples.
+   \item Removal of classes/samples.
+         % \end{itemize}
+  \end{enumerate}                                                                           &
+  Package: Weka.\par
+  \medskip
+  Test Case: Randomly generated training and test data. The randomly generated data model does not encapsulate any domain knowledge.                                                             &
+  Only a subset of MRs were a necessary property of the corresponding algorithm.\par\medskip
+  Several MRs violated NBC algorithms.\par\medskip
+  In the case of kNN algorithm, none of the necessary MRs were violated.
+  \\
+
+  \hline
+
+  Dataset Coverage for Testing Machine Learning Computer Programs            &
+  MR for Pseudo Oracles:
+  \begin{enumerate}
+   \item Reorder Data Points
+   \item Reverse Labels
+   \item Reorder Attributes
+   \item Add a Constant Attribute
+   \item Change Attribute Values
+  \end{enumerate}
+  \smallskip
+  MR for Dataset Generation:
+  \begin{enumerate}
+   \item Reduce Margin
+   \item Insert Noise
+   \item Insert Separable
+   \item Inconsistent Labels
+  \end{enumerate}                                                  &
+  Developed a Java program of an SVM classifier\par\medskip
+  LIBSVM, used as a pseudo oracle.\par\medskip
+  Test Case: Java pseudo random number generator.                            &
+  The Java program passed the tests in terms of this criteria. \par\medskip
+  When the model constructor component was tested it had some faults that the proposed method identifies.                      \\
+
+  \hline
+
+  Properties of Machine Learning Applications for Use in Metamorphic Testing &
+  MartiRank:
+  \begin{enumerate}
+   \item Additive
+   \item Multiplicative
+   \item Permutative
+   \item Invertive
+   \item Inclusive
+   \item Exclusive
+   \item SVM-Light:
+   \item Exclusive
+   \item Inclusive
+   \item Permutative
+  \end{enumerate}
+  \par\medskip
+  PAYL:
+  \begin{enumerate}
+   \item Additive
+   \item Multiplicative
+   \item Permutative
+   \item Invertive
+   \item Inclusive
+   \item Exclusive
+  \end{enumerate}                                                  &
+  Packages: MartiRank, SVM-Light, PAYL.                                      &
+  MartiRank: the implementation produced inconsistent results when a negative label existed.\par\medskip
+  SVM-Light not tested because it is inefficient to run the quadratic optimization algorithm on the full data set.\par\medskip
+  PAYL exhibits the same six metamorphic properties as MartiRank.                                                              \\
+
+  \hline
+
+  \caption{Synthesis Matrix.\label{long}}
+ \end{longtable}
+
+ \begin{longtable}[c]{| p{3cm} | p{4cm} | p{3.5cm} | p{4cm} |}
+  \hline
+  %  \multicolumn{4}{|c|}{Begin of Table}\\
+  %
+  %  \hline
+
+  Paper & Domain and Algo tested  & MRs investigated & New Innovative \\
+  \hline
+  \endfirsthead
+  \hline
+  \multicolumn{4}{|c|}{Continuation of Table \ref{long}}                                                                       \\
+  \hline
+  Paper & Domain and Algo tested  & MRs investigated & New Innovative \\
+  \hline
+  \endhead
+  \caption{Synthesis Matrix.\label{long}}
+  \endfoot
+
+  Semi-Proving: An Integrated Method for Program Proving, Testing, and Debugging             &
+  “Siemens suite of programs” specifically “replace program”: performs regular expression matching and substitutions.                                                                           &
+  Given the text 'ab', replacing 'a' with 'x' is equivalent to replacing non-'b' with 'x'. \par\medskip
+  'char' and '[char]' are equivalent with the exception of a few wildcards. \par\medskip
+  Regular expressions that involve square brackets are equivalent. \par\medskip
+  Use '?*' to match the entire input string.                                                             &
+  Proof of concept. \par\medskip
+  Supports automatic debugging through the identification of constraints for failure-causing inputs.
+  \\
+
+  \hline
+
+  Metamorphic Testing Integer Overflow Faults of Mission Critical Program: A Case Study             &
+  Integer Overflow Faults in TCAS: tcas.c                                                                           &
+  Additive                                                            &
+  Proof of concept. \par\medskip
+  Formal definition of MR, original test case, follow-up test case, input relation and output relation. \par\medskip
+  TCAS case study for demonstration.
+  \\
+
+  \hline
+  Metamorphic Testing for Software Quality Assessment: A Study of Search Engines             &
+  Search engines:
+  \begin{enumerate}
+    \item Google search
+    \item Baidu
+    \item Bing
+  \end{enumerate}                                                                        &
+  \begin{enumerate}
+    \item MPSite
+    \item MPTitle
+    \item MPReverseJD
+    \item SwapJD
+    \item Top1Absent
+  \end{enumerate}                                                         &
+  Validation, verification as well as quality assessment.
+  \\
+
+  \hline
+
+  Automatic System Testing of Programs without Test Oracles             &
+  Machine learning.
+  \begin{enumerate}
+    \item SVM: Sequential Minimal Optimization (SMO).
+    \item C4.5
+    \item MartiRank: Area Under the Curve
+  \end{enumerate}                                        &
+  \begin{enumerate}
+    \item Permute
+    \item Multiply
+    \item Add
+    \item Negate
+  \end{enumerate}                                          &
+  Heuristic Metamorphic Testing.\par\medskip
+  Automated Metamorphic System Testing.  \\
+
+  \hline
+
+  Metamorphic Testing and Beyond             &
+  A laplace equation with Dirichlet boundary Conditions: “alternating direction implicit” method                                        &
+  Beyond identity relations: Convergence                                          &
+  Selecting useful MRs. \par\medskip
+  Stronger may not necessarily be better than weaker ones. \par\medskip
+  Provides guidelines.  \\
+
+  \hline
+
+  A Metamorphic Testing Approach for Online Testing of Service-Oriented Software Applications             &
+  service-oriented calculator: arithmetic operators                                        &
+  \begin{enumerate}
+    \item Commutative
+    \item Associative
+  \end{enumerate}                                         &
+  Methodological steps for online and offline testing. \par\medskip
+  MT for service oriented applications.  \\
+
+  \hline
+
+ \end{longtable}
+\end{singlespace}

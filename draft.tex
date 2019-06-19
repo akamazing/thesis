@@ -1,0 +1,148 @@
+\documentclass[print,ms]{unothesis}
+
+\usepackage{style/import}
+\usepackage{hyperref} % to hyperlink the table of contents
+\hypersetup{linktocpage, pdfborder=0 0 0} % hyperref option to hyperlink the page number only, not the section title
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{setspace}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{geometry}
+\usepackage[english]{babel}
+\usepackage[autostyle]{csquotes}
+\usepackage{enumerate}
+\usepackage{subfiles}
+\usepackage[table]{xcolor}
+\usepackage{forloop}
+\usepackage{tabularx}
+\usepackage{rotating}
+\usepackage[shortlabels]{enumitem}
+\usepackage{longtable}
+
+
+%\usepackage{tcolorbox}
+
+%\graphicspath{ {images/} }
+
+\begin{document}
+%% Start formatting the first few special pages
+%% frontmatter is needed to set the page numbering correctly
+\frontmatter
+
+\title{Testing machine learning algorithms without oracle}
+\author{Abhishek Kumar}
+\adviser{Harvey Siy, Ph.D.}
+\adviserAbstract{Harvey Siy, Ph.D.}
+\membera{Myoungkyu Song, Ph.D.}
+\memberb{Matthew Hale, Ph.D.}
+\major{Computer Science}
+\degreemonth{August}
+\degreeyear{2018}
+%%
+%% For most people the defaults will be correct, so they are commented
+%% out. To manually set these, just uncomment and make the needed
+%% changes.
+%% \college{Your college}
+%% \city{Your City}
+%%
+%% For most people the following can be changed with a class
+%% option. To manually set these, just uncomment the following and
+%% make the needed changes.
+%%\doctype{Thesis Proposal}
+%% \degree{Your degree}
+%% \degreeabbreviation{Your degree abbr.}
+%%
+%% Now that we know everything we need, we can generate the title page
+%% itself.
+%%
+
+\maketitle
+
+%%
+%% You have a maximum of 350 words for your abstract, which includes
+%% your title, name, etc.
+%%
+%% Required
+\begin{abstract}
+ Abstract here
+\end{abstract}
+
+%% Optional
+%% \begin{copyrightpage}
+%% \end{copyrightpage}
+
+%% Optional
+%% \begin{dedication}
+%% \end{dedication}
+
+%% Optional
+\begin{acknowledgments}
+ Acknowledgments here
+\end{acknowledgments}
+
+%% Optional
+%% \begin{grantinfo}
+%% \end{grantinfo}
+%% The ToC is required
+%% Uncomment these if need be
+
+%% The ToC is required
+\tableofcontents
+%% Uncomment these if need be
+\listoffigures
+\listoftables
+%%
+%% ``Real'' beginning of the document.
+%% mainmatter is needed to set the page numbering correctly
+%%   mainmatter is needed after the ToC, (LoF, and LoT) to set the
+%%   page numbering correctly for the main body
+\mainmatter
+
+
+\chapter{Introduction}
+\import{chapters/introduction/}{introduction.tex}
+% \subfile{chapters/introduction/introduction}
+%talk about motivations - increasing popularity of machine learning in different applications, few research on reliaibility of these algorithms, lack of oracles
+
+\chapter{Literature Review}
+\import{chapters/litReview/}{litReview.tex}
+\import{chapters/litReview/}{metamorphicTesting.tex}
+\import{chapters/litReview/}{mlAlgo.tex}
+\import{chapters/litReview/}{testMLprog.tex}
+
+\chapter{Proposed Work}
+\import{chapters/proposedWork/}{environment.tex}
+\newpage
+\import{chapters/proposedWork/}{implementation.tex}
+%selection of MR
+%Analysis of results
+%No. of transformation before degrading
+%individual analysis and then comparisio of algos.
+% Weka, BioWeka
+% maybes: MartiRank, SVM-Light, PAYL
+
+\chapter{Work Plan}
+\import{chapters/proposedWork/}{workplan.tex}
+
+\chapter{Results}
+\import{chapters/results/}{results.tex}
+
+\chapter{Synthesis Matrix}
+\import{chapters/litReview/}{synthesisMatrix.tex}
+
+%% backmatter is needed at the end of the main body of your thesis to
+%% set up page numbering correctly for the remainder of the thesis
+\backmatter
+
+%% Start the correct formatting for the appendices
+\appendix
+
+%% Appendices go here (if you have them)
+
+
+\nocite{*}
+\bibliographystyle{plain}
+\bibliography{bibliography/bibliography}
+
+\end{document}
