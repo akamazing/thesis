@@ -13,13 +13,15 @@
 \usepackage[autostyle]{csquotes}
 \usepackage{enumerate}
 \usepackage{subfiles}
+\usepackage{subcaption}
 \usepackage[table]{xcolor}
 \usepackage{forloop}
 \usepackage{tabularx}
 \usepackage{rotating}
 \usepackage[shortlabels]{enumitem}
 \usepackage{longtable}
-
+\usepackage{placeins}
+\usepackage{siunitx}
 
 %\usepackage{tcolorbox}
 
@@ -111,10 +113,12 @@
 \import{chapters/litReview/}{mlAlgo.tex}
 \import{chapters/litReview/}{testMLprog.tex}
 
-\chapter{Proposed Work}
-\import{chapters/proposedWork/}{environment.tex}
+\chapter{Methodology}
+\import{chapters/methodology/}{collection.tex}
 \newpage
-\import{chapters/proposedWork/}{implementation.tex}
+\import{chapters/methodology/}{properties.tex}
+\newpage
+\import{chapters/methodology/}{analysis.tex}
 %selection of MR
 %Analysis of results
 %No. of transformation before degrading
@@ -122,8 +126,7 @@
 % Weka, BioWeka
 % maybes: MartiRank, SVM-Light, PAYL
 
-\chapter{Work Plan}
-\import{chapters/proposedWork/}{workplan.tex}
+
 
 \chapter{Results}
 \import{chapters/results/}{results.tex}
