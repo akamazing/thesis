@@ -1,5 +1,9 @@
 \documentclass[print,ms]{unothesis}
 
+%\usepackage{mathptmx} % alternative for Times-Roman font
+\usepackage{newtxtext} % for Times-Roman font https://tex.stackexchange.com/questions/81772/packages-times-itsc-txfonts-newtxtext-newtxmath-and-mathptmx-relation-and/88016
+%\usepackage[utf8]{inputenc}
+
 \usepackage{style/import}
 \usepackage{hyperref} % to hyperlink the table of contents
 \hypersetup{linktocpage, pdfborder=0 0 0} % hyperref option to hyperlink the page number only, not the section title
@@ -13,34 +17,48 @@
 \usepackage[autostyle]{csquotes}
 \usepackage{enumerate}
 \usepackage{subfiles}
-\usepackage{subcaption}
-\usepackage[table]{xcolor}
+\usepackage[table,dvipsnames]{xcolor}
 \usepackage{forloop}
 \usepackage{tabularx}
 \usepackage{rotating}
 \usepackage[shortlabels]{enumitem}
 \usepackage{longtable}
+\usepackage{multirow}
+\usepackage{makecell}
+\usepackage{subcaption}
 \usepackage{placeins}
+%\usepackage{tcolorbox}
 \usepackage{siunitx}
 
-%\usepackage{tcolorbox}
+\usepackage{float} % these move the table caption to the top
+\floatstyle{plaintop}
+\restylefloat{table}
+
+% http://tug.ctan.org/tex-archive/macros/latex/contrib/titlesec/titlesec.pdf
+\usepackage[compact]{titlesec}
+\titleformat{\chapter}[display]   
+{\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{-15pt}{\Huge}  % -15pt reduces gap between "Chapter" and title
+\titlespacing*{\chapter}{0pt}{-40pt}{40pt} % -40pt in second parameter reduces space above the chapter
+
+\newenvironment{italicquotes}
+{\small\begin{quote}\itshape}
+{\end{quote}\normalsize}
 
 %\graphicspath{ {images/} }
 
 \begin{document}
-%% Start formatting the first few special pages
-%% frontmatter is needed to set the page numbering correctly
-\frontmatter
 
-\title{Testing machine learning algorithms without oracle}
+% Affect of MR on the robustness of ML algo
+\title{Affect of Metamorphic Relations on the robustness of Machine Learning algorithms}
 \author{Abhishek Kumar}
 \adviser{Harvey Siy, Ph.D.}
 \adviserAbstract{Harvey Siy, Ph.D.}
 \membera{Myoungkyu Song, Ph.D.}
 \memberb{Matthew Hale, Ph.D.}
+\memberc{\ } % required by unothesis; if there is not a 4th member, put a hard space "\ "
 \major{Computer Science}
 \degreemonth{August}
-\degreeyear{2018}
+\degreeyear{2019}
 %%
 %% For most people the defaults will be correct, so they are commented
 %% out. To manually set these, just uncomment and make the needed
@@ -70,6 +88,10 @@
  Abstract here
 \end{abstract}
 
+%% Start formatting the first few special pages
+%% frontmatter is needed to set the page numbering correctly
+\frontmatter
+
 %% Optional
 %% \begin{copyrightpage}
 %% \end{copyrightpage}
@@ -90,10 +112,13 @@
 %% Uncomment these if need be
 
 %% The ToC is required
-\tableofcontents
+\setlength{\beforechapskip}{-40pt} % https://tex.stackexchange.com/questions/44751/how-do-i-remove-spacing-from-before-the-table-of-contents-in-memoir-class
+\renewcommand*\contentsname{Table of Contents}
+\tableofcontents  % use \tableofcontents* to exclude the ToC itself from the ToC entries
 %% Uncomment these if need be
 \listoffigures
 \listoftables
+
 %%
 %% ``Real'' beginning of the document.
 %% mainmatter is needed to set the page numbering correctly
@@ -108,7 +133,7 @@
 %talk about motivations - increasing popularity of machine learning in different applications, few research on reliaibility of these algorithms, lack of oracles
 
 \chapter{Literature Review}
-\import{chapters/litReview/}{litReview.tex}
+\import{chapters/litReview/}{finalLit.tex}
 \import{chapters/litReview/}{metamorphicTesting.tex}
 \import{chapters/litReview/}{mlAlgo.tex}
 \import{chapters/litReview/}{testMLprog.tex}

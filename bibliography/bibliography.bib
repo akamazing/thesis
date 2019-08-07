@@ -9,17 +9,7 @@ title = {{On testing non-testable programs}},
 volume = {25},
 year = {1982}
 }
-@inproceedings{Nakajima2016,
-author = {Nakajima, S and Bui, H N},
-booktitle = {2016 23rd Asia-Pacific Software Engineering Conference (APSEC)},
-doi = {10.1109/APSEC.2016.049},
-isbn = {1530-1362},
-issn = {1530-1362},
-keywords = {Computers,Guidelines,Metamorphic Testing,Pseudo Oracles,Software testing,Support Vector Machines,Support vector machines,Systematics,Test Coverage,Training,dataset coverage,learning (artificial intelligence),machine learning classifiers,machine learning computer program testing,metamorphic testing,program testing,support vector machines},
-pages = {297--304},
-title = {{Dataset Coverage for Testing Machine Learning Computer Programs}},
-year = {2016}
-}
+
 @inproceedings{Elbaum2014,
  author = {Elbaum, Sebastian and Rosenblum, David S.},
  title = {Known Unknowns: Testing in the Presence of Uncertainty},
@@ -36,6 +26,35 @@ year = {2016}
  publisher = {ACM},
  address = {New York, NY, USA},
  keywords = {Fault Masking, Hidden Markov Models, Software Testing, Uncertainty Quantification},
+}
+
+@inproceedings{Nakajima2016,
+author = {Nakajima, S and Bui, H N},
+booktitle = {2016 23rd Asia-Pacific Software Engineering Conference (APSEC)},
+doi = {10.1109/APSEC.2016.049},
+isbn = {1530-1362},
+issn = {1530-1362},
+keywords = {Computers,Guidelines,Metamorphic Testing,Pseudo Oracles,Software testing,Support Vector Machines,Support vector machines,Systematics,Test Coverage,Training,dataset coverage,learning (artificial intelligence),machine learning classifiers,machine learning computer program testing,metamorphic testing,program testing,support vector machines},
+pages = {297--304},
+title = {{Dataset Coverage for Testing Machine Learning Computer Programs}},
+year = {2016}
+}
+
+@article{Chen1998,
+abstract = {In software testing, a set of test cases is constructed according to some predeened selection criteria. The software is then examined against these test cases. Three interesting observations have been made on the current artifacts of software testing. Firstly, an error-revealing test case is considered useful while a successful test case which does not reveal software errors is usually not further investigated. Whether these successful test cases still contain useful information for revealing software errors has not been properly studied. Secondly, no matter how extensive the testing has been conducted in the development phase, errors may still exist in the software 5. These errors, if left undetected, may eventually cause damage to the production system. The study of techniques for uncovering software errors in the production phase is seldom addressed in the literature. Thirdly, as indicated by Weyuker in 66, the availability of test oracles is pragmatically unattainable in most situations. However, the availability of test oracles is generally assumed in conventional software testing techniques. In this paper, we propose a novel test case selection technique that derives new test cases from the successful ones. The selection aims at revealing software errors that are possibly left undetected in successful test cases which may be generated using some existing strategies. As such, the proposed technique augments the eeectiveness of existing test selection strategies. The},
+author = {Chen, TY and Cheung, SC and Yiu, SM},
+journal = {{\ldots} , Hong Kong University of Science and {\ldots}},
+title = {{Metamorphic testing: a new approach for generating next test cases}},
+year = {1998}
+}
+
+@article{Zhou2004,
+abstract = {An " oracle " in software testing is a procedure by which testers can decide whether the output of the program under test-ing is correct. In some situations, however, the oracle is not available or too difficult to apply. This is known as the " or-acle problem " . In other situations, the oracle is often the human tester who checks the testing result manually. The manual prediction and verification of program output greatly decreases the efficiency and increases the cost of testing. A metamorphic testing method has been proposed to test pro-grams without the involvement of an oracle. It employs prop-erties of the target function, known as metamorphic relations, to generate follow-up test cases and verify the outputs},
+author = {Zhou, Z.Q. and Huang, Dh and Tse, Th and Yang, Z. and Huang, H. and Chen, Ty},
+journal = {Proceedings of the 8th International Symposium on Future Software Technology (ISFST 2004)},
+keywords = {automated testing,ful test case,metamorphic relation,metamorphic testing,multiple executions,oracle,success-},
+title = {{Metamorphic testing and its applications}},
+year = {2004}
 }
 
 @article{Segura2016,
@@ -100,9 +119,14 @@ keywords = {D25 [Software Engineering],Metamorphic Testing,Oracle Problem,Softwa
 title = {{Automatic System Testing of Programs without Test Oracles}},
 year = {2009}
 }
-@article{Murphy,
-author = {Murphy, Christian and Kaiser, Gail and Hu, Lifeng},
-title = {{Properties of Machine Learning Applications for Use in Metamorphic Testing}}
+
+@inproceedings{Murphy2008,
+author = {Murphy, Christian and Kaiser, Gail and Hu, Lifeng and Wu, Leon},
+booktitle={SEKE},
+year = {2008},
+month = {01},
+pages = {867-872},
+title = {Properties of Machine Learning Applications for Use in Metamorphic Testing.}
 }
 
 @inproceedings{Chen2003,
@@ -159,7 +183,25 @@ year = {2016}
  address = {New York, NY, USA},
 }
 
+@inproceedings{Bertolino2007,
+abstract = {Software engineering comprehends several disciplines devoted to prevent and remedy malfunctions and to warrant adequate behaviour. Testing, the subject of this paper, is a widespread validation approach in industry, but it is still largely ad hoc, expensive, and unpredictably effective. Indeed, software testing is a broad term encompassing a variety of activities along the development cycle and beyond, aimed at different goals. Hence, software testing research faces a collection of challenges. A consistent roadmap of the most relevant challenges to be addressed is here proposed. In it, the starting point is constituted by some important past achievements, while the destination consists of four identified goals to which research ultimately tends, but which remain as unreachable as dreams. The routes from the achievements to the dreams are paved by the outstanding research challenges, which are discussed in the paper along with interesting ongoing work.},
+author = {Bertolino, Antonia},
+booktitle = {FoSE 2007: Future of Software Engineering},
+doi = {10.1109/FOSE.2007.25},
+isbn = {0769528295},
+mendeley-groups = {Thesis},
+title = {{Software testing research: Achievements, challenges, dreams}},
+year = {2007}
+}
 
+@article{Beizer1990,
+doi = {10.1002/stvr.4370020406},
+issn = {09600833},
+journal = {Software Testing, Verification and Reliability},
+mendeley-groups = {Thesis},
+title = {{Software testing techniques (2nd Edn). B. Beizer, Published by Van Nostrand Reinhold, New York, 1990. ISBN 0-442-20672-0, 550 pages. Price: {\pounds}36.50, Hard Cover}},
+year = {2006}
+}
 
 @misc{MNIST,
 author = {Yann LeCun and Corinna Cortes and Christopher J.C. Burges},
@@ -169,13 +211,79 @@ note = {Accessed: 2018-05-30},
 year = {1999}
 }
 
+@inproceedings{Chen2002,
+abstract = {We present a semi-proving method for verifying necessary conditions for program correctness. Our approach is based on the integration of global symbolic evaluation and metamorphic testing. It is relatively easier than conventional program proving, and helps to alleviate the problem that software testing cannot show the absence of faults.},
+author = {Chen, T.Y. and Tse, T.H. and Zhou, Z.},
+booktitle = {Proceedings of the ACM SIGSOFT 2002 International Symposium on Software Testing and Analysis},
+isbn = {1581135629},
+keywords = {Global symbolic evaluation,Metamorphic testing,Program proving,Program testing,Semi-proving,Symbolic execution},
+mendeley-groups = {Thesis},
+title = {{Semi-proving: An integrated method based on global symbolic evaluation and metamorphic testing}},
+year = {2002}
+}
 
-to cite:
-lit review: 1st paragraph
-Software Testing Research: Achievements, Challenges, Dreams:
-Antonia Bertolino
-B. Beizer. Software Testing Techniques (2nd ed.). Van Nos- trand Reinhold Co., New York, NY, USA, 1990.
 
-MT: 
-Metamorphic Testing and Its Applications ∗ † Zhi Quan Zhou‡∥, D.H. Huang‡, T.H. Tse§,
-Zongyuan Yang ¶, Haitao Huang ¶, and T. Y. Chen ‡
+
+@article{brendel2017decision,
+  title={Decision-based adversarial attacks: Reliable attacks against black-box machine learning models},
+  author={Brendel, Wieland and Rauber, Jonas and Bethge, Matthias},
+  journal={arXiv preprint arXiv:1712.04248},
+  year={2017}
+}
+
+@inproceedings{ma2018deepgauge,
+  title={Deepgauge: Multi-granularity testing criteria for deep learning systems},
+  author={Ma, Lei and Juefei-Xu, Felix and Zhang, Fuyuan and Sun, Jiyuan and Xue, Minhui and Li, Bo and Chen, Chunyang and Su, Ting and Li, Li and Liu, Yang and others},
+  booktitle={Proceedings of the 33rd ACM/IEEE International Conference on Automated Software Engineering},
+  pages={120--131},
+  year={2018},
+  organization={ACM}
+}
+
+@inproceedings{zhang2018efficient,
+  title={Efficient neural network robustness certification with general activation functions},
+  author={Zhang, Huan and Weng, Tsui-Wei and Chen, Pin-Yu and Hsieh, Cho-Jui and Daniel, Luca},
+  booktitle={Advances in neural information processing systems},
+  pages={4939--4948},
+  year={2018}
+}
+
+@article{xie2018coverage,
+  title={Coverage-guided fuzzing for deep neural networks},
+  author={Xie, Xiaofei and Ma, Lei and Juefei-Xu, Felix and Chen, Hongxu and Xue, Minhui and Li, Bo and Liu, Yang and Zhao, Jianjun and Yin, Jianxiong and See, Simon},
+  journal={arXiv preprint arXiv:1809.01266},
+  year={2018}
+}
+
+@article{zhou2019metamorphic,
+  title={Metamorphic testing of driverless cars},
+  author={Zhou, Zhi Quan and Sun, Liqun},
+  journal={Communications of the ACM},
+  volume={62},
+  number={3},
+  pages={61--67},
+  year={2019},
+  publisher={ACM}
+}
+
+@article{chen2016metamorphic,
+  title={Metamorphic testing for cybersecurity},
+  author={Chen, Tsong Yueh and Kuo, Fei-Ching and Ma, Wenjuan and Susilo, Willy and Towey, Dave and Voas, Jeffrey and Zhou, Zhi Quan},
+  journal={Computer},
+  volume={49},
+  number={6},
+  pages={48--55},
+  year={2016},
+  publisher={IEEE}
+}
+
+@article{barr2014oracle,
+  title={The oracle problem in software testing: A survey},
+  author={Barr, Earl T and Harman, Mark and McMinn, Phil and Shahbaz, Muzammil and Yoo, Shin},
+  journal={IEEE transactions on software engineering},
+  volume={41},
+  number={5},
+  pages={507--525},
+  year={2014},
+  publisher={IEEE}
+}

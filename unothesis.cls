@@ -1,28 +1,27 @@
 %%
 %% This is file `unothesis.cls',
-%% based on `nuthesis.cls', which was
+%% based on `nuthesis.cls', which was 
 %% generated with the docstrip utility.
 %%
 %% The original source files were:
 %%
 %% nuthesis.dtx  (with options: `class')
 %% This is a generated file.
-%%
+%% 
 %% Copyright (C) 2008 by Ned W. Hummel nhummel@gmail.com
-%%
+%% 
 %% This file may be distributed and/or modified under the conditions of
 %% the LaTeX Project Public License, either version 1.3c of this license
 %% or (at your option) any later version.  The latest version of this
 %% license is in:
-%%
+%% 
 %%    http://www.latex-project.org/lppl.txt
-%%
+%% 
 %% and version 1.3c or later is part of all distributions of LaTeX version
 %% 2006/05/20 or later.
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{unothesis}
     [2008/04/14 v0.7 University of Nebraska Thesis class]
-
 %% \CharacterTable
 %% {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
 %%  Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
@@ -71,10 +70,10 @@
 \newcommand{\nu@campus}{University of Nebraska at Omaha}
 \newcommand{\city}[1]{%
   \gdef\nu@city{#1}}
-% \newcommand{\nu@city}{Omaha}
+\newcommand{\nu@city}{Omaha}
 \newcommand{\state}[1]{%
   \gdef\nu@state{#1}}
-% \newcommand{\nu@state}{Nebraska}
+\newcommand{\nu@state}{Nebraska}
 \newcommand{\adviser}[1]{%
   \gdef\nu@adviser{#1}}
 \newcommand{\adviserAbstract}[1]{%
@@ -85,8 +84,11 @@
   \gdef\nu@membera{#1}}
 \newcommand{\memberb}[1]{%
   \gdef\nu@memberb{#1}}
+\newcommand{\memberc}[1]{%
+  \gdef\nu@memberc{#1}}
 \newcommand{\nu@membera}{}
 \newcommand{\nu@memberb}{}
+\newcommand{\nu@memberc}{}
 \newcommand{\degreemonth}[1]{%
   \gdef\nu@month{#1}}
 \newcommand{\nu@month}{}
@@ -164,7 +166,7 @@
 \renewcommand{\maketitle}{%
 \begin{center}%
 \singlespacing
-\MakeUppercase{\textbf{\thetitle}}\\[2\baselineskip]
+\MakeUppercase{\thetitle}\\[1\baselineskip]
 A \nu@doctype\\[\baselineskip]
 Presented to the\\[\baselineskip]
 Department of \nu@major\\[\baselineskip]
@@ -175,12 +177,13 @@ In Partial Fulfilment \\of the Requirements for the Degree\\[\baselineskip]
 \nu@degree\ in \nu@major\\[\baselineskip] \nu@campus\\[\baselineskip]
 by\\[1\baselineskip]
 \theauthor\\[1\baselineskip]
-% \nu@city, \nu@state\\[1\baselineskip]
-\nu@month, \nu@year\\[3\baselineskip]
+%\nu@city, \nu@state\\[1\baselineskip]
+\nu@month, \nu@year\\[4\baselineskip]
 \underline{Supervisory Committee:}\\[\baselineskip]
 \nu@adviser\\[\baselineskip]
 \nu@membera\\[\baselineskip]
-\nu@memberb\\
+\nu@memberb\\[\baselineskip]
+\nu@memberc\\
 \end{center}
 \thispagestyle{empty}
 \cleardoublepage
@@ -189,10 +192,11 @@ by\\[1\baselineskip]
   \pagestyle{empty}%
   \begin{doublespacing}%
     \begin{center}%
-      \MakeUppercase{\textbf{\thetitle}}\\[1\baselineskip]
-      \theauthor, \nu@degreeabbreviation\\
-      \nu@university, \nu@year\\
+      \MakeUppercase{\thetitle}\\[1\baselineskip]
+      \theauthor, \nu@degreeabbreviation\\[1\baselineskip]
+      \nu@university, \nu@year\\[1\baselineskip]
       Advisor: \nu@adviserAbstract\\[1\baselineskip]
+      %Co-advisors: \nu@adviserAbstract\\[1\baselineskip]
     \end{center}%
   }{\par\end{doublespacing}\cleardoublepage}
 
@@ -250,4 +254,4 @@ by\\[1\baselineskip]
 }
 \endinput
 %%
-%% End of file `nuthesis.cls'.
+%% End of file `unothesis.cls'.

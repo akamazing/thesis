@@ -1,5 +1,5 @@
 \section{Software testing}
-Testing is one of the most important activity in software development life cycle. Bertolino define software testing as, "observing the execution of a software system to validate whether it behaves as intended and identify potential malfunctions". Testing is widely used in industry for quality assurance purposes. Software testing is an umbrella term that encompasses a wide range of different sub tasks, like unit testing a small piece of code developers, acceptance testing a large information system for customer validation, monitoring the application at run-time to ensure uninterrupted service. Some studies (B. Beizer) have estimated that software testing can use upto fifty percent, or more, of the total development cost. Thus, it is program software testing is worthy of our attention for research and improvement. 
+Testing is one of the most important activity in software development life cycle. Bertolino (2007) define software testing as, "observing the execution of a software system to validate whether it behaves as intended and identify potential malfunctions". Testing is widely used in industry for quality assurance purposes. Software testing is an umbrella term that encompasses a wide range of different sub tasks, like unit testing a small piece of code, acceptance testing a large information system for customer validation, monitoring the application at run-time to ensure uninterrupted service, etc.\cite{Bertolino2007} A study by Beizer (2006) has estimated that software testing can use up to fifty percent, or more, of the total development cost. Thus, it is clear that program software testing is worthy of our attention for research and improvement.\cite{Beizer1990} 
 Weyuker (1982) categorizes the testing research activities into three categories:
 \begin{enumerate}
   \item Develop a sound theoretical basis for testing.
@@ -7,50 +7,22 @@ Weyuker (1982) categorizes the testing research activities into three categories
   \item Define accurate measurement criteria for testing data adequately.
 \end{enumerate}
 
-However,  there are a lot of uncertainties in program testing and it is often not so straightforward to test programs. These Uncertainties in most systems are introduced by either human decisions, machine learning algorithms, external libraries, or sensing variability mostly due to the need to support deep interactions between interconnected software systems and their users and execution environments. In the context of software testing, the two fundamental problems are: increased ambiguity of what constitutes the input space and what is deemed as acceptable behavior in absence of an oracle. (Chen, Tse, & Zhou Semi Proving: An integrated method and Elbaum2014)
-
- One of the first problems that testers run into is that they don't have access to acceptable output to test the program output against. This problem is often referred to as the Oracle problem. Weyuker (1982) provides founding definition of an oracle as a system that determines the correctness of the solution by comparing the system’s output to the one that it predicts. As per Weyuker, non-testable programs can be defined as the programs for which such oracles do not exist. The term non-testable is used, from the point of view of correctness testing. If one cannot decide whether or not the output is correct or have to spend some extraordinary amount of resources to do so, testing those systems may not be worth it.
- 
- One way of elevating the oracle-problem is through the use of pseudo oracle. It is also referred to as dual-coding and used in higly critical software. (Weyuker and automatic system testing of programs without test oracles: Christian murphy, kuang shen). Pseudo-oracles are multiple implementation of same specification of the original program under test.
- However dual coding comes with it's own set of problems. As [this and this ] pointed out that it 
- multiple implementation may not exist
- multiple implementation may be created by the same or same set of developers prone to make same mistakes.
- pseudo-oracle requires at least two implementation and it may be a lot of overhead 
- The authors finally make five recommendation for items to be considered as a part of documentation during testing.
-\begin{enumerate}
-  \item The criteria used to select the test data.
-  \item The degree to which the criteria were fulfilled.
-  \item The test data, the program ran on.
-  \item The output of each of each test datum.
-  \item How the results were determined to be correct or acceptable.
-\end{enumerate}
-Although these recommendations do not solve the problem of non-testable programs, however, they do provide information on whether the program should be considered adequately tested or not.
-
- 
- Although non-testable programs occur in all areas of data processing, the problem is undoubtedly most acute in the area of numerical computations, particularly where floating point arithmetic is used. While performing mathematical computations, errors from three sources can creep in:
+However,  there are a lot of uncertainties in program testing and it is often not so straightforward to test programs. These Uncertainties in most systems are introduced by either human decisions, machine learning algorithms, external libraries, or sensing variability mostly due to the need to support deep interactions between interconnected software systems and their users and execution environments. In the context of software testing, the two fundamental problems are: increased ambiguity of what constitutes the input space and what is deemed as acceptable behavior in absence of an oracle. \cite{Chen2002} \cite(Elbaum2014)
+Although non-testable programs occur in all areas of data processing, the problem is undoubtedly most acute in the area of numerical computations, particularly where floating point arithmetic is used. While performing mathematical computations, errors from three sources can creep in:
 \begin{enumerate}
   \item The mathematical model used to do the computations.
   \item Programs written to implement the computation.
   \item The features of the environment like round-off, floating point operations etc.
-\end{enumerate}
-
-Many techniques have since been developed to develop these set of non-testable programs.
-
-Two ways to deal with uncertainty are to exercise more control over the inputs provided to the unit under test and to constrain the testing environment. Some uncertainties like those present in systems that deal with the physical world are aleatoric; that is, they cannot be known precisely because of their inherent variability and noise.  Epistemic uncertainties are those that could be resolved with enough effort (e.g., over-engineering a sensor-based system to minimize inference errors about the environment)— and resolving them are becoming more numerous and costly, as the systems are becoming increasingly complex. A complementary way to deal with uncertainty at the other end of the testing process is to develop more sophisticated oracles. If the oracles are relaxed too much to tolerate the variations introduced by uncertainties, there is an inherent risk for the uncertain behavior to mask a fault. On the other hand, if the oracles are too narrow it may cause them to generate false positives, resulting in wasted developer's time. The authors provide a set of requirements for adequate handling of uncertainty in testing:
-\begin{enumerate}
-  \item Specifying input distributions and generating inputs with the help of the distributions instead of using discrete inputs.
-  \item Probabilistic oracles that can help distinguish acceptable from unacceptable misbehaviors. These models will also provide the specification of the likelihood of results.
-  \item Richer models to represent system and environment uncertainty, so that uncertainties can be connected to test requirements and outcomes. This will help with automated uncertainty quantification.
-\end{enumerate}
-Not all systems will impose these requirements, and not all techniques will satisfy them. In fact, they expect it will be necessary to develop a suite of techniques for dealing with uncertainty, selected according to system characteristics and the particular forms of uncertainty the system embodies and based on the use of stochastic models and quantitative analyses.
-
-\section{On Testing Non-testable Programs \cite{Weyuker}}
+\end{enumerate}\cite{Weyuker}
 
 
- But, due to a great deal of overhead involved pseudo-oracles may not be practical for every situation. 
-A different, and frequently employed course of action is to run the program on 'simplified' data for which the correctness of the results can be accurately and readily determined. The tester then extrapolates from the correctness of the test results on these simple cases to correctness for more complicated cases. In this case, we are deliberately omitting test cases even though these cases may have been identified as important. They are not being omitted because it is not expected that they will yield substantial additional information, but rather because they are impossible, too difficult, or too expensive to check. The problem with using simple test cases is very obvious i.e. it is common for central cases to work perfectly whereas boundary cases to cause errors. 
-
-Even in the absence of oracles the users often have a ballpark idea of what the correct answer would look like without knowing the correct answer. In such cases, we make use of partial oracles. It is relatively easier to test the systems on simpler inputs for which the output is known. There is rarely a single correct answer in these types of computations. Rather, the goal is generally an approximation which is within a designated tolerance of the exact solution. The authors finally make five recommendation for items to be considered as a part of documentation during testing.
+ One of the first problems that testers run into is that they don't have access to acceptable output to test the program output against. This problem is often referred to as the Oracle problem. Weyuker provides founding definition of an oracle as a system that determines the correctness of the solution by comparing the system’s output to the one that it predicts. As per Weyuker, non-testable programs can be defined as the programs for which such oracles do not exist. The term non-testable is used, from the point of view of correctness testing. If one cannot decide whether or not the output is correct or have to spend some extraordinary amount of resources to do so, testing those systems may not be worth it.\cite{Weyuker}
+ 
+ A complementary way to deal with uncertainty at the other end of the testing process is to develop more sophisticated oracles. If the oracles are relaxed too much to tolerate the variations introduced by uncertainties, there is an inherent risk for the uncertain behavior to mask a fault. On the other hand, if the oracles are too narrow it may cause them to generate false positives, resulting in wasted developer's time.\cite(Elbaum2014)
+ 
+ Many techniques have since been developed to test these set of non-testable programs. One way of elevating the oracle-problem is through the use of pseudo oracle. It is also referred to as dual-coding and is used in highly critical software.\cite{Weyuker}\cite{Murphy2009}. Pseudo-oracles are multiple implementation of same specification of the original program under test.
+ However, dual coding comes with it's own set of problems. As the authors [this and this ] pointed out that pseudo-oracle requires at least two implementation and it may come out to be a lot of overhead or, multiple implementation may not exist or, the multiple implementation may be created by the same or same set of developers prone to make same mistakes.
+ In light of shortcomings of the testing process the authors finally make five recommendation for items to be considered as a part of documentation during testing.
 \begin{enumerate}
   \item The criteria used to select the test data.
   \item The degree to which the criteria were fulfilled.
@@ -58,5 +30,10 @@ Even in the absence of oracles the users often have a ballpark idea of what the 
   \item The output of each of each test datum.
   \item How the results were determined to be correct or acceptable.
 \end{enumerate}
-Although these recommendations do not solve the problem of non-testable programs, however, they do provide information on whether the program should be considered adequately tested or not.
+Although these recommendations do not solve the problem of non-testable programs, however, they do provide information on whether the program should be considered adequately tested or not.\cite(Weyuker)
 
+
+But, due to a great deal of overhead involved pseudo-oracles may not be practical for every situation.  
+A different, and frequently employed course of action is to run the program on 'simplified' data for which the correctness of the results can be accurately and readily determined. The tester then extrapolates from the correctness of the test results on these simple cases to correctness for more complicated cases. In this case, we are deliberately omitting test cases even though these cases may have been identified as important. They are not being omitted because it is not expected that they will yield substantial additional information, but rather because they are impossible, too difficult, or too expensive to check. The problem with using simple test cases is very obvious i.e. it is common for central cases to work perfectly whereas boundary cases to cause errors. \cite{Weyuker}
+
+Even in the absence of oracles the users often have a ballpark idea of what the correct answer would look like without knowing the correct answer. In such cases, we make use of partial oracles. It is relatively easier to test the systems on simpler inputs for which the output is known. There is rarely a single correct answer in these types of computations. Rather, the goal is generally an approximation which is within a designated tolerance of the exact solution. 
