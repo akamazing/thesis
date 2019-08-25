@@ -7,7 +7,7 @@ From literature review we postulate that small changes to input image should not
 \subsection{Misclassification of digits}
     In order to see how each digit is affected by changes in  mp. For each digit 0-9 we calculated the number of correct predictions made by the model as compared to total number of .
 \subsection{Robustness}
-    
+We difined robustness in relative terms and we will be comparing the robustness of these algorithms with respect to each other for different datasets and different metamorphic relations. We also attempt to quantify robustness by measuring how tolerant the algorithm is to changes to original input.
     
 \clearpage
 % \input{CNN/Rotate/rotate.tex}
@@ -123,7 +123,7 @@ Shade
 \end{tabular}
 \end{table}
 
- ShiftY
+ShiftY
 \begin{table}
 \begin{tabular}{|l|l|l|l|l|l|l|l|l|l|}
 \hline
@@ -145,3 +145,11 @@ Shade
 \clearpage
 
 To generate new data from MNIST digit dataset. While using rotation 0 should be in a prticular range. 1 should be in particular range.....
+
+
+We make following recommendations for transforming digits in MNIST dataset.
+\import{chapters/results/}{tables.tex}
+
+\newpage
+\section{Discussion}
+In this paper we identified five metamorphic properties that can be used with image datasets MNIST and MNIST-Fashion. We also provided recommendations for creating follow up test cases from this dataset by providing the most effective values to use for these metamorphic properties. We also evaluated the robustness of five machine learning algorithms on these metamorphic properties.

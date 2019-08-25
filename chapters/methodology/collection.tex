@@ -11,9 +11,21 @@ Jupyter notebook is gaining rapid popularity in the field of data science for ma
 TensorFlow\textsuperscript{TM} is an open source software library developed within Google’s AI organization by the Google Brain team with a strong support for machine learning and deep learning. Its flexible architecture allows easy deployment of computation across a variety of platforms (CPUs, GPUs, TPUs), and from desktops to clusters of servers to mobile and edge devices. It is being used at a number of well known companies like Uber, Google, AMD, etc. for high performance numerical computation and machine learning. While TensorFlow is capable of handling a wide range of tasks, it is mainly designed for deep neural network models. It will serve as baseline to test the metamorphic relations identified in section \ref{MRused}.
 
 \section{Algorithm}
+\subsection{Neural network}
+ Each hidden layer is made up of a set of neurons, where each neuron is fully connected to all neurons in the previous layer, and where neurons in a single layer function completely independently and do not share any connections. If the image is a 64 by 64 greyscale image, then we'd have 4,096=64x64 input neurons, with the intensities scaled appropriately between 0 and 1. The output layer will contain just a single neuron, with output values of less than 0.5 indicating "input image is not a 9", and values greater than 0.5 indicating "input image is a 9 ". The input pixels are greyscale, with a value of 0.0 representing white, a value of 1.0 representing black, and in between values representing gradually darkening shades of grey. The second layer of the network is a hidden layer.
+
+2 layer
 \subsection{Convolutional neural network}
-Number of layers. Filter. arrangement of ...
-\subsection{2-layer neural network}
+In EMNIST dataset, each image is single-channel of size 28 x 28 x 1. 
+
+\subsection{Naive Bayes}
+What the function is 
+Input and output
+
+
+\subsection{k-Nearest Neighbor}
+The 1-NN rule decide x belongs to the category of nearest neighbor and ignored the others!.
+In general k-NN rule decide x belongs to the category of majority vote of the nearest k neighbors.
 
 \section{Dataset}
 \subsection{MNIST Dataset}
@@ -48,7 +60,7 @@ The EMNIST Letters dataset merges a balanced set of the uppercase and lowercase 
         \begin{subfigure}[b]{\textwidth}
             \centering
             \includegraphics[width=\linewidth]{images/letter.png}
-            \caption{Sample EMNIST-MNIST dataset}
+            \caption{Sample EMNIST-Letter dataset}
             \label{fig:EMNIST MNIST dataset}
         \end{subfigure}%
         \label{fig:Rotate-misclassifications}

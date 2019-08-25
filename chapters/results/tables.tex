@@ -1,0 +1,265 @@
+\subsection{Rotate}
+\begin{table}[ht]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+ & \multicolumn{2}{c}{\textbf{CNN}} &  \multicolumn{2}{|c|}{\textbf{NN}} &\multicolumn{2}{c}{\textbf{NB}} & \multicolumn{2}{|c|}{\textbf{SVM}} & \multicolumn{2}{c|}{\textbf{kNN}} \\
+\hline
+Digit  &   Start & End & Start & End & Start & End & Start & End & Start & End \\
+\hline
+0  &   -37&46 & -44&31 & -50&17 & -45&45 & -50&49 \\
+\hline
+1 &   -15&18 & -11&15 & -9&12 & -21&22 & -28&43  \\
+\hline
+2  &   -19&15 & -14&11 & -12&10 & -14&12 & -19&16  \\
+\hline
+3  &   -20&15 & -17&15 & -9&19 & -17&13 & -25&26  \\
+\hline
+4  &   -15&15 & -12&15 & -13&14 & -15&22 & -14&15 \\
+\hline
+5  &   -16&17 & -9&8 & -14&5 & -11&10 & -25&18  \\
+\hline
+6  &   -26&32 & -20&43 & -11&36 & -16&43 & -19&37 \\
+\hline
+7  &   -18&11 & -19&8 & -13&7 & -20&11 & -19&13 \\
+\hline
+8  &   -16&18 & -13&15 & -13&12 & -14&21 & -17&15 \\
+\hline
+9  &   -21&24 & -10&18 & -6&22 & -12&16 & -11&18 \\ 
+\hline
+\end{tabular}
+\caption{Rotate.}
+\label{tbl:test-file-format}
+\end{table}
+
+\pgfplotstableread[row sep=\\,col sep=&]{
+    interval & Digit & Fashion & Letter \\
+    CNN   & 41.4  & 17.45  & 0  \\
+    NN    & 34.8 & 24.75  & 0  \\
+    NB    & 30.4 & 42.0 & 0 \\
+    SVM   & 40.0 & 29.1 & 0 \\
+    KNN   & 47.7  & 20.81 & 0.0 \\
+    }\rotate
+    
+\begin{tikzpicture}
+    \begin{axis}[
+            ybar,
+            bar width=.75cm,
+            width=\textwidth,
+            height=.5\textwidth,
+            legend style={at={(0.5,1)},
+                anchor=north,legend columns=-1},
+            symbolic x coords={CNN,NN,NB,SVM,KNN},
+            xtick=data,
+            nodes near coords,
+            nodes near coords align={vertical},
+            ymin=0,ymax=75,
+            ylabel={\%},
+        ]
+        \addplot table[x=interval,y=Digit]{\rotate};
+        \addplot table[x=interval,y=Fashion]{\rotate};
+        \addplot table[x=interval,y=Letter]{\rotate};
+        \legend{Digit, Fashion, Letter}
+    \end{axis}
+\end{tikzpicture}
+
+\subsection{ShiftX}
+\begin{table}[ht]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|}
+    \hline
+     & \multicolumn{2}{c}{\textbf{CNN}} &  \multicolumn{2}{|c|}{\textbf{NN}} &\multicolumn{2}{c}{\textbf{NB}} & \multicolumn{2}{|c|}{\textbf{SVM}} & \multicolumn{2}{c|}{\textbf{kNN}} \\
+    \hline
+    Digit  &   Start & End & Start & End & Start & End & Start & End & Start & End \\
+    \hline
+    0  &   -5&4 & -3&3 & -4&3 & -4&3 & -4&4 \\
+    \hline
+        \multirow{3}{*}{1}
+            &-50&-29 & -50&-38 &  \multirow{3}{*}{-2}&\multirow{3}{*}{2} & -50&-28 & -50&-25\\
+            &-5&5 & -2&1 & & & -6&4 & -9&11\\
+            &32&49 & 40&49  & & & 28&49 & 27&49\\
+    \hline
+    \multirow{2}{*}{2}  
+        &   \multirow{2}{*}{-7}&\multirow{2}{*}{7}  &  \multirow{2}{*}{-5}&\multirow{2}{*}{6}  &  -41&-25   &  \multirow{2}{*}{-5}&\multirow{2}{*}{8} & \multirow{2}{*}{-5}&\multirow{2}{*}{11}\\
+        & & &   & & -12&6   & & & &\\          
+    \hline
+    3  &   -6&3 & -7&1 & -7&0 & -7&2 & -8&4  \\
+    \hline
+    4  &   -7&6 & -4&4 & -5&5 & -4&5 & -5&4 \\
+    \hline
+    5  &   -5&8 & -2&7 & -2&21 & -3&9 & -5&13 \\
+    \hline
+    6  &   -5&8 & -4&4 & -3&3 & -5&5 & -5&5 \\
+    \hline
+    7  &   -5&6 & -6&2 & -4&2 & -7&4 & -11&4 \\
+    \hline
+    8  &   -4&5 & -2&4 & -1&5 & -3&4 & -3&6 \\
+    \hline
+    9  &   -5&5 & -4&2 & -2&2 & -4&3 & -3&3 \\ 
+    \hline
+\end{tabular}
+\caption{ShiftX.}
+\label{tbl:test-file-format}
+\end{table}
+
+\pgfplotstableread[row sep=\\,col sep=&]{
+    interval & Digit & Fashion & Letter \\
+    CNN   & 12.42  & 10.75  & 0  \\
+    NN    & 7.83 & 14.71  & 0  \\
+    NB    & 9.73 & 22.27 & 0 \\
+    SVM   & 11.5 & 11.18 & 0 \\
+    KNN   & 14.17  & 9.27 & 0.0 \\
+    }\shiftX
+    
+\begin{tikzpicture}
+    \begin{axis}[
+            ybar,
+            bar width=.75cm,
+            width=\textwidth,
+            height=.5\textwidth,
+            legend style={at={(0.5,1)},
+                anchor=north,legend columns=-1},
+            symbolic x coords={CNN,NN,NB,SVM,KNN},
+            xtick=data,
+            nodes near coords,
+            nodes near coords align={vertical},
+            ymin=0,ymax=50,
+            ylabel={\Angle},
+        ]
+        \addplot table[x=interval,y=Digit]{\shiftX};
+        \addplot table[x=interval,y=Fashion]{\shiftX};
+        \addplot table[x=interval,y=Letter]{\shiftX};
+        \legend{Digit, Fashion, Letter}
+    \end{axis}
+\end{tikzpicture}
+MNIST: KNN is the most robust. 
+
+\subsection{Shade}
+\begin{table}[ht]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+ & \multicolumn{2}{c}{\textbf{CNN}} &  \multicolumn{2}{|c|}{\textbf{NN}} &\multicolumn{2}{c}{\textbf{NB}} & \multicolumn{2}{|c|}{\textbf{SVM}} & \multicolumn{2}{c|}{\textbf{kNN}} \\
+\hline
+Digit  &   Start & End & Start & End & Start & End & Start & End & Start & End \\
+\hline
+0  &   0.0&0.6 & 0.0&0.74 & 0.0&0.96 & 0.0&0.5 & 0.0&0.51 \\
+\hline
+1  &   0.0&0.99 & 0.0&0.99 & 0.0&0.99 & 0.0&0.99 & 0.0&0.99 \\
+\hline
+2  &   0.0&0.64 & 0.0&0.78 & 0.0&0.93 & 0.0&0.5 & 0.0&0.49 \\
+\hline
+3  &   0.0&0.62 & 0.0&0.76 & 0.0&0.97 & 0.0&0.49 & 0.0&0.5  \\
+\hline
+4  &   0.0&0.63 & 0.0&0.87 & 0.0&0.99 & 0.0&0.51 & 0.0&0.5 \\
+\hline
+5  &   0.0&0.62 & 0.0&0.91 & 0.0&0.92 & 0.0&0.53 & 0.0&0.5  \\
+\hline
+6  &   0.0&0.62 & 0.0&0.81 & 0.0&0.97 & 0.0&0.5 & 0.0&0.5 \\
+\hline
+7  &   0.0&0.6 & 0.0&0.89 & 0.0&0.98 & 0.0&0.51 & 0.0&0.52\\
+\hline
+8  &   0.0&0.57 & 0.0&0.61 & 0.0&0.9 & 0.0&0.49 & 0.0&0.49\\
+\hline
+9  &   0.0&0.57 & 0.0&0.7 & 0.0&0.94 & 0.0&0.5 & 0.0&0.5\\ 
+\hline
+\end{tabular}
+\caption{Shade.}
+\label{tbl:test-file-format}
+\end{table}
+
+\pgfplotstableread[row sep=\\,col sep=&]{
+    interval & Digit & Fashion & Letter \\
+    CNN   & 64.6  & 55.6  & 0  \\
+    NN    & 80.6 & 56.1  & 0  \\
+    NB    & 95.5 & 68.63 & 0 \\
+    SVM   & 55.2 & 55.8 & 0 \\
+    KNN   & 55.0  & 51.9 & 0.0 \\
+    }\shade
+    
+\begin{tikzpicture}
+    \begin{axis}[
+            ybar,
+            bar width=.75cm,
+            width=\textwidth,
+            height=.5\textwidth,
+            legend style={at={(0.5,1)},
+                anchor=north,legend columns=-1},
+            symbolic x coords={CNN,NN,NB,SVM,KNN},
+            xtick=data,
+            nodes near coords,
+            nodes near coords align={vertical},
+            ymin=0,ymax=120,
+            ylabel={\%},
+        ]
+        \addplot table[x=interval,y=Digit]{\shade};
+        \addplot table[x=interval,y=Fashion]{\shade};
+        \addplot table[x=interval,y=Letter]{\shade};
+        \legend{Digit, Fashion, Letter}
+    \end{axis}
+\end{tikzpicture}
+
+\subsection{Shear}
+\begin{table}[ht]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+ & \multicolumn{2}{c}{\textbf{CNN}} &  \multicolumn{2}{|c|}{\textbf{NN}} &\multicolumn{2}{c}{\textbf{NB}} & \multicolumn{2}{|c|}{\textbf{SVM}} & \multicolumn{2}{c|}{\textbf{kNN}} \\
+\hline
+Digit  &   Start & End & Start & End & Start & End & Start & End & Start & End \\
+\hline
+0  &   -24&28 & -19&16 & -17&10 & -36&25 & -50&39 \\
+\hline
+1  &   -50&18 & -24&14 & -14&10 & -50&24 & -50&49 \\
+\hline
+2  &   -22&33 & -25&25 & -17&49 & -25&26 & -32&29 \\
+\hline
+3  &   -25&23 & -31&21 & -12&33 & -32&22 & -35&35  \\
+\hline
+4  &   -25&20 & -17&17 & -25&13 & -21&31 & -24&18 \\
+\hline
+5  &   -32&26 & -24&18 & -45&4 & -25&23 & -31&27  \\
+\hline
+6  &   -39&29 & -23&30 & -9&21 & -31&30 & -40&34 \\
+\hline
+7  &   -21&20 & -23&18 & -26&40 & -24&23 & -26&16 \\
+\hline
+8  &   -26&25 & -22&23 & -16&17 & -36&27 & -36&22 \\
+\hline
+9  &   -17&21 & -13&15 & -6&15 & -20&16 & -23&15\\ 
+\hline
+\end{tabular}
+\caption{Shear.}
+\label{tbl:test-file-format}
+\end{table}
+
+\pgfplotstableread[row sep=\\,col sep=&]{
+    interval & Digit & Fashion & Letter \\
+    CNN   & 52.4  & 38.82  & 0  \\
+    NN    & 41.8 & 41.18  & 0  \\
+    NB    & 39.9 & 53.6 & 0 \\
+    SVM   & 54.7 & 53.8 & 0 \\
+    KNN   & 63.1  & 45.1 & 0.0 \\
+    }\shade
+    
+\begin{tikzpicture}
+    \begin{axis}[
+            ybar,
+            bar width=.75cm,
+            width=\textwidth,
+            height=.5\textwidth,
+            legend style={at={(0.5,1)},
+                anchor=north,legend columns=-1},
+            symbolic x coords={CNN,NN,NB,SVM,KNN},
+            xtick=data,
+            nodes near coords,
+            nodes near coords align={vertical},
+            ymin=0,ymax=120,
+            ylabel={\%},
+        ]
+        \addplot table[x=interval,y=Digit]{\shade};
+        \addplot table[x=interval,y=Fashion]{\shade};
+        \addplot table[x=interval,y=Letter]{\shade};
+        \legend{Digit, Fashion, Letter}
+    \end{axis}
+\end{tikzpicture}
