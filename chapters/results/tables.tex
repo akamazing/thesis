@@ -1,265 +1,513 @@
-\subsection{Rotate}
-\begin{table}[ht]
-\centering
-\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|}
-\hline
- & \multicolumn{2}{c}{\textbf{CNN}} &  \multicolumn{2}{|c|}{\textbf{NN}} &\multicolumn{2}{c}{\textbf{NB}} & \multicolumn{2}{|c|}{\textbf{SVM}} & \multicolumn{2}{c|}{\textbf{kNN}} \\
-\hline
-Digit  &   Start & End & Start & End & Start & End & Start & End & Start & End \\
-\hline
-0  &   -37&46 & -44&31 & -50&17 & -45&45 & -50&49 \\
-\hline
-1 &   -15&18 & -11&15 & -9&12 & -21&22 & -28&43  \\
-\hline
-2  &   -19&15 & -14&11 & -12&10 & -14&12 & -19&16  \\
-\hline
-3  &   -20&15 & -17&15 & -9&19 & -17&13 & -25&26  \\
-\hline
-4  &   -15&15 & -12&15 & -13&14 & -15&22 & -14&15 \\
-\hline
-5  &   -16&17 & -9&8 & -14&5 & -11&10 & -25&18  \\
-\hline
-6  &   -26&32 & -20&43 & -11&36 & -16&43 & -19&37 \\
-\hline
-7  &   -18&11 & -19&8 & -13&7 & -20&11 & -19&13 \\
-\hline
-8  &   -16&18 & -13&15 & -13&12 & -14&21 & -17&15 \\
-\hline
-9  &   -21&24 & -10&18 & -6&22 & -12&16 & -11&18 \\ 
-\hline
-\end{tabular}
-\caption{Rotate.}
-\label{tbl:test-file-format}
-\end{table}
+% \subsection{Rotate}
+% \begin{table}[ht]
+% \centering
+% \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|}
+% \hline
+%  & \multicolumn{2}{c}{\textbf{CNN}} &  \multicolumn{2}{|c|}{\textbf{NN}} &\multicolumn{2}{c}{\textbf{NB}} & \multicolumn{2}{|c|}{\textbf{SVM}} & \multicolumn{2}{c|}{\textbf{kNN}} \\
+% \hline
+% Digit  &   Start & End & Start & End & Start & End & Start & End & Start & End \\
+% \hline
+% 0  &   -37&46 & -44&31 & -50&17 & -45&45 & -50&49 \\
+% \hline
+% 1 &   -15&18 & -11&15 & -9&12 & -21&22 & -28&43  \\
+% \hline
+% 2  &   -19&15 & -14&11 & -12&10 & -14&12 & -19&16  \\
+% \hline
+% 3  &   -20&15 & -17&15 & -9&19 & -17&13 & -25&26  \\
+% \hline
+% 4  &   -15&15 & -12&15 & -13&14 & -15&22 & -14&15 \\
+% \hline
+% 5  &   -16&17 & -9&8 & -14&5 & -11&10 & -25&18  \\
+% \hline
+% 6  &   -26&32 & -20&43 & -11&36 & -16&43 & -19&37 \\
+% \hline
+% 7  &   -18&11 & -19&8 & -13&7 & -20&11 & -19&13 \\
+% \hline
+% 8  &   -16&18 & -13&15 & -13&12 & -14&21 & -17&15 \\
+% \hline
+% 9  &   -21&24 & -10&18 & -6&22 & -12&16 & -11&18 \\ 
+% \hline
+% \end{tabular}
+% \caption{Rotate.}
+% \label{tbl:test-file-format}
+% \end{table}
+
+% \subsubsection{MT: Rotate}
+% \pgfplotstableread[row sep=\\,col sep=&]{
+%     interval & Digit & Fashion & Letter \\
+%     CNN & 75.4 & 39.8 & 43.72 \\
+%     NN & 61.6 & 43.36 & 40.59 \\
+%     NB & 54.5 & 57.9 & 37.29 \\
+%     SVM & 40.0 & 51.5 & 23.153 \\ 
+%     KNN & 47.7 & 35.08 & 26.31 \\
+%     }\rotate
+    
+% \begin{tikzpicture}
+%     \begin{axis}[
+%             ybar,
+%             bar width=.75cm,
+%             width=\textwidth,
+%             height=.5\textwidth,
+%             legend style={at={(0.5,1)},
+%                 anchor=north,legend columns=-1},
+%             symbolic x coords={CNN,NN,NB,SVM,KNN},
+%             xtick=data,
+%             nodes near coords,
+%             nodes near coords align={vertical},
+%             ymin=0,ymax=120,
+%             ylabel={Value},
+%         ]
+%         \addplot table[x=interval,y=Digit]{\rotate};
+%         \addplot table[x=interval,y=Fashion]{\rotate};
+%         \addplot table[x=interval,y=Letter]{\rotate};
+%         \legend{Digit, Fashion, Letter}
+%     \end{axis}
+% \end{tikzpicture}
+\clearpage
+When the rotation metamorphic transformation is applied to the MNIST dataset, the convolutional neural-network algorithm has the largest bar. This means that that a larger angle of rotation can be applied to the MNIST dataset before it's accuracy drops below $90\%$ of the original MNIST dataset. Similarly, Naive Bayes is the most robust for Fashion-MNIST datset and KNN is the most robust for EMNIST dataset.
 
 \pgfplotstableread[row sep=\\,col sep=&]{
-    interval & Digit & Fashion & Letter \\
-    CNN   & 41.4  & 17.45  & 0  \\
-    NN    & 34.8 & 24.75  & 0  \\
-    NB    & 30.4 & 42.0 & 0 \\
-    SVM   & 40.0 & 29.1 & 0 \\
-    KNN   & 47.7  & 20.81 & 0.0 \\
-    }\rotate
+    Mx & My & Fx & Fy & Ex & Ey \\
+    0 & 39 & 0.1 & 13 & 0.2 & 24 \\
+    4 & 27 & 4.1 & 19 & 4.2 & 19 \\
+    8 & 25 & 8.1 & 19 & 8.2 & 20 \\
+    12 & 16 & 12.1 & 18 & 12.2 & 21 \\
+    16 & 19 & 16.1 & 15 & 16.2 & 24 \\
+    }\mnistx
     
-\begin{tikzpicture}
-    \begin{axis}[
-            ybar,
-            bar width=.75cm,
-            width=\textwidth,
-            height=.5\textwidth,
-            legend style={at={(0.5,1)},
-                anchor=north,legend columns=-1},
-            symbolic x coords={CNN,NN,NB,SVM,KNN},
-            xtick=data,
-            nodes near coords,
-            nodes near coords align={vertical},
-            ymin=0,ymax=75,
-            ylabel={\%},
-        ]
-        \addplot table[x=interval,y=Digit]{\rotate};
-        \addplot table[x=interval,y=Fashion]{\rotate};
-        \addplot table[x=interval,y=Letter]{\rotate};
-        \legend{Digit, Fashion, Letter}
-    \end{axis}
-\end{tikzpicture}
+\pgfplotstableread[row sep=\\,col sep=&]{
+   Algo & Mx & My & Fx & Fy & Ex & Ey \\
+   CNN & 0 & -34 & 0.1 & -14 & 0.2 & -20 \\
+    NN & 4 & -28 & 4.1 & -17 & 4.2 & -18 \\
+    NB & 8 & -24 & 8.1 & -19 & 8.2 & -17 \\
+    SVM & 12 & -16 & 12.1 & -17 & 12.2 & -20 \\
+     KNN & 16 & -18 & 16.1 & -16 & 16.2 & -25 \\
+    }\mnisty
 
-\subsection{ShiftX}
-\begin{table}[ht]
-\centering
-\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|}
-    \hline
-     & \multicolumn{2}{c}{\textbf{CNN}} &  \multicolumn{2}{|c|}{\textbf{NN}} &\multicolumn{2}{c}{\textbf{NB}} & \multicolumn{2}{|c|}{\textbf{SVM}} & \multicolumn{2}{c|}{\textbf{kNN}} \\
-    \hline
-    Digit  &   Start & End & Start & End & Start & End & Start & End & Start & End \\
-    \hline
-    0  &   -5&4 & -3&3 & -4&3 & -4&3 & -4&4 \\
-    \hline
-        \multirow{3}{*}{1}
-            &-50&-29 & -50&-38 &  \multirow{3}{*}{-2}&\multirow{3}{*}{2} & -50&-28 & -50&-25\\
-            &-5&5 & -2&1 & & & -6&4 & -9&11\\
-            &32&49 & 40&49  & & & 28&49 & 27&49\\
-    \hline
-    \multirow{2}{*}{2}  
-        &   \multirow{2}{*}{-7}&\multirow{2}{*}{7}  &  \multirow{2}{*}{-5}&\multirow{2}{*}{6}  &  -41&-25   &  \multirow{2}{*}{-5}&\multirow{2}{*}{8} & \multirow{2}{*}{-5}&\multirow{2}{*}{11}\\
-        & & &   & & -12&6   & & & &\\          
-    \hline
-    3  &   -6&3 & -7&1 & -7&0 & -7&2 & -8&4  \\
-    \hline
-    4  &   -7&6 & -4&4 & -5&5 & -4&5 & -5&4 \\
-    \hline
-    5  &   -5&8 & -2&7 & -2&21 & -3&9 & -5&13 \\
-    \hline
-    6  &   -5&8 & -4&4 & -3&3 & -5&5 & -5&5 \\
-    \hline
-    7  &   -5&6 & -6&2 & -4&2 & -7&4 & -11&4 \\
-    \hline
-    8  &   -4&5 & -2&4 & -1&5 & -3&4 & -3&6 \\
-    \hline
-    9  &   -5&5 & -4&2 & -2&2 & -4&3 & -3&3 \\ 
-    \hline
-\end{tabular}
-\caption{ShiftX.}
-\label{tbl:test-file-format}
-\end{table}
+\begin{figure}[H]
+
+\begin{tikzpicture}
+
+\begin{groupplot}[group style={group size= 1 by 2},xtick=\empty]%[ybar stacked,xtick=\empty,]%ytick=\empty]
+\nextgroupplot[ybar, bar width=.2cm,xtick=\empty,yshift=1cm, ymin=0,ymax=60,legend style = {at={(1.05, 0.5)}, anchor = west, legend columns =1, draw=none, area legend},  ymajorgrids = true,width=0.85\textwidth,height=.4\textwidth,]%ytick=\empty]
+\addplot[fill=blue,draw=black] table[x=Mx,y=My]{\mnistx};
+\addlegendentry{MNIST}
+
+\addplot[fill=red,draw=black] table[x=Fx,y=Fy]{\mnistx};
+\addlegendentry{Fashion}
+
+\addplot[fill=brown,draw=black] table[x=Ex,y=Ey]{\mnistx};
+\addlegendentry{EMNIST}
+
+\nextgroupplot[ybar, width=0.85\textwidth,height=.4\textwidth, bar width=.2cm,yshift=1cm,ymin=-60,ymax=0,legend style = {at={(1.05, 1.65)}, anchor = west, legend columns =1, draw=none, area    legend},ymajorgrids = true,xtick=data, xticklabels from table={\mnisty}{Algo}, xticklabel style={yshift=-2ex, xshift=-2ex,anchor= west},]
+\addplot[fill=blue,draw=black] table[x=Mx,y=My]{\mnisty};
+\addplot[fill=red,draw=black] table[x=Fx,y=Fy]{\mnisty};
+\addplot[fill=brown,draw=black] table[x=Ex,y=Ey]{\mnisty};
+\end{groupplot}
+\end{tikzpicture}
+\caption{Robustness graph for rotation property}
+\end{figure}
+
+% \subsection{Shade}
+% \begin{table}[ht]
+% \centering
+% \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|}
+% \hline
+%  & \multicolumn{2}{c}{\textbf{CNN}} &  \multicolumn{2}{|c|}{\textbf{NN}} &\multicolumn{2}{c}{\textbf{NB}} & \multicolumn{2}{|c|}{\textbf{SVM}} & \multicolumn{2}{c|}{\textbf{kNN}} \\
+% \hline
+% Digit  &   Start & End & Start & End & Start & End & Start & End & Start & End \\
+% \hline
+% 0  &   0.0&0.6 & 0.0&0.74 & 0.0&0.96 & 0.0&0.5 & 0.0&0.51 \\
+% \hline
+% 1  &   0.0&0.99 & 0.0&0.99 & 0.0&0.99 & 0.0&0.99 & 0.0&0.99 \\
+% \hline
+% 2  &   0.0&0.64 & 0.0&0.78 & 0.0&0.93 & 0.0&0.5 & 0.0&0.49 \\
+% \hline
+% 3  &   0.0&0.62 & 0.0&0.76 & 0.0&0.97 & 0.0&0.49 & 0.0&0.5  \\
+% \hline
+% 4  &   0.0&0.63 & 0.0&0.87 & 0.0&0.99 & 0.0&0.51 & 0.0&0.5 \\
+% \hline
+% 5  &   0.0&0.62 & 0.0&0.91 & 0.0&0.92 & 0.0&0.53 & 0.0&0.5  \\
+% \hline
+% 6  &   0.0&0.62 & 0.0&0.81 & 0.0&0.97 & 0.0&0.5 & 0.0&0.5 \\
+% \hline
+% 7  &   0.0&0.6 & 0.0&0.89 & 0.0&0.98 & 0.0&0.51 & 0.0&0.52\\
+% \hline
+% 8  &   0.0&0.57 & 0.0&0.61 & 0.0&0.9 & 0.0&0.49 & 0.0&0.49\\
+% \hline
+% 9  &   0.0&0.57 & 0.0&0.7 & 0.0&0.94 & 0.0&0.5 & 0.0&0.5\\ 
+% \hline
+% \end{tabular}
+% \caption{Shade.}
+% \label{tbl:test-file-format}
+% \end{table}
+
+% \subsubsection{MT: Shade}
+% \pgfplotstableread[row sep=\\,col sep=&]{
+%     interval & Digit & Fashion & Letter \\
+%     CNN   & 64.6  & 55.6  & 36.76  \\
+%     NN    & 80.6 & 56.1  & 74.69  \\
+%     NB    & 95.5 & 68.63 & 62.30 \\
+%     SVM   & 55.2 & 55.8 & 40.81 \\
+%     KNN   & 55.0  & 51.9 & 56.29 \\
+%     }\shade
+    
+% \begin{tikzpicture}
+%     \begin{axis}[
+%             ybar,
+%             bar width=.75cm,
+%             width=\textwidth,
+%             height=.5\textwidth,
+%             legend style={at={(0.5,1)},
+%                 anchor=north,legend columns=-1},
+%             symbolic x coords={CNN,NN,NB,SVM,KNN},
+%             xtick=data,
+%             nodes near coords,
+%             nodes near coords align={vertical},
+%             ymin=0,ymax=120,
+%             ylabel={Value},
+%         ]
+%         \addplot table[x=interval,y=Digit]{\shade};
+%         \addplot table[x=interval,y=Fashion]{\shade};
+%         \addplot table[x=interval,y=Letter]{\shade};
+%         \legend{Digit, Fashion, Letter}
+%     \end{axis}
+% \end{tikzpicture}
 
 \pgfplotstableread[row sep=\\,col sep=&]{
-    interval & Digit & Fashion & Letter \\
-    CNN   & 12.42  & 10.75  & 0  \\
-    NN    & 7.83 & 14.71  & 0  \\
-    NB    & 9.73 & 22.27 & 0 \\
-    SVM   & 11.5 & 11.18 & 0 \\
-    KNN   & 14.17  & 9.27 & 0.0 \\
-    }\shiftX
+    Mx & My & Fx & Fy & Ex & Ey \\
+    0 & 55 & 0.1 & 55 & 0.2 & 53 \\
+    4 & 69 & 4.1 & 53 & 4.2 & 61 \\
+    8 & 96 & 8.1 & 76 & 8.2 & 92 \\
+    12 & 52 & 12.1 & 52 & 12.2 & 51 \\
+    16 & 51 & 16.1 & 52 & 16.2 & 51 \\
+    }\shadex
     
-\begin{tikzpicture}
-    \begin{axis}[
-            ybar,
-            bar width=.75cm,
-            width=\textwidth,
-            height=.5\textwidth,
-            legend style={at={(0.5,1)},
-                anchor=north,legend columns=-1},
-            symbolic x coords={CNN,NN,NB,SVM,KNN},
-            xtick=data,
-            nodes near coords,
-            nodes near coords align={vertical},
-            ymin=0,ymax=50,
-            ylabel={\Angle},
-        ]
-        \addplot table[x=interval,y=Digit]{\shiftX};
-        \addplot table[x=interval,y=Fashion]{\shiftX};
-        \addplot table[x=interval,y=Letter]{\shiftX};
-        \legend{Digit, Fashion, Letter}
-    \end{axis}
-\end{tikzpicture}
-MNIST: KNN is the most robust. 
-
-\subsection{Shade}
-\begin{table}[ht]
-\centering
-\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|}
-\hline
- & \multicolumn{2}{c}{\textbf{CNN}} &  \multicolumn{2}{|c|}{\textbf{NN}} &\multicolumn{2}{c}{\textbf{NB}} & \multicolumn{2}{|c|}{\textbf{SVM}} & \multicolumn{2}{c|}{\textbf{kNN}} \\
-\hline
-Digit  &   Start & End & Start & End & Start & End & Start & End & Start & End \\
-\hline
-0  &   0.0&0.6 & 0.0&0.74 & 0.0&0.96 & 0.0&0.5 & 0.0&0.51 \\
-\hline
-1  &   0.0&0.99 & 0.0&0.99 & 0.0&0.99 & 0.0&0.99 & 0.0&0.99 \\
-\hline
-2  &   0.0&0.64 & 0.0&0.78 & 0.0&0.93 & 0.0&0.5 & 0.0&0.49 \\
-\hline
-3  &   0.0&0.62 & 0.0&0.76 & 0.0&0.97 & 0.0&0.49 & 0.0&0.5  \\
-\hline
-4  &   0.0&0.63 & 0.0&0.87 & 0.0&0.99 & 0.0&0.51 & 0.0&0.5 \\
-\hline
-5  &   0.0&0.62 & 0.0&0.91 & 0.0&0.92 & 0.0&0.53 & 0.0&0.5  \\
-\hline
-6  &   0.0&0.62 & 0.0&0.81 & 0.0&0.97 & 0.0&0.5 & 0.0&0.5 \\
-\hline
-7  &   0.0&0.6 & 0.0&0.89 & 0.0&0.98 & 0.0&0.51 & 0.0&0.52\\
-\hline
-8  &   0.0&0.57 & 0.0&0.61 & 0.0&0.9 & 0.0&0.49 & 0.0&0.49\\
-\hline
-9  &   0.0&0.57 & 0.0&0.7 & 0.0&0.94 & 0.0&0.5 & 0.0&0.5\\ 
-\hline
-\end{tabular}
-\caption{Shade.}
-\label{tbl:test-file-format}
-\end{table}
-
 \pgfplotstableread[row sep=\\,col sep=&]{
-    interval & Digit & Fashion & Letter \\
-    CNN   & 64.6  & 55.6  & 0  \\
-    NN    & 80.6 & 56.1  & 0  \\
-    NB    & 95.5 & 68.63 & 0 \\
-    SVM   & 55.2 & 55.8 & 0 \\
-    KNN   & 55.0  & 51.9 & 0.0 \\
-    }\shade
+   Algo & Mx & My & Fx & Fy & Ex & Ey \\
+    CNN & 0 & 0 & 0.1 & 0 & 0.2 & 0 \\
+    NN & 4 & 0 & 4.1 & 0 & 4.2 & 0 \\
+    NB & 8 & 0 & 8.1 & 0 & 8.2 & 0 \\
+    SVM & 12 & 0 & 12.1 & 0 & 12.2 & 0 \\
+    KNN & 16 & 0 & 16.1 & 0 & 16.2 & 0 \\
+    }\shadey
     
+\begin{figure}[H]
 \begin{tikzpicture}
-    \begin{axis}[
-            ybar,
-            bar width=.75cm,
-            width=\textwidth,
-            height=.5\textwidth,
-            legend style={at={(0.5,1)},
-                anchor=north,legend columns=-1},
-            symbolic x coords={CNN,NN,NB,SVM,KNN},
-            xtick=data,
-            nodes near coords,
-            nodes near coords align={vertical},
-            ymin=0,ymax=120,
-            ylabel={\%},
-        ]
-        \addplot table[x=interval,y=Digit]{\shade};
-        \addplot table[x=interval,y=Fashion]{\shade};
-        \addplot table[x=interval,y=Letter]{\shade};
-        \legend{Digit, Fashion, Letter}
-    \end{axis}
+\begin{groupplot}[group style={group size= 1 by 2},xtick=\empty]%[ybar stacked,xtick=\empty,]%ytick=\empty]
+\nextgroupplot[ybar, bar width=.2cm,xtick=\empty,yshift=1cm, ymin=0,ymax=100,legend style = {at={(1.05, 0.5)}, anchor = west, legend columns =1, draw=none, area legend},  ymajorgrids = true,width=0.85\textwidth,height=.6\textwidth,]%ytick=\empty]
+\addplot[fill=blue,draw=black] table[x=Mx,y=My]{\shadex};
+\addlegendentry{MNIST}
+
+\addplot[fill=red,draw=black] table[x=Fx,y=Fy]{\shadex};
+\addlegendentry{Fashion}
+
+\addplot[fill=brown,draw=black] table[x=Ex,y=Ey]{\shadex};
+\addlegendentry{EMNIST}
+
+\nextgroupplot[ybar, width=0.85\textwidth,height=0, bar width=.2cm,yshift=1cm,ymin=0,ymax=0,legend style = {at={(1.05, 1.65)}, anchor = west, legend columns =1, draw=none, area    legend},ymajorgrids = true,xtick=data, xticklabels from table={\shadey}{Algo}, xticklabel style={yshift=-2ex, xshift=-2ex,anchor= west},ytick=\empty,]
+\addplot[fill=blue,draw=black] table[x=Mx,y=My]{\shadey};
+\addplot[fill=red,draw=black] table[x=Fx,y=Fy]{\shadey};
+\addplot[fill=brown,draw=black] table[x=Ex,y=Ey]{\shadey};
+
+\end{groupplot}
 \end{tikzpicture}
+\caption{Robustness graph for shading property}
+\end{figure}
+For the shading metamorphic property we find that Naive Bayes is the most robust algorithm for all the three datasets.
 
-\subsection{Shear}
-\begin{table}[ht]
-\centering
-\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|}
-\hline
- & \multicolumn{2}{c}{\textbf{CNN}} &  \multicolumn{2}{|c|}{\textbf{NN}} &\multicolumn{2}{c}{\textbf{NB}} & \multicolumn{2}{|c|}{\textbf{SVM}} & \multicolumn{2}{c|}{\textbf{kNN}} \\
-\hline
-Digit  &   Start & End & Start & End & Start & End & Start & End & Start & End \\
-\hline
-0  &   -24&28 & -19&16 & -17&10 & -36&25 & -50&39 \\
-\hline
-1  &   -50&18 & -24&14 & -14&10 & -50&24 & -50&49 \\
-\hline
-2  &   -22&33 & -25&25 & -17&49 & -25&26 & -32&29 \\
-\hline
-3  &   -25&23 & -31&21 & -12&33 & -32&22 & -35&35  \\
-\hline
-4  &   -25&20 & -17&17 & -25&13 & -21&31 & -24&18 \\
-\hline
-5  &   -32&26 & -24&18 & -45&4 & -25&23 & -31&27  \\
-\hline
-6  &   -39&29 & -23&30 & -9&21 & -31&30 & -40&34 \\
-\hline
-7  &   -21&20 & -23&18 & -26&40 & -24&23 & -26&16 \\
-\hline
-8  &   -26&25 & -22&23 & -16&17 & -36&27 & -36&22 \\
-\hline
-9  &   -17&21 & -13&15 & -6&15 & -20&16 & -23&15\\ 
-\hline
-\end{tabular}
-\caption{Shear.}
-\label{tbl:test-file-format}
-\end{table}
 
+% \subsection{Shear}
+% \begin{table}[ht]
+% \centering
+% \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|}
+% \hline
+%  & \multicolumn{2}{c}{\textbf{CNN}} &  \multicolumn{2}{|c|}{\textbf{NN}} &\multicolumn{2}{c}{\textbf{NB}} & \multicolumn{2}{|c|}{\textbf{SVM}} & \multicolumn{2}{c|}{\textbf{kNN}} \\
+% \hline
+% Digit  &   Start & End & Start & End & Start & End & Start & End & Start & End \\
+% \hline
+% 0  &   -24&28 & -19&16 & -17&10 & -36&25 & -50&39 \\
+% \hline
+% 1  &   -50&18 & -24&14 & -14&10 & -50&24 & -50&49 \\
+% \hline
+% 2  &   -22&33 & -25&25 & -17&49 & -25&26 & -32&29 \\
+% \hline
+% 3  &   -25&23 & -31&21 & -12&33 & -32&22 & -35&35  \\
+% \hline
+% 4  &   -25&20 & -17&17 & -25&13 & -21&31 & -24&18 \\
+% \hline
+% 5  &   -32&26 & -24&18 & -45&4 & -25&23 & -31&27  \\
+% \hline
+% 6  &   -39&29 & -23&30 & -9&21 & -31&30 & -40&34 \\
+% \hline
+% 7  &   -21&20 & -23&18 & -26&40 & -24&23 & -26&16 \\
+% \hline
+% 8  &   -26&25 & -22&23 & -16&17 & -36&27 & -36&22 \\
+% \hline
+% 9  &   -17&21 & -13&15 & -6&15 & -20&16 & -23&15\\ 
+% \hline
+% \end{tabular}
+% \caption{Shear.}
+% \label{tbl:test-file-format}
+% \end{table}
+\newline
+
+% \subsubsection{MT: Shear}
+% \pgfplotstableread[row sep=\\,col sep=&]{
+%     interval & Digit & Fashion & Letter \\
+%     CNN & 52.4 & 38.81 & 28.84 \\
+%     NN  & 41.8 & 41.18 & 28.11 \\
+%     NB  & 39.9 & 53.6 & 31.5 \\
+%     SVM & 54.7 & 53.8 & 34.84 \\
+%     KNN & 63.1 & 45.1 & 38.23 \\
+%     }\shear
+    
+% \begin{tikzpicture}
+%     \begin{axis}[
+%             ybar,
+%             bar width=.75cm,
+%             width=\textwidth,
+%             height=.5\textwidth,
+%             legend style={at={(0.5,1)},
+%                 anchor=north,legend columns=-1},
+%             symbolic x coords={CNN,NN,NB,SVM,KNN},
+%             xtick=data,
+%             nodes near coords,
+%             nodes near coords align={vertical},
+%             ymin=0,ymax=120,
+%             ylabel={Angle},
+%         ]
+%         \addplot table[x=interval,y=Digit]{\shear};
+%         \addplot table[x=interval,y=Fashion]{\shear};
+%         \addplot table[x=interval,y=Letter]{\shear};
+%         \legend{Digit, Fashion, Letter}
+%     \end{axis}
+% \end{tikzpicture}
 \pgfplotstableread[row sep=\\,col sep=&]{
-    interval & Digit & Fashion & Letter \\
-    CNN   & 52.4  & 38.82  & 0  \\
-    NN    & 41.8 & 41.18  & 0  \\
-    NB    & 39.9 & 53.6 & 0 \\
-    SVM   & 54.7 & 53.8 & 0 \\
-    KNN   & 63.1  & 45.1 & 0.0 \\
-    }\shade
+    Mx & My & Fx & Fy & Ex & Ey \\
+    0 & 47 & 0.1 & 24 & 0.2 & 30 \\
+    4 & 43 & 4.1 & 29 & 4.2 & 24 \\
+    8 & 34 & 8.1 & 33 & 8.2 & 26 \\
+    12 & 23 & 12.1 & 31 & 12.2 & 29 \\
+    16 & 23 & 16.1 & 29 & 16.2 & 35 \\
+    }\shearx
     
+\pgfplotstableread[row sep=\\,col sep=&]{
+   Algo & Mx & My & Fx & Fy & Ex & Ey \\
+    CNN & 0 & -48 & 0.1 & -25 & 0.2 & -30 \\
+    NN & 4 & -46 & 4.1 & -30 & 4.2 & -26 \\
+    NB & 8 & -31 & 8.1 & -43 & 8.2 & -23 \\
+    SVM & 12 & -28 & 12.1 & -40 & 12.2 & -33 \\
+    KNN & 16 & -31 & 16.1 & -32 & 16.2 & -45 \\
+    }\sheary
+    
+\begin{figure}[H]
 \begin{tikzpicture}
-    \begin{axis}[
-            ybar,
-            bar width=.75cm,
-            width=\textwidth,
-            height=.5\textwidth,
-            legend style={at={(0.5,1)},
-                anchor=north,legend columns=-1},
-            symbolic x coords={CNN,NN,NB,SVM,KNN},
-            xtick=data,
-            nodes near coords,
-            nodes near coords align={vertical},
-            ymin=0,ymax=120,
-            ylabel={\%},
-        ]
-        \addplot table[x=interval,y=Digit]{\shade};
-        \addplot table[x=interval,y=Fashion]{\shade};
-        \addplot table[x=interval,y=Letter]{\shade};
-        \legend{Digit, Fashion, Letter}
-    \end{axis}
+\begin{groupplot}[group style={group size= 1 by 2},xtick=\empty]%[ybar stacked,xtick=\empty,]%ytick=\empty]
+\nextgroupplot[ybar, bar width=.2cm,xtick=\empty,yshift=1cm, ymin=0,ymax=60,legend style = {at={(1.05, 0.5)}, anchor = west, legend columns =1, draw=none, area legend},  ymajorgrids = true,width=0.85\textwidth,height=.4\textwidth,]%ytick=\empty]
+\addplot[fill=blue,draw=black] table[x=Mx,y=My]{\shearx};
+\addlegendentry{MNIST}
+
+\addplot[fill=red,draw=black] table[x=Fx,y=Fy]{\shearx};
+\addlegendentry{Fashion}
+
+\addplot[fill=brown,draw=black] table[x=Ex,y=Ey]{\shearx};
+\addlegendentry{EMNIST}
+
+\nextgroupplot[ybar, width=0.85\textwidth,height=.4\textwidth, bar width=.2cm,yshift=1cm,ymin=-60,ymax=0,legend style = {at={(1.05, 1.65)}, anchor = west, legend columns =1, draw=none, area    legend},ymajorgrids = true,xtick=data, xticklabels from table={\sheary}{Algo}, xticklabel style={yshift=-2ex, xshift=-2ex,anchor= west},]
+\addplot[fill=blue,draw=black] table[x=Mx,y=My]{\sheary};
+\addplot[fill=red,draw=black] table[x=Fx,y=Fy]{\sheary};
+\addplot[fill=brown,draw=black] table[x=Ex,y=Ey]{\sheary};
+
+\end{groupplot}
 \end{tikzpicture}
+\caption{Robustness graph for Shear property}
+\end{figure}
+For the Shearing property, the convolutional neural-network is the most robust. The Fashion-MNIST and EMNIST datasets have Naive Bayes and KNN as the most robust algorithm respectively.
+% \subsection{ShiftX}
+% \begin{table}[ht]
+% \centering
+% \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|}
+%     \hline
+%      & \multicolumn{2}{c}{\textbf{CNN}} &  \multicolumn{2}{|c|}{\textbf{NN}} &\multicolumn{2}{c}{\textbf{NB}} & \multicolumn{2}{|c|}{\textbf{SVM}} & \multicolumn{2}{c|}{\textbf{kNN}} \\
+%     \hline
+%     Digit  &   Start & End & Start & End & Start & End & Start & End & Start & End \\
+%     \hline
+%     0  &   -5&4 & -3&3 & -4&3 & -4&3 & -4&4 \\
+%     \hline
+%         \multirow{3}{*}{1}
+%             &-50&-29 & -50&-38 &  \multirow{3}{*}{-2}&\multirow{3}{*}{2} & -50&-28 & -50&-25\\
+%             &-5&5 & -2&1 & & & -6&4 & -9&11\\
+%             &32&49 & 40&49  & & & 28&49 & 27&49\\
+%     \hline
+%     \multirow{2}{*}{2}  
+%         &   \multirow{2}{*}{-7}&\multirow{2}{*}{7}  &  \multirow{2}{*}{-5}&\multirow{2}{*}{6}  &  -41&-25   &  \multirow{2}{*}{-5}&\multirow{2}{*}{8} & \multirow{2}{*}{-5}&\multirow{2}{*}{11}\\
+%         & & &   & & -12&6   & & & &\\          
+%     \hline
+%     3  &   -6&3 & -7&1 & -7&0 & -7&2 & -8&4  \\
+%     \hline
+%     4  &   -7&6 & -4&4 & -5&5 & -4&5 & -5&4 \\
+%     \hline
+%     5  &   -5&8 & -2&7 & -2&21 & -3&9 & -5&13 \\
+%     \hline
+%     6  &   -5&8 & -4&4 & -3&3 & -5&5 & -5&5 \\
+%     \hline
+%     7  &   -5&6 & -6&2 & -4&2 & -7&4 & -11&4 \\
+%     \hline
+%     8  &   -4&5 & -2&4 & -1&5 & -3&4 & -3&6 \\
+%     \hline
+%     9  &   -5&5 & -4&2 & -2&2 & -4&3 & -3&3 \\ 
+%     \hline
+% \end{tabular}
+% \caption{ShiftX.}
+% \label{tbl:test-file-format}
+% \end{table}
+\newline
+
+% \subsubsection{MT: ShiftX}
+% \pgfplotstableread[row sep=\\,col sep=&]{
+%     interval & Digit & Fashion & Letter \\
+%     CNN & 11.2 & 5.166666666666667 & 2.892857142857143 \\ 
+%     NN & 6.9 & 8.615384615384615 & 2.3214285714285716 \\
+%     NB & 8.727272727272727 & 18.0 & 2.5454545454545454 \\
+%     SVM & 8.545454545454545 & 7.3076923076923075 & 3.0 \\
+%     KNN & 10.416666666666666 & 6.6 & 3.75 \\
+%     }\shiftX
+    
+% \begin{tikzpicture}
+%     \begin{axis}[
+%             ybar,
+%             bar width=.75cm,
+%             width=\textwidth,
+%             height=.5\textwidth,
+%             legend style={at={(0.5,1)},
+%                 anchor=north,legend columns=-1},
+%             symbolic x coords={CNN,NN,NB,SVM,KNN},
+%             xtick=data,
+%             nodes near coords,
+%             nodes near coords align={vertical},
+%             ymin=0,ymax=50,
+%             ylabel={Pixels},
+%         ]
+%         \addplot table[x=interval,y=Digit]{\shiftX};
+%         \addplot table[x=interval,y=Fashion]{\shiftX};
+%         \addplot table[x=interval,y=Letter]{\shiftX};
+%         \legend{Digit, Fashion, Letter}
+%     \end{axis}
+% \end{tikzpicture}
+\pgfplotstableread[row sep=\\,col sep=&]{
+    Mx & My & Fx & Fy & Ex & Ey \\
+    0 & 5 & 0.1 & 1 & 0.2 & 1 \\
+    4 & 3 & 4.1 & 1 & 4.2 & 1 \\
+    8 & 3 & 8.1 & 2 & 8.2 & 1 \\
+    12 & 4 & 12.1 & 1 & 12.2 & 1 \\
+    16 & 4 & 16.1 & 1 & 16.2 & 1 \\
+    }\shearxX
+    
+\pgfplotstableread[row sep=\\,col sep=&]{
+   Algo & Mx & My & Fx & Fy & Ex & Ey \\
+    CNN & 0 & -5 & 0.1 & -1 & 0.2 & -1 \\
+    NN & 4 & -3 & 4.1 & -1 & 4.2 & -1 \\
+    NB & 8 & -3 & 8.1 & -2 & 8.2 & -1 \\
+    SVM & 12 & -4 & 12.1 & -1 & 12.2 & -1 \\
+    KNN & 16 & -5 & 16.1 & -1 & 16.2 & -1 \\
+    }\shearxY
+    
+\begin{figure}[H]
+\begin{tikzpicture}
+\begin{groupplot}[group style={group size= 1 by 2},xtick=\empty]%[ybar stacked,xtick=\empty,]%ytick=\empty]
+\nextgroupplot[ybar, bar width=.2cm,xtick=\empty,yshift=1cm, ymin=0,ymax=10,legend style = {at={(1.05, 0.5)}, anchor = west, legend columns =1, draw=none, area legend},  ymajorgrids = true,width=0.85\textwidth,height=.3\textwidth,]%ytick=\empty]
+\addplot[fill=blue,draw=black] table[x=Mx,y=My]{\shearxX};
+\addlegendentry{MNIST}
+
+\addplot[fill=red,draw=black] table[x=Fx,y=Fy]{\shearxX};
+\addlegendentry{Fashion}
+
+\addplot[fill=brown,draw=black] table[x=Ex,y=Ey]{\shearxX};
+\addlegendentry{EMNIST}
+
+\nextgroupplot[ybar, width=0.85\textwidth,height=.3\textwidth, bar width=.2cm,yshift=1cm,ymin=-10,ymax=0,legend style = {at={(1.05, 1.65)}, anchor = west, legend columns =1, draw=none, area    legend},ymajorgrids = true,xtick=data, xticklabels from table={\shearxY}{Algo}, xticklabel style={yshift=-2ex, xshift=-2ex,anchor= west}]
+\addplot[fill=blue,draw=black] table[x=Mx,y=My]{\shearxY};
+\addplot[fill=red,draw=black] table[x=Fx,y=Fy]{\shearxY};
+\addplot[fill=brown,draw=black] table[x=Ex,y=Ey]{\shearxY};
+\end{groupplot}
+\end{tikzpicture}
+\caption{Robustness graph for ShiftX property}
+\end{figure}
+
+
+On average the length of the bars for ShiftX metamorphic property is much lower than rotation, shearing, or, shading. This means that the algorithms are much less robust when the images are shifted in the direction of X axis. Among the algorithms we implemented, CNN is the most robust on MNIST-digit dataset, Naive Bayes on MNIST-Fashion, and, all the algorithms perform equally on the EMNIST dataset.
+
+% \subsubsection{MT: ShiftY}
+% \pgfplotstableread[row sep=\\,col sep=&]{
+%     interval & Digit & Fashion & Letter \\
+%     CNN & 6.6 & 1.4 & 2.0714285714285716 \\
+%     NN & 4.7272727272727275 & 4.076923076923077 & 2.357142857142857 \\
+%     NB & 6.0 & 8.285714285714286 & 2.5161290322580645 \\
+%     SVM & 6.8 & 4.428571428571429 & 2.357142857142857 \\
+%     KNN & 11.3 & 5.333333333333333 & 3.1379310344827585 \\
+%     }\shiftY
+
+% \newline
+% \begin{tikzpicture}
+%     \begin{axis}[
+%             ybar,
+%             bar width=.75cm,
+%             width=\textwidth,
+%             height=.5\textwidth,
+%             legend style={at={(0.5,1)},
+%                 anchor=north,legend columns=-1},
+%             symbolic x coords={CNN,NN,NB,SVM,KNN},
+%             xtick=data,
+%             nodes near coords,
+%             nodes near coords align={vertical},
+%             ymin=0,ymax=50,
+%             ylabel={Pixels},
+%         ]
+%         \addplot table[x=interval,y=Digit]{\shiftY};
+%         \addplot table[x=interval,y=Fashion]{\shiftY};
+%         \addplot table[x=interval,y=Letter]{\shiftY};
+%         \legend{Digit, Fashion, Letter}
+%     \end{axis}
+% \end{tikzpicture}
+\pgfplotstableread[row sep=\\,col sep=&]{
+    Mx & My & Fx & Fy & Ex & Ey \\
+    0 & 3 & 0.1 & 1 & 0.2 & 1 \\
+    4 & 2 & 4.1 & 1 & 4.2 & 0 \\
+    8 & 2 & 8.1 & 1 & 8.2 & 1 \\
+    12 & 3 & 12.1 & 1 & 12.2 & 1 \\
+    16 & 3 & 16.1 & 1 & 16.2 & 1 \\
+    }\shearyX
+    
+\pgfplotstableread[row sep=\\,col sep=&]{
+   Algo & Mx & My & Fx & Fy & Ex & Ey \\
+    CNN & 0 & -4 & 0.1 & -1 & 0.2 & -1 \\
+    NN & 4 & -2 & 4.1 & 0 & 4.2 & -1 \\
+    NB & 8 & -3 & 8.1 & -1 & 8.2 & -1 \\
+    SVM & 12 & -3 & 12.1 & -1 & 12.2 & -1 \\
+    KNN & 16 & -4 & 16.1 & -1 & 16.2 & -1 \\
+    }\shearyY
+    
+\begin{figure}[H]
+\begin{tikzpicture}
+\begin{groupplot}[group style={group size= 1 by 2},xtick=\empty]%[ybar stacked,xtick=\empty,]%ytick=\empty]
+\nextgroupplot[ybar, bar width=.2cm,xtick=\empty,yshift=1cm, ymin=0,ymax=10,legend style = {at={(1.05, 0.5)}, anchor = west, legend columns =1, draw=none, area legend},  ymajorgrids = true,width=0.85\textwidth,height=.3\textwidth,]%ytick=\empty]
+\addplot[fill=blue,draw=black] table[x=Mx,y=My]{\shearyX};
+\addlegendentry{MNIST}
+
+\addplot[fill=red,draw=black] table[x=Fx,y=Fy]{\shearyX};
+\addlegendentry{Fashion}
+
+\addplot[fill=brown,draw=black] table[x=Ex,y=Ey]{\shearyX};
+\addlegendentry{EMNIST}
+
+\nextgroupplot[ybar, width=0.85\textwidth,height=.3\textwidth, bar width=.2cm,yshift=1cm,ymin=-10,ymax=0,legend style = {at={(1.05, 1.65)}, anchor = west, legend columns =1, draw=none, area    legend},ymajorgrids = true,xtick=data, xticklabels from table={\shearyY}{Algo}, xticklabel style={yshift=-2ex, xshift=-2ex,anchor= west},]
+\addplot[fill=blue,draw=black] table[x=Mx,y=My]{\shearyY};
+\addplot[fill=red,draw=black] table[x=Fx,y=Fy]{\shearyY};
+\addplot[fill=brown,draw=black] table[x=Ex,y=Ey]{\shearyY};
+
+\end{groupplot}
+\end{tikzpicture}
+\caption{Robustness graph for ShiftY property}
+\end{figure}
+Just like the ShiftX property, the length of bars here are much smaller than others. Thus al here we find that k-NN is also more robust than the rest of the algorithms we tested when applied to MNIST-digit and EMNIST-letter dataset. While, Naive Bayes is more robust when applied to MNIST-Fashion dataset.

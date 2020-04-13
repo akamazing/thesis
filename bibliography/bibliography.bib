@@ -41,7 +41,6 @@ year = {2016}
 }
 
 @article{Chen1998,
-abstract = {In software testing, a set of test cases is constructed according to some predeened selection criteria. The software is then examined against these test cases. Three interesting observations have been made on the current artifacts of software testing. Firstly, an error-revealing test case is considered useful while a successful test case which does not reveal software errors is usually not further investigated. Whether these successful test cases still contain useful information for revealing software errors has not been properly studied. Secondly, no matter how extensive the testing has been conducted in the development phase, errors may still exist in the software 5. These errors, if left undetected, may eventually cause damage to the production system. The study of techniques for uncovering software errors in the production phase is seldom addressed in the literature. Thirdly, as indicated by Weyuker in 66, the availability of test oracles is pragmatically unattainable in most situations. However, the availability of test oracles is generally assumed in conventional software testing techniques. In this paper, we propose a novel test case selection technique that derives new test cases from the successful ones. The selection aims at revealing software errors that are possibly left undetected in successful test cases which may be generated using some existing strategies. As such, the proposed technique augments the eeectiveness of existing test selection strategies. The},
 author = {Chen, TY and Cheung, SC and Yiu, SM},
 journal = {{\ldots} , Hong Kong University of Science and {\ldots}},
 title = {{Metamorphic testing: a new approach for generating next test cases}},
@@ -49,7 +48,6 @@ year = {1998}
 }
 
 @article{Zhou2004,
-abstract = {An " oracle " in software testing is a procedure by which testers can decide whether the output of the program under test-ing is correct. In some situations, however, the oracle is not available or too difficult to apply. This is known as the " or-acle problem " . In other situations, the oracle is often the human tester who checks the testing result manually. The manual prediction and verification of program output greatly decreases the efficiency and increases the cost of testing. A metamorphic testing method has been proposed to test pro-grams without the involvement of an oracle. It employs prop-erties of the target function, known as metamorphic relations, to generate follow-up test cases and verify the outputs},
 author = {Zhou, Z.Q. and Huang, Dh and Tse, Th and Yang, Z. and Huang, H. and Chen, Ty},
 journal = {Proceedings of the 8th International Symposium on Future Software Technology (ISFST 2004)},
 keywords = {automated testing,ful test case,metamorphic relation,metamorphic testing,multiple executions,oracle,success-},
@@ -96,6 +94,21 @@ pmid = {21243103},
 title = {{Application of metamorphic testing to supervised classifiers}},
 year = {2009}
 }
+
+@article{Xu2012,
+abstract = {We derive generalization bounds for learning algorithms based on their robustness: the property that if a testing sample is “similar” to a training sample, then the testing error is close to the training error. This provides a novel approach, different from complexity or stability arguments, to study generalization of learning algorithms. One advantage of the robustness approach, compared to previous methods, is the geometric intuition it conveys. Consequently, robustness-based analysis is easy to extend to learning in non-standard setups such as Markovian samples or quantile loss. We further show that a weak notion of robustness is both sufficient and necessary for generalizability, which implies that robustness is a fundamental property that is required for learning algorithms to work.},
+author = {Xu, Huan and Mannor, Shie},
+doi = {10.1007/s10994-011-5268-1},
+issn = {1573-0565},
+journal = {Machine Learning},
+number = {3},
+pages = {391--423},
+title = {{Robustness and generalization}},
+url = {https://doi.org/10.1007/s10994-011-5268-1},
+volume = {86},
+year = {2012}
+}
+
 
 @book{Graves,
   author    = {Alex Graves},
@@ -436,6 +449,17 @@ keywords = "Condition monitoring, Feature selection, Genetic algorithm, Bearing 
   publisher={Nature Publishing Group}
 }
 
+@article{huang2018applications,
+  title={Applications of support vector machine (SVM) learning in cancer genomics},
+  author={Huang, Shujun and Cai, Nianguang and Pacheco, Pedro Penzuti and Narrandes, Shavira and Wang, Yang and Xu, Wayne},
+  journal={Cancer Genomics-Proteomics},
+  volume={15},
+  number={1},
+  pages={41--51},
+  year={2018},
+  publisher={International Institute of Anticancer Research}
+}
+
 @article{hall199,
 author = {Hall, Tony and Brooks, Harold E. and Doswell, Charles A.},
 title = {Precipitation Forecasting Using a Neural Network},
@@ -454,14 +478,28 @@ eprint = { https://doi.org/10.1175/1520-0434(1999)014<0338:PFUANN>2.0.CO;2}
   title     = {Neural Networks and Deep Learning},
   publisher = {Determination Press},
   year      = {2015},
-  url       = {http://neuralnetworksanddeeplearning.com/chap1.html},
+  howpublished       = {http://neuralnetworksanddeeplearning.com/chap1.html},
   note = {Accessed: 2019-08-13}
 }
 
 @online{convNN,
   author = {Neil R. Grabois},
-  title = {Lab 8: Convolutional Neural Networks
-Due April 10 by midnight},
-  url = {https://www.cs.swarthmore.edu/~meeden/cs63/s19/labs/08.html},
+  title = {{Lab 8: Convolutional Neural Networks}},
+  howpublished = {https://www.cs.swarthmore.edu/~meeden/cs63/s19/labs/08.html},
   note = {Accessed: 2019-08-15}
+}
+
+@online{convNNStan,
+  author = {Fei-Fei Li},
+  title = {{CS231n: Convolutional Neural Networks for Visual Recognition}},
+  howpublished = {\url{http://cs231n.github.io/convolutional-networks/}},
+  note = {Accessed: 2019-08-15}
+}
+
+@inproceedings{krizhevsky2012imagenet,
+  title={Imagenet classification with deep convolutional neural networks},
+  author={Krizhevsky, Alex and Sutskever, Ilya and Hinton, Geoffrey E},
+  booktitle={Advances in neural information processing systems},
+  pages={1097--1105},
+  year={2012}
 }

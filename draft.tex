@@ -5,6 +5,7 @@
 %\usepackage[utf8]{inputenc}
 
 \usepackage{style/import}
+\usepackage[table]{xcolor}
 \usepackage{hyperref} % to hyperlink the table of contents
 \hypersetup{linktocpage, pdfborder=0 0 0} % hyperref option to hyperlink the page number only, not the section title
 \usepackage{graphicx}
@@ -35,7 +36,7 @@
 \usepackage{float} % these move the table caption to the top
 \floatstyle{plaintop}
 \restylefloat{table}
-
+\usepgfplotslibrary{groupplots}
 % http://tug.ctan.org/tex-archive/macros/latex/contrib/titlesec/titlesec.pdf
 \usepackage[compact]{titlesec}
 \titleformat{\chapter}[display]   
@@ -159,21 +160,22 @@
 \chapter{Results}
 \import{chapters/results/}{results.tex}
 
-\chapter{Synthesis Matrix}
-\import{chapters/litReview/}{synthesisMatrix.tex}
+
 
 %% backmatter is needed at the end of the main body of your thesis to
 %% set up page numbering correctly for the remainder of the thesis
 \backmatter
 
-%% Start the correct formatting for the appendices
-\appendix
-
 %% Appendices go here (if you have them)
-
-
 \nocite{*}
 \bibliographystyle{plain}
 \bibliography{bibliography/bibliography}
+
+%% Start the correct formatting for the appendices
+\appendix
+\chapter{Synthesis Matrix}
+\import{chapters/litReview/}{synthesisMatrix.tex}
+
+
 
 \end{document}

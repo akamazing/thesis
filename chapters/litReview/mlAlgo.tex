@@ -10,7 +10,7 @@ Neural networks were first introduced in 1944 by two University of Chicago resea
     \end{figure}
     \FloatBarrier
 % cite figure: https://towardsdatascience.com/applied-deep-learning-part-1-artificial-neural-networks-d7834f67a4f6
-A typical neural network looks like a variation of Figure 2.1. \\
+A typical neural network looks like a variation of Figure \ref{Neural network}. \\
 Input layer: The leftmost layer in the network is made up of input neurons and the layer is called the input layer. There is no computation performed in the nodes at this layer. Input layer simply provides the information from the environment to the next layer.
 Hidden layers: The layers in the middle make up the hidden layers, as the neurons in these layers are neither inputs nor outputs. There can be zero or multiple hidden layers. Hidden layers takes the input from the input layer and passes information to the output layer after performing computation on the data. 
 Output layer: The rightmost or output layer contains the output neurons, or, as in this case, a single output neuron. 
@@ -22,31 +22,26 @@ There are some other models of artificial neural networks in which feedback loop
 
 
 \subsection{Convolutional neural network}
-Convolutional neural networks (ConvNet) are very similar to ordinary neural networks in structure. They work by extracting simple features at a higher resolution and then converting them into more complex features at a coarser resolution \cite{simard2003best}. It does so by performing dot product on the inputs received at each neuron and optionally follow it with non-linearity. Just like a normal neural network, convolutional neural network (from the input image to output class) can be expressed as a single differential function. It also has a loss function on the fully-connected output layer.
+Convolutional neural networks (ConvNet) are very similar to ordinary neural networks in structure. They work by extracting simple features at a higher resolution and then converting them into more complex features at a coarser resolution \cite{simard2003best}. It does so by performing dot product on the inputs received at each neuron and optionally follow it with non-linearity. Just like a normal neural network, convolutional neural network (from the input image to output class) can be expressed as a single differential function. It also has a loss function on the fully-connected output layer and the neurons have learnable weights and biases which are optimized during the learning phase.
 
-Convolutional Neural Networks (ConvNet) are very similar to ordinary Neural Networks. they are made up of neurons that have learnable weights and biases. Each neuron receives some inputs, performs a dot product and optionally follows it with a non-linearity. The whole network still expresses a single differentiable score function: from the raw image pixels on one end to class scores at the other. And they still have a loss function (e.g. SVM/Softmax) on the last (fully-connected) layer and all the tips/tricks we developed for learning regular Neural Networks still apply. 
-What makes it different is that ConvNet architectures make the explicit assumption that the inputs are images, which allows us to encode certain properties into the architecture. These then make the forward function more efficient to implement and vastly reduce the amount of parameters in the network. Convolutional Neural Networks take advantage of the fact that the input consists of images and they constrain the architecture in a more sensible way. In particular, unlike a regular Neural Network, the layers of a ConvNet have neurons arranged in 3 dimensions: width, height, depth. (Note that the word depth here refers to the third dimension of an activation volume, not to the depth of a full Neural Network, which can refer to the total number of layers in a network). 
-A ConvNet architecture is made up of the following layers: \\
-Input: This layer holds the raw input image in form of it's pixel values and color channels.\\
-Convolutional layer: This layer computes the dot product between it's weight and a small region in the previous layer it is connected to.\\
-Rectified linear unit: \\
-Fully connected layer: The fully connected output layer computes the class scores for the input. The neurons in this layer are connected to every neuron in the last layer.\\
+What makes it different from an ordinary neural network is the architecture of a ConvNet. It makes explicit assumption that the inputs are images, which allows us to encode certain properties into the architecture. In particular, unlike a regular Neural Network, the layers of a ConvNet have neurons arranged in 3 dimensions: width, height, depth. A simple ConvNet is a sequence of layers and every layer transforms one volume of activation to another through a differentiable function.
 
-A simple ConvNet is a sequence of layers, and every layer of a ConvNet transforms one volume of activations to another through a differentiable function. We use three main types of layers to build ConvNet architectures: Convolutional Layer, Pooling Layer, and Fully-Connected Layer (exactly as seen in regular Neural Networks). We will stack these layers to form a full ConvNet architecture.
-
-
-RELU layer will apply an elementwise activation function, such as the $max(0,x)$ thresholding at zero. This leaves the size of the volume unchanged ([32x32x12]).
-POOL layer will perform a downsampling operation along the spatial dimensions (width, height), resulting in volume such as [16x16x12].
-FC (i.e. fully-connected) layer will compute the class scores, resulting in volume of size [1x1x10], where each of the 10 numbers correspond to a class score, such as among the 10 categories of CIFAR-10. As with ordinary Neural Networks and as the name implies, each neuron in this layer will be connected to all the numbers in the previous volume.
 \begin{figure}[htb!]
     \centering
     \includegraphics[scale=1.25]{chapters/litReview/files/convNet.png}
     \caption{Convolutional Neural network \cite{convNN}}
-    \label{Neural network}
+    \label{Convolutional Neural network}
     \end{figure}
     \FloatBarrier
+    
+A ConvNet architecture is made up of the following layers and these layers are stacked to form the full network \cite{krizhevsky2012imagenet}: \\
+Input layer: This layer holds the raw input image in form of it's pixel values and color channels.\\
+Convolutional layer (Conv): This layer computes the dot product between it's weight and a small region in the previous layer it is connected to. It is a linear operation which multiplies the input from the previous layer to a two-dimensional array of weights called filter or kernel. \\
+Rectified linear unit (ReLu): This layer applies an element-wise activation function, like $max(0,x)$ with the threshold at zero. It introduces non-linearity to the system which has just been doing linear computations (element wise multiplication and sum) in previous Conv layers. \\
+Pooling layer (POOL): This layer performs a downsampling operation along the spatial dimensions. This helps in two major ways: $i)$ The amount of parameters or weights is reduced by 75\%. $ii)$ It also reduces the problem of overfitting.\\
+Fully connected layer (FC): The fully connected output layer computes the class scores for the input. The neurons in this layer are connected to every neuron in the previous layer. The only difference between this layer and the Conv layer is that the neurons in Conv layer are only connected to a local region in the input layer and the neurons in Conv layer share parameters. The neurons in both the layer compute dot product and their function form is identical. Thus, it is easily possible to convert between the fully connected and Conv layer.\\
 
-Note that some layers contain parameters and other don’t. In particular, the CONV/FC layers perform transformations that are a function of not only the activations in the input volume, but also of the parameters (the weights and biases of the neurons). On the other hand, the RELU/POOL layers will implement a fixed function. The parameters in the CONV/FC layers will be trained with gradient descent so that the class scores that the ConvNet computes are consistent with the labels in the training set for each image.
+It should be noted that some layers contain parameters while others may not. The ReLu/Pool layer implements a fixed function whereas, the Conv/FC layers transformation functions work on the activations in the input volume and the weights and biases of the neurons. The parameters in Conv/FC layer is trained using gradient descent such that the scores computed by ConvNet is consistent with the expected output of each image in the training set \cite{convNNStan}.
 %cite http://cs231n.github.io/convolutional-networks/
 
 \subsection{Naive Bayes}
@@ -71,7 +66,7 @@ $\hat{y} = \arg\max_y P(y) \prod_{i=1}^{n} P(x_i \mid y)$
 The main distinction between different versions of naive Bayes classifiers are the assumptions they make about the distribution of $P(x_i \mid y)$\cite{scikit-learn}. The multinomial Naive Bayes suffers from a systematic problem of assigning poor weights to necessary parameters if once class has more training examples than others. This effect lowers the weights for classes with less training examples\cite{rennie2003tackling}. For this reason we have equal numbers of training and testing examples for each class in our experiment. 
 
 \subsection{k-Nearest Neighbor}
-The nearest neighbor classifier is a supervised classification technique which assigns an input sample vector (whose classification is to be predicted) to the class of it's nearest neighbors. The similarity between the input and the neighbors is calculated based on some distance metrics. This process does not require any pre-processing of the labeled set of neighbors before their use \cite{cover1967}. This idea can be further extended to assign the class of input variable to the class represented by majority of the $k$ nearest neighbors, where $k$ is a positive number specified by the user. The optimal value of $k$ depends on the data. A larger value of $k$ makes the classification boundaries less distinct while suppressing the noise effect \cite{scikit-learn}. One problem with implementing $k$ nearest algorithm is that in some cases there may be a tie among classes between the $k$ neighbors. This problem can be solved by restricting the values of $k$. In a binary classification problem, the values of $k$ can be restricted to odd numbers so that ties can be avoided. In a multi-class classification, this can be resolved by assigning the input to the class for which the sum of distance to each neighbor is the least. This could further lead to a tie and in that case an arbitrary assignment can be made \cite{keller1985}.
+The nearest neighbor classifier is a supervised classification technique which assigns an input sample vector (whose classification is to be predicted) to the class of it's nearest neighbors. The similarity between the input and the neighbors is calculated based on some distance metrics. This process does not require any pre-processing of the labeled set of neighbors before their use \cite{cover1967}. This idea can be further extended to assign the class of input variable to the class represented by majority of the $k$ nearest neighbors, where $k$ is a positive number specified by the user. The optimal value of $k$ depends on the data. A larger value of $k$ makes the classification boundaries less distinct while suppressing the noise effect \cite{scikit-learn}. One problem with implementing $k$ nearest algorithm is that in some cases there may be a tie among classes between the $k$ neighbors. This problem can be solved by restricting the values of $k$. In a binary classification problem, the values of $k$ can be restricted to odd numbers so that ties can be avoided. In a multi-class classification, this can be resolved by assigning the input to the class for which the sum of distance to each neighbor is the least. This could further lead to a tie and in that case an arbitrary assignment has to be made \cite{keller1985}.
 \begin{figure}[htb!]
     \centering
     \includegraphics[scale=1]{files/knn.png}
@@ -80,43 +75,17 @@ The nearest neighbor classifier is a supervised classification technique which a
     \end{figure}
     \FloatBarrier
 
-\cite{cover1967}
-A set of n pairs is given $(x1,\theta 2),...(xn,\theta n)$ s.t the x′is take value in a metric space X upon which is defined a metric d.
-The category $\theta$ i is assigned to the ith sample or individual from finite subset {1,2, ... M} and xi is the measurement made upon that ith.
-we shall say ”xi belongs to $\theta$ i” when we mean precisely that the ith sample have measurement xi with category $\theta i$ .
-Our Goal is to classify the measurement x , for a new arriving pair $(x,\theta )$, the classification is procedure to estimate the $\theta$  since x is observable .
-The estimation of $\theta$  is done by utilizing the fact that we have set of n correctly classified points.
-We shall call : nearest neighbor of x if
-'xn ∈(x1,x2,x3,....xn)'
-min d(xi,x) = d(xn,x) i = 1,2,3...,n.
 
-In this case the decision of the nearest neighbor rule is assigning the category $\theta$ n to our new measurement x .
-The 1-NN rule decide x belongs to the category of nearest neighbor and ignored the others!.
-In general k-NN rule decide x belongs to the category of majority vote of the nearest k neighbors.
+Given a set of n test data $(x_i, y_i),\dots(x_n, y_n)$ where $x_i$ is the feature vector and $y_i$ is the class label. $x_i$ is defined in a feature space $X$ with distance metric $d$. For a new incoming input $(x, y)$ the goal is to estimate the value of $y$ using the set of already classified data points. A data point $\acute{x_n} \in (x_1, x_2, \dots x_n)$ is said to be the nearest neighbor of $x$ if:
+\begin{center}
+$min\ d(x_i,x) = d(\acute{x_n},x) i = 1,2,3...,n.$ 
+\end{center}
+$x$ is then assigned to the category of $\acute{y_n}$. If $k = 1$, the algorithm assigns $x$ to the category of it's nearest neighbor, ignoring the others. In general, $k$-NN assigns $x$ to the majority class of nearest $k$ neighbors \cite{cover1967}.
 
 
 
 \subsection{Support vector machine}
-A support vector machine (SVM)  is a supervised machine learning classifier. The support vectors lie on the dotted hyperplanes parallel to the separating hyperplane. The margin, the minimum gap between the supporting hyperplane and the separating hyperplane, is chosen to be maximum. The pseudo-code is a common, abstract description of implemented SMO computer programs. Because SMO is an algorithm for solving the SVM optimization problem, it corresponds to the model constructor and is an abstract version of the quasi-testable core.\cite{Nakajima2016}
-
-
-support vector machines (SVMs), based on statistical learning theory, are gaining applications in the areas of machine learning, computer vision and pattern recognition because of high accuracy and good generalisation capability
-
-Based on the structural risk minimization (SRM) principal, SVM can get decision-making rules and achieve small error for independent tests set and hence can solve the learning problems efficiently \cite{svm2008}. Recently SVM is applied to solve the problems such as nonlinear, local minimum and high dimension. In many practical applications, SVM can ensure higher accuracy for a long-term prediction compared to other computational approaches.
-SVM is based on the concept of decision planes that define decision boundaries. SVM creates a hyperplane by using a linear model to implement nonlinear class boundaries through some nonlinear mapping input vectors into a high-dimensional feature space \cite{SAMANTA2003657} 
-
-It aims to create a decision boundary between two classes that enables the prediction of labels from one or more feature vectors (6). This decision boundary, known as the hyperplane, is orientated in such a way that it is as far as possible from the closest data points from each of the classes. These closest points are called support vectors.
-The most obvious drawback to the SVM algo- rithm, as described thus far, is that it apparently only handles binary classification problems. 
-Generalizing to multiclass clas- sification is straightforward and can be accom- plished by using any of a variety of methods. To recognize three classes, A, B and C, we simply have to train three separate SVMs to answer the binary questions, “Is it A?,” “Is it B?” and “Is it C?”. More sophisti- cated approaches also exist, which generalize the SVM optimization algorithm to account for multiple classes. \cite{noble2006support}
-The SVM algorithm was originally proposed to construct a linear classifier in 1963 by Vapnik (7). An alternative use for SVM is the kernel method, which enables us to model higher dimensional, non-linear models (8). In a non-linear problem, a kernel function could be used to add additional dimensions to the raw data and thus make it a linear problem in the resulting higher dimensional space (Figure 2). Briefly, a kernel function could help do certain calculations faster which would otherwise would need computations in high dimensional space.
-It is defined as:
-
-K (x, y)=<f(x), f(y)>
-
-Here K is the kernel function, x, y are n dimensional inputs. f is used to map the input from n dimensional to m dimensional space. <x, y> denotes the dot product. With kernel functions, we could calculate the scalar product between two data points in a higher dimensional space without explicitly calculating the mapping from the input space to the higher dimensional space. In many cases, computing the kernel is easy while going to the high dimensional space to compute the inner product of two feature vectors is hard. The feature vector for even simple kernels can blow up in size, and for kernels like the Radial Basis Function (RBF) kernel (KRBF(x, y) = exp (-γ||x - y||2), the corresponding feature vector is infinite dimensional. Yet, computing the kernel is almost trivial.
-
-The choice of kernel function among other factors could greatly affect the performance of an SVM model. However, there is no way to figure out which kernel would do the best for a specific pattern recognition problem. The only way to choose the best kernel is through trials. We can start with a simple SVM and then experiment with a variety of ‘standard’ kernel functions. Depending on the nature of the problem, it is possible that one kernel is better than the other kernels. An optimal kernel function can be selected from a fixed set of kernels in a statistically rigorous fashion by using cross-validation.
-
+A support vector machine (SVM) is a supervised machine learning classifier based on the structural risk minimization (SRM) principal. It solves learning problems by making decision-based rules and minimizing error for independent samples \cite{svm2008}. It has gained rapid popularity in the fields of machine learning, pattern recognition and computer vision because of high accuracy and good generalization capability. SVM creates a decision boundary, also known as hyperplanes, between elements of two classes that allows it to make predictions from one or more feature vectors. The hyperplanes are oriented such that it maximizes the distance between the closest data points in the two classes. These closest points are called support vectors. Support vectors are the input data $x_i$ for which $|y_i|(wx_i^T + b)=1$. It creates these nonlinear boundaries by mapping input vectors to a higher dimensional feature space \cite{SAMANTA2003657,Nakajima2016}.
 \begin{figure}[htb!]
     \centering
     \includegraphics[scale=0.75]{files/svm.png}
@@ -124,4 +93,33 @@ The choice of kernel function among other factors could greatly affect the perfo
     \label{SVM maximizes the margin between classes}
     \end{figure}
     \FloatBarrier
+    
+Given a set of training feature vector $x_i \in R_d$ with label $y_i \in (−1, +1)$: $(x_1, y_1), ..., (x_n, y_n)$ \\
+A hyperplane is defined as:
+\begin{center}
+    $wx^T + b=0$
+\end{center}
+where $w$ is the weight vector, and $b$ is the bias.
+$w$ and $b$ are selected such that the following condition holds for all the elements in the training set.
+\begin{center}
+    $wx_i^T + b \geq +1$ if $y_i=1$\\
+    $wx_i^T + b \leq −1$ if $y_i=–1$
+\end{center}
+During the training step, the model tries to place the hyperplace such that it maximizes the distance between the support vectors. This is done by finding the optimal values for $w$ and $b$ such the value of $1/(\parallel w\parallel)^2$ is maximum.
+
+    
+The obvious problem with SVM described above is that it works only in binary classification problems. A number of methods can be employed to enable SVM for multiclass classification. To classify an input data to three classes, x, y, and, z, three SVMs are needed to answer: $i)$ Is it x? $ii)$ Is it y? $iii)$ Is it z?\cite{noble2006support}
+An alternative way is to make use of kernel methods which enables us to model higher dimensional, non-linear models.
+A kernel function helps us to do faster calculations which would otherwise require higher dimensional computation. It adds additional dimension to the input data and makes it a linear problem in a higher dimensional feature space.
+A kernel function is defined as:
+\begin{center}
+  $K (x, y)=<f(x), f(y)>$ where,  
+\end{center}
+$K$ is the kernel function.\\
+$x, y$ are $m$ dimensional inputs.\\
+$f$ maps the inputs from $m$ dimensional feature space to $n$ dimensional feature space.\\
+$<x, y>$ denotes a dot product.\\
+Kernels can heavily affect the performance of a SVM but unfortunately there is no set way of choosing a kernel. We can start with a simpler kernel and then experiment with a number of standard kernels to produce best predictions by using cross-validation \cite{huang2018applications}.
+
+
 
