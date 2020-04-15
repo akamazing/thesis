@@ -1,18 +1,20 @@
-Machine learning algorithms are gaining rapid popularity 
-Testing 
-Oracle problem
-In this paper we first introduce metamorphic testing. Then identify new metamorphic properties for image datasets.
+% Machine learning algorithms are gaining rapid popularity 
+% Testing 
+% Oracle problem.
+% In this paper we first introduce metamorphic testing. Then identify new metamorphic properties for image datasets.
 
-Machine learning has gained rapid popularity in the past decade and different sectors like healthcare, finance, retail, etc. are using machine learning techniques to provide better products and services. This rising popularity has created a demand for better implementation of the state-of-the-art algorithms in order to implement more complex and sophisticated use cases. Machine learning algorithms has been around for a long time now and several developers have written a number of tools and libraries to help others learn and use these algorithms in their own projects.  While developing and training a machine learning model, the developers rely on the accuracy of these libraries to produce best results where the aim is to create a model that makes the best predictions.
-Conventionally, oracles have been used to test the correctness of a program. Oracles provide expected values against which the output from the program can be compared and validated. Lack of reliable oracles for testing machine learning algorithms makes it very hard to test the accuracy of such programs. This problem is called the oracle problem\cite{Weyuker}. Oracle problem arises when either:
+Machine learning has gained rapid popularity in the past decade, and different sectors like healthcare, finance, retail, etc. are using machine learning techniques to provide better products and services. This rising popularity has created a demand for better implementation of the state-of-the-art algorithms in order to implement more complex and sophisticated use cases. Machine learning algorithms have been around for a long time now, and several developers have written a number of tools and libraries to help others learn and use these algorithms in their own projects.  While developing and training a machine learning model, the developers rely on the accuracy of these libraries to produce the best results where the aim is to create a model that makes the best predictions.
+Conventionally, oracles have been used to test the correctness of a program. Oracles provide expected values against which the output from the program can be compared and validated. Lack of reliable oracles for testing machine learning algorithms makes it very difficult to test the accuracy of such programs. This problem is called the oracle problem\cite{Weyuker}. Oracle problem arises when either:
 \begin{itemize}
   \item An oracle does not exist, or,
-  \item An oracle can theoretically exist but it is computationally too expensive to determine the output.
+  \item An oracle can theoretically exist, but it is computationally too expensive to generate/use it.
 \end{itemize}
-Such set of programs which does not have a test oracle to predict the output on a set of inputs are called \enquote{non-testable programs}\cite{Weyuker}. Davis and Weyuker describe these programs as \enquote{Programs which were written in order to determine the answer in the first place. There would be no need to write such programs if the correct answer were known}\cite{Davis1981}. Most machine learning programs fall under this category as they are written in order to predict the correct answers in the first place. Several techniques can be employed to verify the correctness of such programs. One of the most popular methods being the use of pseudo-oracles. To use pseudo-oracle two or more implementations of the algorithm are independently developed to fulfill the same specification. They are run on the same input test data and the outputs from them are then compared. If the outputs match it can be asserted that the original results are according to the specification. This kind of testing is often referred to as dual coding. However, this technique introduces a significant overhead in terms of implementing two or more versions of the same algorithm and testing their outputs and is more suitable for mission-critical systems\cite{Weyuker}.\newline
+Such a set of programs that do not have a test oracle to predict the output on a set of inputs are called \enquote{non-testable programs}\cite{Weyuker}. Davis and Weyuker describe these programs as \enquote{Programs, which were written in order to determine the answer in the first place. There would be no need to write such programs if the correct answer were known}\cite{Davis1981}. Since most machine learning programs are developed to determine the correct answers in the first place, most of them fall under this category. Nevertheless, several techniques can be employed to verify the correctness of such programs. One of the most popular methods is the use of pseudo-oracles. In order to use pseudo-oracle, two or more implementations of the algorithm are independently developed, which fulfill the same specification. They are run on the same input test data, and their outputs are compared. If the outputs match it can be asserted that the original results are according to the specification. This kind of testing is often referred to as dual coding. Nevertheless, this technique introduces significant overhead in terms of implementing two or more versions of the same algorithm and testing their outputs. This can lead to significant computation and financial costs. However, dual coding is more suitable for mission-critical systems\cite{Weyuker}.
+\newline
 
-Another testing methodology called Metamorphic testing introduced by Chen et. al can be used for testing ML programs instead. It addresses some of these problems while testing the \enquote{non-testable programs} without significant overhead. The idea behind Metamorphic testing is that it easier to compare and understand the relationship between outputs than to compare and understand input-output behavior. For a prototype example: To test a program which implements the $sin$ function, the output from the program for value of $sin$ at $x$ could be compare to the real value of $sin(x)$ or, the mathematical property of $sin(x) = sin(\pi-x)$ can be exploited to verify the correct implementation of $sin$ function. Such relation $(sin(x) = sin(\pi-x))$ are called Metamorphic Relations. Metamorphic testing makes use of metamorphic relations where an input relation is used to generate new input test cases from existing test data, and an output relation is used to compare the outputs produced by the test cases.\newline
-In this paper, we will explore the types of guarantees one can expect a machine learning model to possess because of the properties that the underlying algorithm of the implementation.
+Chen et al. introduced another method of testing these machine learning programs with no oracle called Metamorphic testing. It addresses some of those problems while testing the \enquote{non-testable programs} without significant overhead. The idea behind Metamorphic testing is that it is easier to compare and understand the relationship between outputs than to compare and understand input-output behavior. For example: To test a program which implements the $sin$ function, the output from the program for value of $sin$ at $x$ could be compare to the real value of $sin(x)$ or, we can exploit the the mathematical property of $sin(x) = sin(\pi-x)$ to verify the correct implementation of $sin$ function. Mathematical properties like $(sin(x) = sin(\pi-x))$ are called "Metamorphic Relations" and, metamorphic testing makes use of metamorphic relations where an input relation is used to generate new input test cases from existing test data. An output relation is also used to compare the outputs produced by the new test cases.
+\newline
+In this paper, we will explore some new properties which can be used with image datasets in particular, and we will also test them on some standard machine learning algorithms.
 % In particular we will look at google's tensorflow.
 % Dataset coverages
 % and
@@ -26,14 +28,14 @@ In this study we will answer the following research questions:
   %\item Can we quantify reliability of predictions made by machine learning algorithms?
     \item Identify metamorphic properties that can be used to generate new test data from image datasets.
 %   \item How does metamorphic properties affect different dataset and deep-learning algorithms?
-    \item Does metamorphic properties have similar affect on the individual classes in a dataset.
-    \item What range of metamorphic transformation produce similar accuracy as the original dataset?
+    \item Do metamorphic transformations have a similar effect on all the classes in a dataset?
+    \item What range of metamorphic transformation produces similar accuracy as the original dataset?
     % \item Are some machine-learning algorithms more robust than others?
 
 %   \item How sensitive are the predictions made by ML algorithms to the change in input data?
 %   \item At what point does the algorithm fail to produce correct classifications on distorted inputs?
-  
 \end{enumerate}
+We will also investigate the robustness of some machine learning algorithms that we implement to test our transformed datasets.
 %Point of failure. by humans& computer. (visual inpection)
 %Properties of ML affect
 %

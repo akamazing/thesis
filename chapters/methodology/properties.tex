@@ -1,11 +1,11 @@
 \section{Identifying Metamorphic Relations} \label{identifyingMR}
-We identified five metamorphic properties for each dataset: rotation, shearing, shading, shifting the image along x-axis, and, shifting the image along y-axis. Each image in the testing dataset (digit, letter, and, fashion) was transformed using the five metamorphic properties. We used Keras image preprocessing functions to apply these transformations to the test data in each dataset to generate new data to measure robustness.
+To answer our first research question, we implemented some affine transformations on the datasets as possible candidates for metamorphic properties. We observed that applying these affine transformations on the dataset to a very small degree produced similar accuracy as that of the original dataset. Thus we selected these five transformations as metamorphic properties for each dataset: rotate, shear, shade, shift the image along $x$-axis, and shift the image along $y$-axis. Each image in the testing dataset (MNIST, Fashion-MNIST, and EMNIST-Letter) was transformed using these five metamorphic properties. We used Keras image preprocessing functions to apply these transformations to the test data in each dataset to generate new data to measure robustness.
 
-There are 10000 test images in the in the MNIST digit dataset. There are 10 class labels from 0 to 9, and each class label has 1000 instances. We applied the following metamorphic properties to each test image.
+There are $10000$ test images in the MNIST dataset. There are $10$ class labels from $0$ to $9$, and each class label has $1000$ samples. We applied the following metamorphic properties to each test image.
 \subsection{Rotate}
-Since we are dealing with image datasets, we hypothesize that small changes to the images by rotating them clock-wise or counter clock wise would not have drastic effect on the accuracy of model. To test our hypothesis we rotated the test data at each angle between [\ang{-50}, \ang{50}]. We also expect certain digits with symmetry (like 0) will be less afftected by these metamorphic properties.
- Each image in the test dataset was transformed using keras ImageDataGenerator method. 
-The test images from each dataset is transformed The rotation transformation algorithm takes in an image and an angle in degrees as parameter and rotates the image with the given angle. For each angle in [\ang{-50}, \ang{50}] we transformed each image Each image (digit, letter, and, fashion) is rotated clockwise and counter clockwise between angles [\ang{-50}, \ang{50}]. 
+% Since we are dealing with image datasets, we hypothesize that small changes to the images by rotating them clock-wise or counter clock wise would not have drastic effect on the accuracy of model. To test our hypothesis we rotated the test data at each angle between [\ang{-50}, \ang{50}]. 
+The first metamorphic property we identified was rotating the images on the $z$ axis. To implement the rotate property, we used the Keras ImageDataGenerator class. ImageDataGenerator implements $apply\_transform()$ method, which can be used to rotate images by passing the argument $'theta'$ along with the angle to rotate the image. Every image in the three datasets was rotated for every angle in [$-50$, $50$]. This generated 100 versions of the follow-up test dataset of the original data, where each version differs from the last by $1$ degree of rotation. We expect that certain digits with symmetry (like $0$) will not be affected that much by the rotate property. 
+% The test images from each dataset is transformed For each angle in [\ang{-50}, \ang{50}] we transformed each image Each image (digit, letter, and, fashion) is rotated clockwise and counter clockwise between angles [\ang{-50}, \ang{50}].  The rotation transformation algorithm takes in an image and an angle in degrees as parameter and rotates the image with the given angle. 
     \begin{figure}[!htbp]
         \centering
         \begin{subfigure}[b]{.3\textwidth}
@@ -26,40 +26,13 @@ The test images from each dataset is transformed The rotation transformation alg
             \caption{Angle: \ang{50}}
             \label{fig:Rotate-misclass0}
         \end{subfigure}
-        \caption{Rotation property applied to Digit 3.}
-        \label{fig:Rotate-misclassifications}
-    \end{figure}
-    \FloatBarrier
-
-\subsection{Shear} 
-To shear the images we used image pre-processing library offered by Keras. The ImageDataGenerator class generates batches of tensor image data with real-time data augmentation. We used the ImageDataGenerator's $apply\_transform()$ method to apply a transformation to an image according to given parameters. The $apply\_transform()$ method takes in the image, transformation type, and, the amount of transformation to be applied as parameter. It then applies the transformation and returns a transformed version of the input in the same shape.
-The transformation parameter we used here was $shear$ and the images were transformed between angle $[-50, 50]$.
-
-    \begin{figure}[!htbp]
-        \centering
-        \begin{subfigure}[b]{.3\textwidth}
-            \includegraphics[width=\linewidth]{images/shear1.png}
-            \caption{Angle: \ang{-50}}
-            \label{fig:Rotate-misclass0}
-        \end{subfigure}%
-        \begin{subfigure}[b]{.3\textwidth}
-            \includegraphics[width=\textwidth]{images/shear2.png}
-            \caption{Angle: \ang{-50}}
-            \label{fig:Rotate-misclass0}
-        \end{subfigure}%
-        \begin{subfigure}[b]{.3\textwidth}
-            \includegraphics[width=\linewidth]{images/shear3.png}
-            \caption{Angle: \ang{-50}}
-            \label{fig:Rotate-misclass0}
-        \end{subfigure}
-        
-        \caption{Shear property applied to Digit 4.}
-        \label{fig:Rotate-misclassifications}
+        \caption{Rotate property applied to Digit 3.}
+        \label{fig:Rotate-property}
     \end{figure}
     \FloatBarrier
     
-\subsection{Shading}
-We represent the pixels of the MNIST images as floats between 0 and 1 where, 0 is white and 1 represents black. To apply the shading transformation we added values to the white pixels of the test data until they become black.
+\subsection{Shade}
+We represent the pixels of the MNIST images as floating point numbers between 0 and 1 where 0 is white, and 1 represents black. To apply the shade transformation, we increased the non-black pixels by $0.01$ for every image until they became black.
     \begin{figure}[htb!]
         \centering
         \begin{subfigure}[b]{.3\textwidth}
@@ -82,12 +55,39 @@ We represent the pixels of the MNIST images as floats between 0 and 1 where, 0 i
         \end{subfigure}
         
         \caption{Shade property applied to Digit 9.}
-        \label{fig:Rotate-misclassifications}
+        \label{fig:Shade-property}
     \end{figure}
     \FloatBarrier
     
-\subsection{Shifting in the X direction}
-Since the images were 28 pixels wide, shifting the images by more than 28 pixels in either direction moved the images out of the frame completely. Thus, we transformed the test datasets by moving each image by pixels between 0 and 28 in both the X directions. We used ImageDataGenerator's $apply\_transform()$ function with $tx$ parameter to perform this transformation.
+\subsection{Shear} 
+To shear the images, we used the image pre-processing library offered by Keras. The ImageDataGenerator class generates batches of tensor image data with real-time data augmentation. We used the ImageDataGenerator's $apply\_transform()$ method to apply a transformation to an image according to given parameters. The $apply\_transform()$ method takes in the image, transformation type, and, the amount of transformation to be applied as a parameter. It then applies the transformation and returns a transformed version of the input in the same shape.
+The transformation parameter we used here was $shear$, and the images were transformed for every angle in $[-50, 50]$.
+
+    \begin{figure}[!htbp]
+        \centering
+        \begin{subfigure}[b]{.3\textwidth}
+            \includegraphics[width=\linewidth]{images/shear1.png}
+            \caption{Angle: \ang{-50}}
+            \label{fig:Rotate-misclass0}
+        \end{subfigure}%
+        \begin{subfigure}[b]{.3\textwidth}
+            \includegraphics[width=\textwidth]{images/shear2.png}
+            \caption{Angle: \ang{-50}}
+            \label{fig:Rotate-misclass0}
+        \end{subfigure}%
+        \begin{subfigure}[b]{.3\textwidth}
+            \includegraphics[width=\linewidth]{images/shear3.png}
+            \caption{Angle: \ang{-50}}
+            \label{fig:Rotate-misclass0}
+        \end{subfigure}
+        
+        \caption{Shear property applied to Digit 4.}
+        \label{fig:Shear-property}
+    \end{figure}
+    \FloatBarrier
+    
+\subsection{Shift the image along the X axis(ShiftX)}
+Since the images are $28$ pixels wide, shifting the images by more than 28 pixels in either direction moved the images out of the frame completely. Thus, we transformed the test datasets by moving each image by pixels between 0 and 28 in both the X directions. We used ImageDataGenerator's $apply\_transform()$ function with $tx$ parameter and a pixel value in order to perform this transformation. This generated 56 follow-up test dataset of the original data where each version differs from the last by $1$ pixel shift along the $x$ axis.
     \begin{figure}[htb!]
         \centering
         \begin{subfigure}[b]{.3\textwidth}
@@ -109,13 +109,13 @@ Since the images were 28 pixels wide, shifting the images by more than 28 pixels
             \label{fig:Rotate-misclass0}
         \end{subfigure}
         
-        \caption{Shift X property applied to Digit 7.}
-        \label{fig:Rotate-misclassifications}
+        \caption{ShiftX property applied to Digit 7.}
+        \label{fig:ShiftX-property}
     \end{figure}
     \FloatBarrier
     
-\subsection{Shifting in the Y direction(ShiftY)}
-The last metamorphic property we identified was shifting the images on Y axis. We used ImageDataGenerator's $apply\_transform()$ function with $ty$ parameter to transform the test data. Since the images are 28x28 pixels we shifted the images by each pixel between 0 and 28 pixels in both direction. 
+\subsection{Shift the image along the Y axis(ShiftY)}
+The last metamorphic property we identified was shifting the images on the Y-axis. We used ImageDataGenerator's $apply\_transform()$ function with $ty$ parameter to transform the test data. Since the images are 28x28 pixels, we shifted the images by each pixel between 0 and 28 pixels in both Y directions. 
     \begin{figure}[htb!]
         \centering
         \begin{subfigure}[b]{.3\textwidth}
@@ -137,9 +137,11 @@ The last metamorphic property we identified was shifting the images on Y axis. W
             \label{fig:Rotate-misclass0}
         \end{subfigure}
         
-        \caption{Shift Y property applied to Digit 5.}
-        \label{fig:Rotate-misclassifications}
+        \caption{ShiftY property applied to Digit 5.}
+        \label{fig:ShiftY-property}
     \end{figure}
     \FloatBarrier
 
-After generating all the transformed versions of the datasets they were saved to be used as follow-up test cases for our machine-learning algorithms.
+The follow-up test images have the same structure and labels as the original image. After generating all the transformed versions of the datasets, they were saved to be used as follow-up test cases for our machine-learning algorithms. The section \ref{identifyingMR} also answers our first research question.
+
+After generating the follow-up test cases and implementing the machine-learning algorithms, we tested the trained model on the five follow-up test cases. The rotate, shade, and shear properties have 100 versions of the transformed original dataset each. The shiftX and shiftY properties have 56 versions of original test data as follow-up test data. Each of the 412 follow-up test datasets was then tested on the trained models, and their accuracy was calculated. We will discuss our findings in the next section.
