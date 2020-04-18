@@ -74,9 +74,6 @@ def model_fn(features, labels, mode):
     return estim_specs
 
 
-# In[ ]:
-
-
 # Define the neural network
 def neural_net(x_dict):
     # TF Estimator input is a dict, in case of multiple inputs
@@ -129,9 +126,6 @@ def nn_model_fn(features, labels, mode):
     return estim_specs
 
 
-# In[ ]:
-
-
 def reloadData(dataType):
     global xTestBackup
     global yTestBackup
@@ -148,20 +142,21 @@ def reloadData(dataType):
         xTrain[:] = xTrainBackup
         yTrain[:] = yTrainBackup
         
-
-
-# In[ ]:
+'''
+Parameters:
+    model:  The model to be trained
+    xData: (List) List of test images
+    yData: (List) List of test corresponding labels
+    shuffle:(bool) Shuffle the data before testing
+Returns a list of predictions for each data and the accuracy
+'''
 def TestModel(model, xData, yData, shuffle):
-    #input_fn = tf.estimator.inputs.numpy_input_fn(
-    #        x={'images': xData}, y= np.array(yData),
-    #        batch_size=batch_size, shuffle=shuffle)
-    #accuracy = model.evaluate(input_fn)
-
     # Prepare the input data
     input_fn = tf.estimator.inputs.numpy_input_fn(
         x={'images': xData}, shuffle=shuffle)
     # Use the model to predict the images class
     preds = list(model.predict(input_fn))
+    # calculate accuracy
     acc = 0.0
     for x in range(len(yData)):
         if (yData[x]==preds[x]):
@@ -170,10 +165,13 @@ def TestModel(model, xData, yData, shuffle):
     #return preds, accuracy['accuracy']
     return preds, acc
 
-
-# In[ ]:
-
-
+'''
+Parameters:
+    model:  The model to be trained
+    xTrain: (List) List of images
+    yTrain: (List) List of corresponding labels
+    shuffle:(bool) Shuffle the data before training
+'''
 def TrainModel(model, xTrain, yTrain, shuffle):
     input_fn = tf.estimator.inputs.numpy_input_fn(
             x={'images': xTrain}, y= np.array(yTrain),
@@ -181,160 +179,146 @@ def TrainModel(model, xTrain, yTrain, shuffle):
     # Train the Model
     model.train(input_fn, steps=num_steps)
 
+'''
+Parameters:
+    xData:  (List) List of images
+    yData:  (List) List of corresponding labels
+    tType:  (String) Metamorphic relation to use
+    value:  (float) Amount of transformation to apply
+    tranpose:   (bool) Apply a transpostion to final image
+Returns a transformed list of images
+'''
 
-# In[ ]:
-
-
-def Transform( xData, yData, tType, value ): # yData is not bein transformed
+def Transform( xData, yData, tType, value, transpose ):
     
     n_images = len(xData)
     xTemp = []
     yTemp = []
     
     datagen = ImageDataGenerator()# fit parameters from data
-    
-    # tType = 1 for shade
+    #  tType = Shade
     if tType == "Shade":
         Xnew = [[[[v-value if v-value>0.0 else 0.0 for v in n] for n in x[0]]] for x in xData]
         # Xnew = [[[[v-value for v in n] for n in x[0]]] for x in xData]
         Xnew = np.array(Xnew)
         xTemp[:] = Xnew.astype('float32')
 
-    # tType = 2 for rotation
+    # tType = Rotate
     if tType == "Rotate":
-        #datagen = ImageDataGenerator(rotation_range=value)# fit parameters from data
         for i in range(n_images):
             x = datagen.apply_transform(xData[i], {'theta':value})
             xTemp.append(x)
             
-    # tType = 3 for sheer
+    # tType = Shear
     if tType == "Shear":
-        #datagen = ImageDataGenerator(shear_range=value)# fit parameters from data
         for i in range(n_images):
             x = datagen.apply_transform(xData[i], {'shear':value})
             xTemp.append(x)
         
-    # tType = 3 for shift
+    # tType = ShiftX
     if tType == "ShiftX":   
-        #datagen = ImageDataGenerator(width_shift_range=value, height_shift_range=value)
         for i in range(n_images):
             x = datagen.apply_transform(xData[i], {'tx':value})
             xTemp.append(x)
             
-    # tType = 3 for shift
+    # tType = ShiftY
     if tType == "ShiftY":   
-        #datagen = ImageDataGenerator(width_shift_range=value, height_shift_range=value)
         for i in range(n_images):
             x = datagen.apply_transform(xData[i], {'ty':value})
             xTemp.append(x)
             
-    # tType = 4 for shift
+    # tType = ZoomX
     if tType == "ZoomX":   
-        #datagen = ImageDataGenerator(width_shift_range=value, height_shift_range=value)
         for i in range(n_images):
             x = datagen.apply_transform(xData[i], {'zx':value})
             xTemp.append(x)
             
-     # tType = 5 for shift
+     # tType = ZoomY
     if tType == "ZoomY":   
-        #datagen = ImageDataGenerator(width_shift_range=value, height_shift_range=value)
         for i in range(n_images):
             x = datagen.apply_transform(xData[i], {'zy':value})
             xTemp.append(x)
         
-    #datagen.fit(xData)
-    # configure batch size and retrieve one batch of images
-    #for xBatch, yBatch in datagen.flow(xData, yData, batch_size=n_images, shuffle=False):
-        #xData[:] = xBatch
-        #yData[:] = yBatch
-        #break
+    # Generate final list
     xTmp = []
     for x in xTemp:
-        xTmp.append(np.transpose(x))
+        if transpose:
+            xTmp.append(np.transpose(x))
+        else:
+            xTmp.append(x)
     xTmp = np.array(xTmp)
     return xTmp
 
-
-# In[ ]:
-
-
+'''
+Parameters:
+    xTest:  (List) List of images
+    yTest:  (List) List of corresponding labels
+   
+Displays data in a nice image
+'''
 def DisplayData( xTest, yTest ):
     for i in range(len(xTest)):
         plt.imshow(np.reshape(xTest[i], [28, 28]), cmap='gray')
         plt.show()
         print ("Image Label: ", yTest[i])
 
-
-# In[ ]:
-
-
-def OpenFile(MT):
-    filename = str(MT)+".txt"
+'''
+File Handler: opens a file
+Location: location of file
+name: name of file
+Returns file pointer
+'''
+def OpenFile(Location, name):
+    filename = str(Location)+"/"+str(name)
     fp = open(filename, 'w')
     return fp
 
+'''
+File Handler: closes a file
+fp: file pointer
+'''
 def CloseFile(fp):
     fp.close()
     
-#Shade = "Shade"
-#Rotate = "Rotate"
-#Sheer = "Sheer"
-#Shift = "Shift"
 
-
-# In[ ]:
-
-
-def ShuffleMT (mode, fp, iteration):
-    print ("Reloading training and test data")
-    reloadData(Train)
-    reloadData(Test)
-    
-    if (mode==Train):
-        print ("Training model")
-        TrainModel(xTrain, yTrain, True)
-        
-        print ("Evaluating Model")
-        accuracy = EvaluateModel(xTest, yTest, False)
-          
-    elif (mode==Test):
-        print ("Evaluating Model")
-        accuracy = EvaluateModel(xTest, yTest, True)
-        
-    elif (mode=="Both"):
-        print ("Training model")
-        TrainModel(xTrain, yTrain, True)       
-        print ("Evaluating Model")
-        accuracy = EvaluateModel(xTest, yTest, True)
-
-    print("Iteration: ", iteration, " Accuracy: ", accuracy)
-    if (fp):
-        fp.write(str(iteration)+"\t"+str(accuracy)+"\n")
-
-
-# In[ ]:
-
-
-def processResults (predMatrix, yMatrix):
+'''
+Parameters:
+    predMatrix:  A list of predictions [num of instances][num_class][num_class]
+    yMatrix:     A list of corresponding correct labels [num of instances][num_class][num_class]
+   
+Returns accuracy of prediction
+'''
+def getPredictionAccuracy (predMatrix, yMatrix):
     totalData = [0]*num_classes
+    # Find total number of data in a class
     for y in yMatrix[0]:
         totalData[y] = totalData[y]+1
+    
     aMatrix = []
-    for i in range(len(predMatrix)):       
+    
+    for i in range(len(predMatrix)):
+        # Temp variable of size [num_class][num_class] to store data
         accMatrix = [[0]*num_classes for x in range(num_classes)]
+        # increases the value in matrix by 1 for every correct prediction
         for j in range(len(predMatrix[i])):
             accMatrix[yMatrix[i][j]][predMatrix[i][j]] += 1
-            
+        # Accuracy = total correct predictions/total number of predictions
         for x in range(len(accMatrix)):
             for y in range(len(accMatrix[x])):
                 accMatrix[x][y] = round(accMatrix[x][y]/totalData[x], 3)
                 
         aMatrix.append(accMatrix)
+    # Returns the prediction matrix
     return aMatrix
 
-
-# In[ ]:
-def getAccuracyPlot(MT, accMatrix):
+'''
+Parameters:
+    MT:  Metamorphic property
+    accMatrix:  list of accuracy for each dataset
+   
+Displays accuracy in a nice plot
+'''
+def getDatasetAccuracyPlot(MT, accMatrix):
     figure(num=None, figsize=(14, 14), dpi=80, facecolor='w', edgecolor='k')
     m = len(accMatrix)
     plt.axis([-m/2, m/2, 0, 1])
@@ -342,11 +326,20 @@ def getAccuracyPlot(MT, accMatrix):
     plt.xlabel("Value")
     if (MT==Rotate or MT==Shear):
         plt.xlabel("Angle")
+    if (MT==ShiftX or MT==ShiftY):
+        plt.xlabel("Pixel")
     plt.ylabel("Accuracy")
     #plt.suptitle("MR: "+str(MT))
     return plt
     
-def getAllAccuracyPlot(MT, accMatrix):
+'''
+Parameters:
+    MT:  Metamorphic property
+    accMatrix:  list of accuracy for each dataset
+   
+Displays accuracy of each class in a nice plot
+'''
+def getClassByAccuracyPlot(MT, accMatrix):
     figure(num=None, figsize=(26, 12), dpi=180, facecolor='w', edgecolor='k')
     m = len(accMatrix)
     for j in range(num_classes):
@@ -359,12 +352,21 @@ def getAllAccuracyPlot(MT, accMatrix):
         plt.xlabel("Value")
         if (MT==Rotate or MT==Shear):
             plt.xlabel("Angle")
+        if (MT==ShiftX or MT==ShiftY):
+            plt.xlabel("Pixel")
         plt.ylabel("Accuracy")
         plt.title('Digit: '+str(j))
     #plt.suptitle("MR: "+str(MT))
     plt.show()
     return plt
 
+'''
+Parameters:
+    xTest:  (List) List of images
+    yTest:  (List) List of corresponding labels
+   
+Displays data in a nice image
+'''
 def getMisclassificationPlot(MT, accMatrix):
     m = len(accMatrix)
     for j in range(num_classes):
@@ -388,6 +390,13 @@ def getMisclassificationPlot(MT, accMatrix):
         print("---------------------------------------------------------------------------------------------------------------------")
     return plt
 
+'''
+Parameters:
+    xTest:  (List) List of images
+    yTest:  (List) List of corresponding labels
+   
+Displays data in a nice image
+'''
 def getAccuracyMatrix(accuracyMatrix):
     accuracyMatrixTotal = [0]*len(accuracyMatrix[0])
     for x in range(len(accuracyMatrix[0])):
@@ -399,6 +408,13 @@ def getAccuracyMatrix(accuracyMatrix):
     
     return accuracyMatrixTotal
 
+'''
+Parameters:
+    xTest:  (List) List of images
+    yTest:  (List) List of corresponding labels
+   
+Displays data in a nice image
+'''
 def getAllAccuracyMatrix(accMatrix):
     accM = []
     for x in range(len(accMatrix[0])):
@@ -413,10 +429,16 @@ def getAllAccuracyMatrix(accMatrix):
     for x in range(len(accM)):
         for y in range(len(accM[0])):
             for z in range(len(accM[0][0])):
-                accM[x][y][z] = accM[x][y][z]/len(accMatrix)
-    
+                accM[x][y][z] = accM[x][y][z]/len(accMatrix)    
     return accM
 
+'''
+Parameters:
+    xTest:  (List) List of images
+    yTest:  (List) List of corresponding labels
+   
+Displays data in a nice image
+'''
 def getConfusionMatrix(accMatrix):
     accM = []
     for x in range(len(accMatrix[0])):
@@ -439,6 +461,13 @@ def getConfusionMatrix(accMatrix):
         confMat.append(cM)
     return confMat
 
+'''
+Parameters:
+    predMatrix:  A list of predictions [num of instances][num_class][num_class]
+    yMatrix:     A list of corresponding correct labels [num of instances][num_class][num_class]
+   
+Returns confusion matrix
+'''
 def getAllConfusionMatrix (predMatrix, yMatrix):
     accMatrix = [[0]*num_classes for x in range(num_classes)] 
     for x in range(len(yMatrix[0][0])):
@@ -447,61 +476,52 @@ def getAllConfusionMatrix (predMatrix, yMatrix):
                 accMatrix[yMatrix[i][z][x]][predMatrix[i][z][x]] =  accMatrix[yMatrix[i][z][x]][predMatrix[i][z][x]]+1
     return accMatrix
 
-def getAccuracyMatrix(accuracyMatrix):
-    accuracyMatrixTotal = [0]*len(accuracyMatrix[0])
-    for x in range(len(accuracyMatrix[0])):
-        for y in range(len(accuracyMatrix)):
-            accuracyMatrixTotal[x] = accuracyMatrixTotal[x]+accuracyMatrix[y][x]
 
-    for x in range(len(accuracyMatrixTotal)):
-        accuracyMatrixTotal[x] = accuracyMatrixTotal[x]/len(accuracyMatrix)
+def getAccuracyPlotNew(MT, OutputDir, Algorithms):
+    figure(num=None, figsize=(14, 14), dpi=80, facecolor='w', edgecolor='k')
+    plt.rcParams.update({'font.size': 32})
+    for Algo in Algorithms:
+        with open(OutputDir+Algo+"_"+str(MT), 'rb') as f:
+            [yMatrix, predMatrix, accuracyMatrix, accMatrix] = pickle.load(f)
+        # Algorithm dependent manipulations
+        if (Algo == KNN or Algo == SVM):
+            yMatrix = [yMatrix]
+            predMatrix = [predMatrix]
+            accuracyMatrix = [accuracyMatrix]
+            accMatrix = [accMatrix]
+        if MT==ShiftY or MT==ShiftX:
+            for x in range (len(yMatrix)):
+                yMatrix[x] = yMatrix[x][22:78]
+                predMatrix[x] = predMatrix[x][22:78]
+                accuracyMatrix[x] = accuracyMatrix[x][22:78]
+                accMatrix[x] = accMatrix[x][22:78]
+                
+        aMatrix = getAccuracyMatrix(accuracyMatrix)
+        
+        m = len(aMatrix)
+        sum = 0
+        for x in aMatrix:
+            sum = sum+x
+        sum = sum/m
+        sum = sum*100
+        print(" %.2f "%sum ,end="&")
+        if (MT == Shade):
+            plt.plot(np.arange(0,1,0.01),aMatrix, label=str(Algo),linewidth=4)
+            plt.axis([0, 1, 0, 1])
+        else:
+            plt.plot(np.arange(-m/2,m/2,1),aMatrix, label=str(Algo),linewidth=4)
+            plt.axis([-m/2, m/2, 0, 1])
     
-    return accuracyMatrixTotal
+    
+    plt.xlabel("Pixels")
+    if (MT==Rotate or MT==Shear):
+        plt.xlabel("Angle")
+    if (MT==Shade):
+        plt.xlabel("Shading Value")
+    plt.ylabel("Accuracy")
+    plt.legend()
+    #plt.suptitle("MR: "+str(MT))
+    return plt
 
-def getAllAccuracyMatrix(accMatrix):
-    accM = []
-    for x in range(len(accMatrix[0])):
-        aM = [[0]*len(accMatrix[0][0][0])for _ in range(len(accMatrix[0][0]))]
-        for y in range(len(accMatrix[0][0])):
-            for z in range(len(accMatrix[0][0][0])): 
-                sum = 0
-                for i in range(len(accMatrix)):
-                    sum = sum+accMatrix[i][x][y][z]            
-                aM[y][z] = sum
-        accM.append(aM)
-    for x in range(len(accM)):
-        for y in range(len(accM[0])):
-            for z in range(len(accM[0][0])):
-                accM[x][y][z] = accM[x][y][z]/len(accMatrix)    
-    return accM
-def getConfusionMatrix(accMatrix):
-    accM = []
-    for x in range(len(accMatrix[0])):
-        aM = [[0]*len(accMatrix[0][0][0])for _ in range(len(accMatrix[0][0]))]
-        for y in range(len(accMatrix[0][0])):
-            for z in range(len(accMatrix[0][0][0])): 
-                sum = 0
-                for i in range(len(accMatrix)):
-                    sum = sum+accMatrix[i][x][y][z]            
-                aM[y][z] = sum
-        accM.append(aM)
-    confMat = []
-    for x in range(len(accM[0])):
-        cM = [0]*len(accM[0][0])
-        for y in range(len(accM[0][0])):
-            sum = 0 
-            for z in range(len(accM)):
-                sum = sum+accM[z][x][y]
-            cM[y] = sum
-        confMat.append(cM)
-    return confMat
 
-# the same as scikit.learn. confusion_matrix
-def getAllConfusionMatrix (predMatrix, yMatrix):
-    accMatrix = [[0]*num_classes for x in range(num_classes)] 
-    for x in range(len(yMatrix[0][0])):
-        for z in range(len(yMatrix[0])):
-            for i in range(len(yMatrix)):
-                accMatrix[yMatrix[i][z][x]][predMatrix[i][z][x]] =  accMatrix[yMatrix[i][z][x]][predMatrix[i][z][x]]+1
-    return accMatrix
 
