@@ -1,3 +1,9 @@
+% 4.1 Overall Accurracy
+% 4.2 Comparison of Accuracy by Transformation
+% 4.3 Comparison of Accurracy by Image Class
+% 4.4 Recommendations
+% 4.5 Testing for Robustness
+
 In this section, we will discuss our findings after implementing the machine learning algorithms and metamorphic properties.
 
 Accuracy is defined as the number of correct predictions made by the model with respect to the total number of predictions made. To evaluate the accuracy of our machine learning models, we first trained the models on the training data. The MNIST, Fashion-MNIST, and EMNIST-Letter training datasets have 55000, 55000, and 119800 training data, respectively. The training data consists of images and their corresponding labels, which are used as input to the algorithm to generate a model. Once we generated the trained models, we used the test data to calculate the accuracy of the models. The following graphs show the accuracy of the various models on the original test dataset.
@@ -31,21 +37,20 @@ Accuracy is defined as the number of correct predictions made by the model with 
         ]
         \addplot table[x=interval,y=MNIST]{\accuracy};
         \addplot table[x=interval,y=Fashion]{\accuracy};
-        \addplot table[x=interval,y=EMNIST]{\accuracy};
-        \legend{MNIST, Fashion, EMNIST}
+        \addplot table[x=interval,y=EMNIST-Letter]{\accuracy};
+        \legend{MNIST, Fashion, EMNIST-Letter}
     \end{axis}
 \end{tikzpicture}      
 \end{center}{}
-An interesting observation from the table above is that deep learning algorithms are not necessarily always the right choice when we are trying to maximize accuracy. Depending on the dataset, regular machine learning algorithms like KNN can also yield high accuracy and outperform deep learning algorithms in terms of accuracy.
+An interesting observation from the table above is that deep learning algorithms are not necessarily always the right choice when we are trying to maximize accuracy. Depending on the data, regular machine learning algorithms like $k$NN can also yield high accuracy and outperform deep learning algorithms in terms of accuracy.
 In the following sections, we will discuss how the metamorphic transformations affected the accuracy of the models and what conclusions we can draw from it.
-\section{Affect of metamorphic transformation on the accuracy of the models}
+\section{Effect of metamorphic transformation on the accuracy of the models}
 From the literature review, we saw that metamorphic testing could be an instrumental technique to test the correctness of a program. In this thesis, we will investigate the effect of the identified metamorphic properties on the accuracy of the machine learning algorithms. For each metamorphic property identified in \ref{identifyingMR}, we want to see how the accuracy of the models changes with the varying degree of transformation. We hypothesize that small changes to the input image should not affect the prediction of the model drastically. After creating a trained model with the training dataset, we applied the metamorphic properties on the training data to generate transformed versions of the test data. We calculated the following metrics to evaluate the effect of metamorphic relations on the machine learning algorithm we implemented. To tackle the stochastic nature of training a neural network model, we ran each of the above experiments ten times and calculated the average accuracy of the models on the transformed datasets.
 \input{figures.tex}
 
-\clearpage
-\subsection{Robustness}
-
-In the section \ref{Digit-by Accuracy} we saw that that the accuracy of the algorithms varied depending upon the transformation applied to the test data as well as the degree of the transformation. Robustness is the property of an algorithm whereby if the test data is "similar" to the training data then the testing error is also close to the training error \cite{Xu2012}. Thus, a robust algorithm should produce similar errors while predicting similar test data. In this section, we will be comparing the robustness of the five algorithms with respect to each other for different metamorphic relations and verify the accuracy of the recommendations we made in the table \ref{tbl:indexrecommendations}. For this we generated a new dataset with those recommendations and compared it's accuracy with the accuracy of the original dataset. To generate a balanced dataset of 5000 samples we randomly picked 100 transformed images from each transformation for every class label. This new test dataset was then tested for accuracy on the five algorithms we implemented. The bar graph below shows the accuracy of the new test dataset as compared to the original MNIST dataset.
+\section{Testing for Robustness}
+To verify the effectiveness of the recommendations we made in section 1, we tested them by generating a new dataset with it and testing the algorithms for robustness. Robustness is the property of an algorithm whereby if the test data is "similar" to the training data, then the testing error is also close to the training error \cite{Xu2012}. Thus, a robust algorithm should produce similar errors while predicting similar test data. In this section, we will compare the robustness of the five algorithms with respect to each other for different metamorphic relations and verify the accuracy of the recommendations we made in the table \ref{tbl:indexrecommendations}. We generated a balanced dataset of $5000$ samples by randomly picking $100$ transformed images from each transformation for every class label using the table \ref{tbl:indexrecommendations}. This new test dataset was then tested for accuracy on the five algorithms we implemented. The bar graph below shows the accuracy of the new test dataset as compared to the original MNIST dataset.
+%  Robustness is the property of an algorithm whereby if the test data is "similar" to the training data then the testing error is also close to the training error \cite{Xu2012}. Thus, a robust algorithm should produce similar errors while predicting similar test data. In this section, we will be comparing the robustness of the five algorithms with respect to each other for different metamorphic relations and verify the accuracy of the recommendations we made in the table \ref{tbl:indexrecommendations}. For this we generated a new dataset with those recommendations and compared it's accuracy with the accuracy of the original dataset. To generate a balanced dataset of 5000 samples we randomly picked 100 transformed images from each transformation for every class label. This new test dataset was then tested for accuracy on the five algorithms we implemented. The bar graph below shows the accuracy of the new test dataset as compared to the original MNIST dataset.
 
 \pgfplotstableread[row sep=\\,col sep=&]{
     Algorithm & MNIST & Transformed  \\
@@ -79,33 +84,178 @@ In the section \ref{Digit-by Accuracy} we saw that that the accuracy of the algo
         \legend{MNIST, Transformed Images}
     \end{axis}
 \end{tikzpicture}      
-\caption{Accuracy of tranformed dataset vs original dataset}
+\caption{Accuracy of original vs tranformed MNIST dataset}
 \label{img:transformedaccuracy}
 \end{figure}
 
-The more robust algorithm will have the accuracy of the transformed images closer to the accuracy of the original MNIST data. From the graph above we see that the convolutional neural network has a $1.81\%$ decrease in accuracy while the accuracy of the neural-network, NB, KNN, and, SVM decreased by $2.39\%$, $2.09\%$, $4.22\%$, and, $4.49\%$ respectively. Thus, among the algorithms we implemented the convolutional neural network is proven to be the most robust followed by Naive Bayes implementation. While the KNN and SVM implementations are the least robust.
+% A more robust algorithm will have the accuracy of the transformed images closer to the accuracy of the original MNIST data. From the graph above we see that the convolutional neural network has a $1.81\%$ decrease in accuracy while the accuracy of the neural-network, NB, KNN, and, SVM decreased by $2.39\%$, $2.09\%$, $4.22\%$, and, $4.49\%$ respectively. Thus, among the algorithms we implemented the convolutional neural network is proven to be the most robust followed by Naive Bayes implementation. While the KNN and SVM implementations are the least robust.
+The more robust algorithm has the accuracy of the transformed images closer to the accuracy of the original MNIST data. From the graph above we see that the convolutional neural network has a $1.81\%$ decrease in accuracy while the accuracy of the neural-network, NB, $k$NN, and, SVM decreased by $2.39\%$, $2.09\%$, $4.22\%$, and, $4.49\%$ respectively. Thus, among the algorithms we implemented, the convolutional neural network is shown to be the most robust on MNIST dataset, followed by Naive Bayes implementation while the $k$NN and the SVM implementations are the least robust. However after doing a similar analysis on the Fashion and EMNIST-Letter datasets we found that the trend does not carry over. The Naive Bayes algorithm showed a higher accuracy on the 5000 transformed test data than on the original test data. Thus showing more robustness than others.
 
-In Section \ref{4.1.1} we discovered that the accuracy of the test data decreased as the degree of the transformation was increased. So a second way of looking at robustness is to look at transformations which can be applied to the dataset without lowering the accuracy of the model below 90 percent of the original value.
+% In Section \ref{4.1.1} we discovered that the accuracy of the test data decreased as the degree of the transformation was increased. So a second way of looking at robustness is to look at transformations which can be applied to the dataset without lowering the accuracy of the model below 90 percent of the original value.
+
+\section{Testing for Robustness by transformation}
+In this section, we investigate the robustness of the algorithms for each transformation. The following graph plots the transformations for which the accuracy of the dataset is close to the original dataset. The $X$-axis represent the algorithms, and the $Y$-axis represents the degree of transformation applied to the MNIST dataset.
+\pgfplotstableread[row sep=\\,col sep=&]{
+    RotateX & RotateY & ShadeX & ShadeY & ShearX & ShearY & ShiftXX & ShiftXY & ShiftYX & ShiftYY \\
+    0 & 39 & 0.1 & 55 & 0.2 & 47 & 0.3 & 5 & 0.4 & 3 \\
+    4 & 27 & 4.1 & 69 & 4.2 & 43 & 4.3 & 3 & 4.4 & 2 \\
+    8 & 25 & 8.1 & 96 & 8.2 & 34 & 8.3 & 3 & 8.4 & 2 \\
+    12 & 16 & 12.1 & 52 & 12.2 & 23 & 12.3 & 4 & 12.4 & 3 \\
+    16 & 19 & 16.1 & 51 & 16.2 & 23 & 16.3 & 4 & 16.4 & 3 \\
+    }\mnistx
+    
+\pgfplotstableread[row sep=\\,col sep=&]{
+   Algo & RotateX & RotateY & ShadeX & ShadeY & ShearX & ShearY & ShiftXX & ShiftXY & ShiftYX & ShiftYY \\
+  CNN & 0 & -34 & 0.1 & 0 & 0.2 & -48 & 0.3 & -5 & 0.4 & -4 \\
+  NN &  4 & -28 & 4.1 & 0 & 4.2 & -46 & 4.3 & -3 & 4.4 & -2 \\
+  NB & 8 & -24 & 8.1 & 0 & 8.2 & -31 & 8.3 & -3 & 8.4 & -3 \\
+  SVM & 12 & -16 & 12.1 & 0 & 12.2 & -28 & 12.3 & -4 & 12.4 & -3 \\
+  KNN & 16 & -18 & 16.1 & 0 & 16.2 & -31 & 16.3 & -5 & 16.4 & -4 \\
+    }\mnisty
+
+\begin{figure}[H]
+
+\begin{tikzpicture}
+
+\begin{groupplot}[group style={group size= 1 by 2},xtick=\empty]%[ybar stacked,xtick=\empty,]%ytick=\empty]
+\nextgroupplot[ylabel={Degree of transfromation},ybar, bar width=.2cm,xtick=\empty,yshift=1cm, ymin=0,ymax=100,legend style = {at={(1.05, 0.5)}, anchor = west, legend columns =1, draw=none, area legend},  ymajorgrids = true,width=0.85\textwidth,height=.5\textwidth,]%ytick=\empty]
+\addplot[fill=blue,draw=black] table[x=RotateX,y=RotateY]{\mnistx};
+\addplot[fill=red,draw=black] table[x=ShadeX,y=ShadeY]{\mnistx};
+\addplot[fill=green,draw=black] table[x=ShearX,y=ShearY]{\mnistx};
+\addplot[fill=yellow,draw=black] table[x=ShiftXX,y=ShiftXY]{\mnistx};
+\addplot[fill=brown,draw=black] table[x=ShiftYX,y=ShiftYY]{\mnistx};
+
+\addlegendentry{Rotate}
+\addlegendentry{Shade}
+\addlegendentry{Shear}
+\addlegendentry{ShiftX}
+\addlegendentry{ShiftY}
+
+\nextgroupplot[ybar, width=0.85\textwidth,height=.5\textwidth, bar width=.2cm,yshift=1cm,ymin=-100,ymax=0,legend style = {at={(1.05, 1.65)}, anchor = west, legend columns =1, draw=none, area    legend},ymajorgrids = true,xtick=data, xticklabels from table={\mnisty}{Algo}, xticklabel style={yshift=-2ex, xshift=-2ex,anchor= west},xlabel={Algorithms}]
+\addplot[fill=blue,draw=black] table[x=RotateX,y=RotateY]{\mnisty};
+\addplot[fill=red,draw=black] table[x=ShadeX,y=ShadeY]{\mnisty};
+\addplot[fill=green,draw=black] table[x=ShearX,y=ShearY]{\mnisty};
+\addplot[fill=yellow,draw=black] table[x=ShiftXX,y=ShiftXY]{\mnisty};
+\addplot[fill=brown,draw=black] table[x=ShiftYX,y=ShiftYY]{\mnisty};
+
+\end{groupplot}
+\end{tikzpicture}
+
+\caption{Robustness graph for MNIST}
+\label{fig:RobGraphforMNIST}
+\end{figure}
+% In Figure \ref{fig:RobGraphforMNIST}, we plotted the degree of transformation for which the algorithms produce a similar accuracy to the original MNIST dataset. The X-axis lists the algorithms, and the Y-axis lists the degrees of transformation for which the accuracy of the algorithm was similar to the accuracy of the original dataset. When the rotation metamorphic transformation is applied to the MNIST dataset, the convolutional neural-network algorithm has the largest bar. This means that that a larger angle of rotation can be applied to the MNIST dataset before it's accuracy drops below $90\%$ of the original MNIST dataset. Similarly, Naive Bayes is the most robust for Fashion-MNIST datset and KNN is the most robust for EMNIST dataset.
+% For the shading metamorphic property we find that Naive Bayes is the most robust algorithm for all the three datasets.
+% For the Shearing property, the convolutional neural-network is the most robust. The Fashion-MNIST and EMNIST datasets have Naive Bayes and KNN as the most robust algorithm respectively.
+% On average the length of the bars for ShiftX metamorphic property is much lower than rotation, shearing, or, shading. This means that the algorithms are much less robust when the images are shifted in the direction of X axis. Among the algorithms we implemented, CNN is the most robust on MNIST-digit dataset, Naive Bayes on MNIST-Fashion, and, all the algorithms perform equally on the EMNIST dataset.
+
+% Just like the ShiftX property, the length of bars here are much smaller than others. Thus al here we find that k-NN is also more robust than the rest of the algorithms we tested when applied to MNIST-digit and EMNIST-letter dataset. While, Naive Bayes is more robust when applied to MNIST-Fashion dataset.
+For the rotation metamorphic transformation, the convolutional neural network has the biggest bar. Thus, the degree of rotation that can be applied to the MNIST dataset is higher for the convolutional neural network before the accuracy of the algorithm drops below $90\%$ of the original dataset. The same is also valid for shear, shiftX, and shiftY properties. However, for the shading property, we find that Naive Bayes implementation is most robust because of the amount of shading that can be applied to the dataset before its accuracy is dissimilar to the original MNIST dataset.
 
 
 
+\pgfplotstableread[row sep=\\,col sep=&]{
+    RotateX & RotateY & ShadeX & ShadeY & ShearX & ShearY & ShiftXX & ShiftXY & ShiftYX & ShiftYY \\
+    0 & 13 & 0.1 & 55 & 0.2 & 24&0.3 & 1&0.4 & 1 \\
+4 & 19 & 4.1 & 53 & 4.2 & 29&4.3 & 1&4.4 & 1 \\
+8 & 19 & 8.1 & 76 & 8.2 & 33&8.3 & 2&8.4 & 1 \\
+12 & 18 & 12.1 & 52 & 12.2 & 31&12.3 & 1&12.4 & 1 \\
+16 & 15 & 16.1 & 52 & 16.2 & 29&16.3 & 1&16.4 & 1 \\
+    }\fashionx
+    
+\pgfplotstableread[row sep=\\,col sep=&]{
+   Algo & RotateX & RotateY & ShadeX & ShadeY & ShearX & ShearY & ShiftXX & ShiftXY & ShiftYX & ShiftYY \\
+  CNN & 0 & -14 & 0.1 & 0 & 0.2 & -25 & 0.3 & -1 & 0.4 & -1 \\
+   NN& 4 & -17 & 4.1 & 0 & 4.2 & -30 & 4.3 & -1 & 4.4 & 0 \\
+   NB& 8 & -19 & 8.1 & 0 & 8.2 & -43 & 8.3 & -2 & 8.4 & -1 \\
+    SVM&12 & -17 & 12.1 & 0 & 12.2 & -40 & 12.3 & -1 & 12.4 & -1 \\
+    KNN&16 & -16 & 16.1 & 0 & 16.2 & -32 & 16.3 & -1 & 16.4 & -1 \\
+    }\fashiony
 
-\import{chapters/results/}{tables.tex}
+\begin{figure}[H]
 
-\newpage
-\section{Discussion}
-In this paper we identified five metamorphic properties "Rotation", "Shading", "Shearing", "Shifting the image along $x$ axis", and, "Shifting the image along $y$ axis" that can be used with image datasets. We then applied these metamorphic transformations to three datasets: MNIST, Fashion-MNIST, and, EMNIST. We then implemented five machine learning algorithms and measured the accuracy of the three datasets as well as the accuracy on the transformed dataset. We also investigated the accuracy of transformations on individual classes in the MNIST dataset and provided recommendations for creating follow up test cases from the MNIST dataset. These recommendations include the minimum and maximum values of transformations that can be used for the metamorphic properties. We also evaluated the robustness of the machine learning algorithms on these metamorphic properties. From this evaluation we found that convolutional neural-networks are more robust than the other machine learning algorithms we implemented. \\
-This paper also makes the a methodological contribution where we have provided a set of functions on the project's github page to easily manipulate, and, transform image datasets for future research. 
-% These functions can be used as frameworks to . 
-Future researchers can utilize these functions to plugin more algorithms and metamorphic properties.
+\begin{tikzpicture}
 
-% Contributions:
-% Methodological contribution where others can plugin more algors or MT.
-% Experimental contribution:Which algo does better.
+\begin{groupplot}[group style={group size= 1 by 2},xtick=\empty]%[ybar stacked,xtick=\empty,]%ytick=\empty]
+\nextgroupplot[ylabel={Degree of transfromation},ybar, bar width=.2cm,xtick=\empty,yshift=1cm, ymin=0,ymax=100,legend style = {at={(1.05, 0.5)}, anchor = west, legend columns =1, draw=none, area legend},  ymajorgrids = true,width=0.85\textwidth,height=.5\textwidth,]%ytick=\empty]
+\addplot[fill=blue,draw=black] table[x=RotateX,y=RotateY]{\fashionx};
+\addplot[fill=red,draw=black] table[x=ShadeX,y=ShadeY]{\fashionx};
+\addplot[fill=green,draw=black] table[x=ShearX,y=ShearY]{\fashionx};
+\addplot[fill=yellow,draw=black] table[x=ShiftXX,y=ShiftXY]{\fashionx};
+\addplot[fill=brown,draw=black] table[x=ShiftYX,y=ShiftYY]{\fashionx};
+
+\addlegendentry{Rotate}
+\addlegendentry{Shade}
+\addlegendentry{Shear}
+\addlegendentry{ShiftX}
+\addlegendentry{ShiftY}
+
+\nextgroupplot[ybar, width=0.85\textwidth,height=.5\textwidth, bar width=.2cm,yshift=1cm,ymin=-100,ymax=0,legend style = {at={(1.05, 1.65)}, anchor = west, legend columns =1, draw=none, area    legend},ymajorgrids = true,xtick=data, xticklabels from table={\fashiony}{Algo}, xticklabel style={yshift=-2ex, xshift=-2ex,anchor= west},xlabel={Algorithms}]
+\addplot[fill=blue,draw=black] table[x=RotateX,y=RotateY]{\fashiony};
+\addplot[fill=red,draw=black] table[x=ShadeX,y=ShadeY]{\fashiony};
+\addplot[fill=green,draw=black] table[x=ShearX,y=ShearY]{\fashiony};
+\addplot[fill=yellow,draw=black] table[x=ShiftXX,y=ShiftXY]{\fashiony};
+\addplot[fill=brown,draw=black] table[x=ShiftYX,y=ShiftYY]{\fashiony};
+
+\end{groupplot}
+\end{tikzpicture}
+
+\caption{Robustness graph for Fashion-MNIST}
+\label{fig:RobGraphforFashion}
+\end{figure}
+
+The figure \ref{fig:RobGraphforFashion} shows the same graph for the Fahion-MNIST dataset. Here the Naive Bayes algorithm shows the most robustness for all the five transformations since the dataset can be transformed for larger values before the accuracy is dissimilar to the original dataset.
 
 
-% Conclusions:
 
-% Framework to apply MT in midst of distortions.
-% CNN not so much better than others based on learning just from the dataset.
+\pgfplotstableread[row sep=\\,col sep=&]{
+    RotateX & RotateY & ShadeX & ShadeY & ShearX & ShearY & ShiftXX & ShiftXY & ShiftYX & ShiftYY \\
+    0 & 24 & 0.1 & 53 & 0.2 & 30 & 0.3 & 1 & 0.4 & 1 \\
+    4 & 19 & 4.1 & 61 & 4.2 & 24 & 4.3 & 1 & 4.4 & 0 \\
+    8 & 20 & 8.1 & 92 & 8.2 & 26 & 8.3 & 1 & 8.4 & 1 \\
+    12 & 21 & 12.1 & 51 & 12.2 & 29 & 12.3 & 1 & 12.4 & 1 \\
+    16 & 24 & 16.1 & 51 & 16.2 & 35 & 16.3 & 1 & 16.4 & 1 \\
+    }\letterx
+    
+\pgfplotstableread[row sep=\\,col sep=&]{
+   Algo & RotateX & RotateY & ShadeX & ShadeY & ShearX & ShearY & ShiftXX & ShiftXY & ShiftYX & ShiftYY \\
+  CNN & 0 & -20 & 0.1 & 0 & 0.2 & -30 & 0.3 & -1 & 0.4 & -1 \\
+  NN & 4 & -18 & 4.1 & 0 & 4.2 & -26 & 4.3 & -1 & 4.4 & -1 \\
+ NB& 8 & -17 & 8.1 & 0 & 8.2 & -23 & 8.3 & -1 & 8.4 & -1 \\
+ SVM& 12 & -20 & 12.1 & 0 & 12.2 & -33 & 12.3 & -1 & 12.4 & -1 \\
+    KNN&    16 & -25 & 16.1 & 0 & 16.2 & -45 & 16.3 & -1 & 16.4 & -1 \\
+    }\lettery
 
+\begin{figure}[H]
+
+\begin{tikzpicture}
+
+\begin{groupplot}[group style={group size= 1 by 2},xtick=\empty]%[ybar stacked,xtick=\empty,]%ytick=\empty]
+\nextgroupplot[ylabel={Degree of transfromation},ybar, bar width=.2cm,xtick=\empty,yshift=1cm, ymin=0,ymax=100,legend style = {at={(1.05, 0.5)}, anchor = west, legend columns =1, draw=none, area legend},  ymajorgrids = true,width=0.85\textwidth,height=.5\textwidth,]%ytick=\empty]
+\addplot[fill=blue,draw=black] table[x=RotateX,y=RotateY]{\letterx};
+\addplot[fill=red,draw=black] table[x=ShadeX,y=ShadeY]{\letterx};
+\addplot[fill=green,draw=black] table[x=ShearX,y=ShearY]{\letterx};
+\addplot[fill=yellow,draw=black] table[x=ShiftXX,y=ShiftXY]{\letterx};
+\addplot[fill=brown,draw=black] table[x=ShiftYX,y=ShiftYY]{\letterx};
+
+\addlegendentry{Rotate}
+\addlegendentry{Shade}
+\addlegendentry{Shear}
+\addlegendentry{ShiftX}
+\addlegendentry{ShiftY}
+
+\nextgroupplot[ybar, width=0.85\textwidth,height=.5\textwidth, bar width=.2cm,yshift=1cm,ymin=-100,ymax=0,legend style = {at={(1.05, 1.65)}, anchor = west, legend columns =1, draw=none, area    legend},ymajorgrids = true,xtick=data, xticklabels from table={\lettery}{Algo}, xticklabel style={yshift=-2ex, xshift=-2ex,anchor= west},xlabel={Algorithms}]
+\addplot[fill=blue,draw=black] table[x=RotateX,y=RotateY]{\lettery};
+\addplot[fill=red,draw=black] table[x=ShadeX,y=ShadeY]{\lettery};
+\addplot[fill=green,draw=black] table[x=ShearX,y=ShearY]{\lettery};
+\addplot[fill=yellow,draw=black] table[x=ShiftXX,y=ShiftXY]{\lettery};
+\addplot[fill=brown,draw=black] table[x=ShiftYX,y=ShiftYY]{\lettery};
+
+\end{groupplot}
+\end{tikzpicture}
+
+\caption{Robustness graph for EMNIST-Letter}
+\label{fig:RobGraphforMNIST}
+\end{figure}
+
+Similarly, for the MNIST-Letter dataset, we find that the $k$NN algorithm is the most robust for all the transformation except shading. For the shading algorithm, the Naive Bayes algorithm shows the most robustness.

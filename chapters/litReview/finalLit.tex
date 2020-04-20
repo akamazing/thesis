@@ -1,4 +1,20 @@
-\section{Software testing}
+% Testing without oracles
+% - Overview (Weyuker 1982), (Barr, et al. 2015), (Elbaum and Rosenblum 2014) 
+% - Differential testing (McKeeman 1998)
+% - Dual coding/N-version programming, ... 
+% - Metamorphic testing (Chen, et al. 1998, 2018, ...), (Liu, et al. 2014), (Segura, et al. 2016)
+%   - Applications of metamorphic testing: scientific software, ...
+
+% Machine learning
+% - Overview
+% - Common algorithms
+% - Robustness of machine learning (Carlini and Wagner 2017), (Moosavi-Dezfooli, et al. 2016), (Zheng, et al. 2016)
+
+% Metamorphic testing of ML programs (Gail Kaiser lab papers)
+
+
+
+\section{Testing without oracle}
 Testing is one of the most crucial activities in the software development life cycle. Bertolino \cite{Bertolino2007} define software testing as, \enquote{observing the execution of a software system to validate whether it behaves as intended and identify potential malfunctions}. Software testing is a very common practice in the software industry and is used to ensure the quality of the product. Software testing is an umbrella term that encompasses a wide range of different sub tasks, like unit testing a small piece of code, acceptance testing a large information system for customer validation, monitoring the application at run-time to ensure continuous service, etc.\cite{Bertolino2007} A study by Beizer \cite{Beizer1990} has estimated that software testing can use up to fifty percent, or more, of the total development cost. Thus, it is clear that program software testing is worthy of our attention for research and improvement \cite{Beizer1990}.\\
 Weyuker \cite{Weyuker} categorizes the testing research activities into three categories:
 \begin{enumerate}
@@ -29,11 +45,10 @@ Although non-testable programs occur in all areas of software engineering, the p
   \item \enquote{The output of each of each test datum.}
   \item \enquote{How the results were determined to be correct or acceptable.}
 \end{enumerate}
-Although these recommendations do not solve the problem of lack of oracle, however, they do provide information on whether the program should be considered adequately tested or not.
-
-Due to a great deal of overhead involved, pseudo-oracles may not be practical for every situation.  
+Although these recommendations do not solve the problem of lack of oracle, however, they do provide information on whether the program should be considered adequately tested or not. Due to a great deal of overhead involved, pseudo-oracles may not be practical for every situation.  
 % A different, and frequently employed course of action is to run the program on 'simplified' data for which the correctness of the results can be accurately and readily determined. The tester then extrapolates from the correctness of the test results on these simple cases to correctness for more complicated cases. In this case, we are deliberately omitting test cases even though these cases may have been identified as important. They are not being omitted because it is not expected that they will yield substantial additional information, but rather because they are impossible, too difficult, or too expensive to check. The problem with using simple test cases is very obvious i.e. it is common for central cases to work perfectly whereas boundary cases to cause errors. \cite{Weyuker}
 
 Another course of action that is used often in these situations is to test the program on "simplified" test data for which the correct output can be easily determined. Testers can then extrapolate the results for more complex cases from the output of the "simplified" test data. However, not all test cases can be generated with this technique. This deliberate omission of even the important test cases is because they might be too difficult, if not, impossible to check and not because they are not expected to yield useful information. The second problem with using simple test cases is very obvious i.e. it is normal for central and simple cases to work perfectly, whereas edge cases that may be ignored tend to cause errors. \cite{Weyuker}
 
- Developing sophisticated oracles is another way of encountering the oracle problem. If the oracles are very relaxed such that they tolerate the effects of uncertainties, then there is a chance that a fault may be masked. On the other hand, f the oracles are too narrow, it may cause them to generate false positives, resulting in wasted developer's time \cite{Elbaum2014}.
+ 
+ A third and more effective method of addressing some of the concerns about the oracle problem is the use of differential testing. McKeeman \cite{McKeeman98differentialtesting} first introduced the idea of differential testing, which works by testing a dataset on two or more comparable systems. The systems are run with mechanically generated test cases, and their output is observed. If one of the systems crashes or goes into an infinite loop, we have detected a potential bug in the implementation. Differential testing is widely used as a method to discover semantic bugs. It has successfully uncovered bugs in various domains like C compilers, JVM, SSL/TLS implementations, etc. However, since it requires two or more similar systems, it inherits some of the same problems of pseudo-oracle testing. Developing sophisticated oracles is another way of encountering the oracle problem. If the oracles are very relaxed such that they tolerate the effects of uncertainties, then there is a chance that a fault may be masked. On the other hand, f the oracles are too narrow, it may cause them to generate false positives, resulting in wasted developer's time \cite{Elbaum2014}.

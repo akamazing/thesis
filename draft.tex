@@ -52,8 +52,12 @@
 \begin{document}
 
 % Affect of MR on the robustness of ML algo
-%\title{Affect of Metamorphic Relations on the robustness of Machine Learning algorithms}
-\title{Assessing Robustness of Machine Learning Algorithms Using Metamorphic Testing}
+% \title{Effect of Metamorphic Relations on the robustness of Machine Learning algorithms}
+% \title{Assessing robustness of machine learning algorithms using metamorphic testing}
+
+\title{Using affine transformations as metamorphic relations to test machine learning algorithms}
+
+% \title{Assessing Robustness of Machine Learning Algorithms Using Metamorphic Properties}
 \author{Abhishek Kumar}
 \adviser{Harvey Siy, Ph.D.}
 \adviserAbstract{Harvey Siy, Ph.D.}
@@ -89,9 +93,40 @@
 %%
 %% Required
 \begin{abstract}
-% Metamorphic testing is rapidly gaining popularity as a method of testing non-testable programs. A program is called non-testable if there are no oracle to test them. The problem is more acute in machine-learning algorithms in absence of a reliable oracle. Dual coding can be used to eliminate some of these problems. However, they can be computationally and financially expensive and come with their own set of problems. In this paper we identified five new metamorphic transformations for image datasets which can be used to generate follow-up test case. These metamorphic properties were then applied to three datasets: MNIST, Fashion-MNIST, and, EMNIST-Letter. To test the accuracy of the transformations we implemented five common machine learning algorithms.
+\begin{flushleft}
 
+% As machine learning applications have gone into mainstream use, it is increasingly important to find ways of assessing the reliability of their outputs. Unlike conventional software applications, there is no known approach for systematically testing machine learning applications. 
+% %There is no useful coverage metric, no formal verification tool, and no code review techniques that can be usefully applied. 
+% % It is because there is no useful oracle due to the large input space for such applications. One of the most common uses of machine learning is for image recognition. Accurate image recognition needs to account for variations in color, lighting, shapes, orientations and distortions that the machine has not ``seen'' before. Similar problems exist for speech recognition and other pattern recognition problems. 
+% It is because of lack of useful oracles due to the large input space for such applications. One of the most common uses of machine learning is for image recognition. Accurate image recognition needs to account for variations in color, lighting, shapes, orientations and distortions that the machine has not ``seen'' before. Similar problems exist for speech recognition and other pattern recognition problems. 
+
+% Metamorphic testing is a promising approach for testing such applications. Metamorphic testing makes use of successful test cases to generate additional test inputs. The main idea is that a small change in the input from a known test case should lead to a similarly small change (or no change) in the output. The changes to the test cases are guided and constrained by metamorphic relations, which are known properties of the application that relate its inputs to the intended outputs.
+% In this thesis, we developed a metamorphic testing framework for assessing the robustness of machine learning algorithms. We broadly define robustness as the ability of the machine to provide correct responses to inputs it had not seen before. In our framework, we use a simple metamorphic relation: small changes in the input image should not lead to a different classification by the machine. In this framework, we implemented 5 machine learning algorithms and trained them on the same dataset. We then apply a set of affine transformations to the test data to generate follow-up test data. We feed the follow-up test data to the algorithms and check if the outputs match the original training outputs. The transformations are progressively increased to identify the breaking point of the algorithms. 
+% % In this thesis, I developed a metamorphic testing framework for assessing the robustness of machine learning algorithms, focusing on image recognition. We broadly define robustness as the ability of the machine to provide correct responses to inputs it had not seen before. In our framework, we use a simple metamorphic relation: small changes in the input image should not lead to a different classification by the machine. In this framework, we implemented 5 machine learning algorithms and trained them on the same dataset. We then apply a set of affine transformations to the training data, feed them to the algorithms and check if the outputs match the original training outputs. The transformations are progressively increased to identify the breaking point of the algorithms. 
+
+% Our results on 3 image databases from the MNIST dataset indicate that deep learning algorithms like CNN do not do as well as simpler machine learning algorithms on the transformed inputs. Also, all machine learning algorithms are more sensitive to image translations than other transformations such as rotation and shearing. Based on the results of the study, we provide guidelines to use our metamorphic properties to generate follow-up test cases for machine learning algorithms. Finally, we generated a new test dataset with these recommendations to assess the robustness of the algorithms.
+
+
+
+% Metamorphic testing is rapidly gaining popularity as a method of testing non-testable programs. A program is called non-testable if there is no oracle to test them. The problem is more acute in machine-learning algorithms, which are designed to predict the correct output in the first place. Dual coding is used to eliminate some of these problems; however, they can be computationally and financially expensive and come with their own set of problems. Metamorphic testing can be used in these situations to create follow-up test cases from existing ones. In this paper, we identified five new metamorphic transformations for image datasets, which can be used as a test case generation strategy to create similar follow-up test case. These metamorphic properties are then applied to three datasets: MNIST, Fashion-MNIST, and, EMNIST-Letter. To test how the individual classes in a dataset are affected by the transformations, we implemented five common machine learning algorithms. Finally, based on the results of the study, we provide guidelines to use our metamorphic properties to generate follow-up test cases for machine learning algorithms.
+% Metamorphic testing is typically performed in two steps. The first step is to generate follow-up test cases by applying transformations to the source test data. Next, the source and follow-up test cases are tested one by one, verifying whether their outputs violate the metamorphic relation. 
+% To test the impact of the transformations on individual classes in a dataset, we implemented five common machine learning algorithms. Based on the results of the study, we provide guidelines to use our metamorphic properties to generate follow-up test cases for machine learning algorithms. Finally, we generated a dataset with these recommendations and assessed the robustness of the algorithms.
 % metamorphic test case is typically performed in two steps. First,a follow-up test case is generated by applying a transformation to the inputs of a sourcetest case. Second, source and follow-up test cases are executed, checking whether theiroutputs violate the metamorphic relation.
+% Metamorphic testing is rapidly gaining popularity as a method of testing non-testable programs. A program is considered non-testable if there is no oracles to test it. The problem is more acute in machine-learning algorithms, which are designed to predict the correct output in the first place. Techniques like dual coding where multiple implementations of the same specification are generated independently can be used to eliminate some of these problems. However, they can be computationally and financially expensive and come with their own set of challenges. Chen, Cheung, and Yiu\cite{Chen1998} \iffalse(1998) \fi first introduced the idea of metamorphic testing to make use of valuable information in successful test cases in order to answer the oracle problem. Metamorphic relations can be used in the absence of an oracle to create follow-up test cases from existing ones whose outputs can be easily predicted. A metamorphic relation(MR) is defined as "an expected relation among input and outputs of multiple executions of the target program". 
+
+% In this study, we investigate the effect of metamorphic properties on individual classes in a dataset and the robustness of some common machine learning algorithms. We first identified five new metamorphic transformations for image datasets, which can be used as test case generation strategies. These metamorphic properties are then applied to three datasets: MNIST, Fashion-MNIST, and, EMNIST-Letter with varying degrees to generate follow-up test cases. 
+
+% We also implemented five common machine learning algorithms to test the impact of metamorphic transformations on their robustness. Based on the results of the study, we provide guidelines to use our metamorphic properties to generate follow-up test cases for machine learning algorithms. Finally, we generated a new test dataset with these recommendations to assess the robustness of the algorithms.
+As machine learning applications have gone into mainstream use, it is increasingly important to find ways of assessing the reliability of their outputs. Unlike conventional software applications, there is no known approach for systematically testing machine learning applications. 
+It is because of a lack of useful oracles due to the large input space for such applications. One of the most common uses of machine learning is image recognition. Accurate image recognition needs to account for variations in color, lighting, shapes, orientations, and distortions that the machine has not ``seen'' before. Similar problems exist for speech recognition and other pattern recognition problems. 
+
+
+Metamorphic testing is a promising approach for testing such applications. It makes use of successful test cases to generate additional test inputs. The main idea is that a small change in the input from a known test case should lead to a similarly small change (or no change) in the output. The changes to the test cases are guided and constrained by metamorphic relations, which are defined as "expected relation among input and output of multiple executions of a program."
+
+
+In this study, we developed a metamorphic testing framework for testing machine learning algorithms. In our framework, we use a simple metamorphic relation: small changes in the input image should not lead to a different classification by the machine. In this framework, we implemented five machine learning algorithms and trained them on the same dataset. We then apply a set of affine transformations to the test data to generate follow-up test data. We feed the follow-up test data to the algorithms and compare the output to the original outputs. We progressively increase the transformations to identify the ``breaking point" of the algorithms. 
+Our results on three image databases indicate that machine learning algorithms are more sensitive to image translations than other transformations such as rotation and shearing. Based on the results of the study, we provide guidelines to use our metamorphic properties to generate follow-up test cases for machine learning algorithms. Finally, we generated a new test dataset with these recommendations to assess the robustness of the algorithms.
+\end{flushleft}
 \end{abstract}
 
 %% Start formatting the first few special pages
@@ -107,9 +142,9 @@
 %% \end{dedication}
 
 %% Optional
-\begin{acknowledgments}
- Acknowledgments here
-\end{acknowledgments}
+% \begin{acknowledgments}
+% %  Acknowledgments here
+% \end{acknowledgments}
 
 %% Optional
 %% \begin{grantinfo}
@@ -145,11 +180,10 @@
 \import{chapters/litReview/}{MRMLalgo.tex}
 
 \chapter{Methodology}
-\import{chapters/methodology/}{collection.tex}
-\newpage
+\import{chapters/methodology/}{tools.tex}
 \import{chapters/methodology/}{properties.tex}
-\newpage
-\import{chapters/methodology/}{analysis.tex}
+\import{chapters/methodology/}{dataset.tex}
+\import{chapters/methodology/}{algorithms.tex}
 %selection of MR
 %Analysis of results
 %No. of transformation before degrading
@@ -162,7 +196,8 @@
 \chapter{Results}
 \import{chapters/results/}{results.tex}
 
-
+\chapter{Discussion}
+\import{chapters/results/}{discussion.tex}
 
 %% backmatter is needed at the end of the main body of your thesis to
 %% set up page numbering correctly for the remainder of the thesis
