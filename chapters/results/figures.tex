@@ -109,7 +109,7 @@ As we discussed in section \ref{identifyingMR}, the follow-up test cases were ge
         \label{fig:Digit by misclassification for ShiftY MR}
     \end{figure}
     
-  To further compare the accuracy of the different classes, we calculated the area under each curve for each plot. The following tables show the area under the curve for each class $[0,9]$ in the above graphs. The cells with \textcolor{green}{green} background has the highest value among all the cells in that row, and the ones in \textcolor{red}{red} has the lowest.
+  To answer the second research question and compare the accuracy of the different classes, we calculated the area under each curve for each plot. The following tables show the area under the curve for each class $[0,9]$ in the above graphs. The cells with \textcolor{green}{green} background has the highest value among all the cells in that row, and the ones in \textcolor{red}{red} has the lowest.
     \begin{table}[H]
     \centering
         \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
@@ -127,7 +127,7 @@ As we discussed in section \ref{identifyingMR}, the follow-up test cases were ge
         SVM & \cellcolor{green!25}93.97 & 76.54 & \cellcolor{red!25}50.38 & 60.45 & 76.49 & 51.74 & 79.87 & 61.49 & 61.58 & 53.49 \\
         \hline
         \end{tabular}
-        \caption{Area under curve for each class for MR: Rotation.}
+        \caption{Area under curve for each class for MR: Rotate.}
         \label{tbl:test-file-formatRotate}
     \end{table}
     
@@ -151,7 +151,7 @@ As we discussed in section \ref{identifyingMR}, the follow-up test cases were ge
     SVM & 47.12 & \cellcolor{green!25}99.61 & 47.91 & 44.62 & 53.40 & 56.73 & 47.62 & 52.26 & \cellcolor{red!25}31.80 & 41.23 \\
     \hline
     \end{tabular}
-    \caption{Area under curve for each class for MR: Shading.}
+    \caption{Area under curve for each class for MR: Shade.}
     \label{tbl:test-file-formatShade}
     \end{table}
     In table \ref{tbl:test-file-formatShade}, we see that the digit $1$ had the highest accuracy as compared to every other class in the dataset for every algorithm we implemented. On the other hand, the digit $8$ had the lowest accuracy in four out of the five algorithms we implemented.
@@ -219,11 +219,11 @@ As we discussed in section \ref{identifyingMR}, the follow-up test cases were ge
     \end{table}
     For the metamorphic transformation shiftY, we find that the digit $1$ has the highest area under the curve for all but the seven-layer neural network implementation. Thus, images with class $1$ can be shifted to a larger value before they get confused with other classes.
     
-A similar analysis was also done for the Fashion-MNIST, and, EMNIST dataset but due to space limitation they are not reported here, instead, they are reported on the project's github page \cite{abhishek2020}.
+From the analysis above we conclude that metamorphic transformations affect the classes differently and their effect on the individual classes should be considered while creating follow-up test cases. A similar analysis was also done for the Fashion-MNIST, and, EMNIST dataset but due to space limitations they are not reported here, instead, they are reported on the project's github page \cite{abhishek2020}.
 
 \section{Recommendations}
 % In the tables 4.2 to 4.6 we have seen that the different classes are affected differently depending upon the algorithm and the metamorphic transformation applied to them. In this section, we want to make recommendations to pick the best values for the metamorphic properties such that the the accuracy of the transformed dataset will be close to the original dataset. For our purpose we define accuracy being close as it being within $90\%$ of the origin dataset. To do this we first calculated the accuracy of each class in the original dataset without applying any transformation. We then calculated the degrees of transformation for which the accuracy of the transformed dataset was greater than or equal to $90\%$ of the accuracy of the original dataset for the five algorithms. Based on this exercise we make the recommendation to testers who want to use these properties to generate follow-up test cases. The following table shows the minimum and maximum values of transformations: 
-In tables \ref{tbl:test-file-formatRotate} to \ref{tbl:test-file-formatShiftY}, we have seen that the different classes are affected differently depending upon the algorithm, and the metamorphic transformation applied to them. In this section, we want to make recommendations to pick the best values for transforming metamorphic properties such that the accuracy of the transformed dataset will be close to the original dataset. For this framework, we define accuracy being close as it is within $90\%$ of the original dataset. A tester will be able to use these recommendations to generate new data that are similar to the original dataset.
+In tables \ref{tbl:test-file-formatRotate} to \ref{tbl:test-file-formatShiftY}, we have seen that the different classes are affected differently depending upon the algorithm, and the metamorphic transformation applied to them. In this section, we answer the third research question by making recommendations to pick the best values for transforming metamorphic properties such that the accuracy of the transformed dataset will be close to the original dataset. For this framework, if the accuracy of the follow-up test cases is above $90\%$ of the original dataset, it is considered close to the original dataset. A tester will be able to use these recommendations to generate new data that are similar to the original dataset.
 To make the recommendations, we first calculated the accuracy of each class in the original dataset without applying any transformation. We then calculated the degrees of transformation for which the transformed dataset was similar to the original dataset by testing them on five algorithms. Since different algorithms had different values for the range of transformations, we took the minimum range from all the algorithms.
 Based on this exercise, we make the recommendation to testers who want to use these properties to generate follow-up test cases. The table \ref{tbl:indexrecommendations} shows the minimum and maximum values of transformations for each class of data in the MNIST dataset which will produce a dataset similar to the origin dataset: 
 % where the accuracy was found to be within $90\%$ of the accuracy without any transformation.

@@ -55,8 +55,8 @@
 % \title{Effect of Metamorphic Relations on the robustness of Machine Learning algorithms}
 % \title{Assessing robustness of machine learning algorithms using metamorphic testing}
 
-\title{Using affine transformations as metamorphic relations to test machine learning algorithms}
-
+% \title{Using affine transformations as metamorphic relations to test machine learning algorithms}
+\title{Validating Machine Learning Applications with Metamorphic Testing}
 % \title{Assessing Robustness of Machine Learning Algorithms Using Metamorphic Properties}
 \author{Abhishek Kumar}
 \adviser{Harvey Siy, Ph.D.}
@@ -117,15 +117,26 @@
 % In this study, we investigate the effect of metamorphic properties on individual classes in a dataset and the robustness of some common machine learning algorithms. We first identified five new metamorphic transformations for image datasets, which can be used as test case generation strategies. These metamorphic properties are then applied to three datasets: MNIST, Fashion-MNIST, and, EMNIST-Letter with varying degrees to generate follow-up test cases. 
 
 % We also implemented five common machine learning algorithms to test the impact of metamorphic transformations on their robustness. Based on the results of the study, we provide guidelines to use our metamorphic properties to generate follow-up test cases for machine learning algorithms. Finally, we generated a new test dataset with these recommendations to assess the robustness of the algorithms.
+
+% As machine learning applications have gone into mainstream use, it is increasingly important to find ways of assessing the reliability of their outputs. Unlike conventional software applications, there is no known approach for systematically testing machine learning applications. 
+% It is because of a lack of useful oracles due to the large input space for such applications. One of the most common uses of machine learning is image recognition. Accurate image recognition needs to account for variations in color, lighting, shapes, orientations, and distortions that the machine has not ``seen'' before. Similar problems exist for speech recognition and other pattern recognition problems. 
+
+
+% Metamorphic testing is a promising approach for testing such applications. It makes use of successful test cases to generate additional test inputs. The main idea is that a small change in the input from a known test case should lead to a similarly small change (or no change) in the output. The changes to the test cases are guided and constrained by metamorphic relations, which are defined as "expected relation among input and output of multiple executions of a program."
+
+
+% In this study, we developed a metamorphic testing framework for testing machine learning algorithms. In our framework, we use a simple metamorphic relation: small changes in the input image should not lead to a different classification by the machine. In this framework, we implemented five machine learning algorithms and trained them on the same dataset. We then apply a set of affine transformations to the test data to generate follow-up test data. We feed the follow-up test data to the algorithms and compare the output to the original outputs. We progressively increase the transformations to identify the ``breaking point" of the algorithms. 
+% Our results on three image databases indicate that machine learning algorithms are more sensitive to image translations than other transformations such as rotation and shearing. Based on the results of the study, we provide guidelines to use our metamorphic properties to generate follow-up test cases for machine learning algorithms. Finally, we generated a new test dataset with these recommendations to assess the robustness of the algorithms.
+
 As machine learning applications have gone into mainstream use, it is increasingly important to find ways of assessing the reliability of their outputs. Unlike conventional software applications, there is no known approach for systematically testing machine learning applications. 
-It is because of a lack of useful oracles due to the large input space for such applications. One of the most common uses of machine learning is image recognition. Accurate image recognition needs to account for variations in color, lighting, shapes, orientations, and distortions that the machine has not ``seen'' before. Similar problems exist for speech recognition and other pattern recognition problems. 
+It is because of a lack of useful oracles due to the large input space for such applications. One of the most common uses of machine learning is image recognition. Accurate image recognition needs to account for variations in color, lighting, shapes, orientations, and distortions that the machine has not ``seen'' before. 
+
+Metamorphic testing is a promising approach for testing such applications. It makes use of successful test cases to generate additional test inputs. The main idea is that a small change in the input from a known test case should lead to a similarly small change (or no change) in the output. The changes to the test cases are constrained by metamorphic relations, which are defined as "expected relation among input and output of multiple executions of a program."
 
 
-Metamorphic testing is a promising approach for testing such applications. It makes use of successful test cases to generate additional test inputs. The main idea is that a small change in the input from a known test case should lead to a similarly small change (or no change) in the output. The changes to the test cases are guided and constrained by metamorphic relations, which are defined as "expected relation among input and output of multiple executions of a program."
-
-
-In this study, we developed a metamorphic testing framework for testing machine learning algorithms. In our framework, we use a simple metamorphic relation: small changes in the input image should not lead to a different classification by the machine. In this framework, we implemented five machine learning algorithms and trained them on the same dataset. We then apply a set of affine transformations to the test data to generate follow-up test data. We feed the follow-up test data to the algorithms and compare the output to the original outputs. We progressively increase the transformations to identify the ``breaking point" of the algorithms. 
+In this study, we developed a metamorphic testing framework for testing machine learning algorithms. In our framework, we use a simple metamorphic relation: small changes in the input image should not lead to a different classification by the machine. We implemented five machine learning algorithms and trained them on the same dataset. We then apply a set of affine transformations to the test data to generate follow-up test data. We feed the follow-up test data to the algorithms and compare the output to the original outputs. We progressively increase the transformations to identify the ``breaking point" of the algorithms. 
 Our results on three image databases indicate that machine learning algorithms are more sensitive to image translations than other transformations such as rotation and shearing. Based on the results of the study, we provide guidelines to use our metamorphic properties to generate follow-up test cases for machine learning algorithms. Finally, we generated a new test dataset with these recommendations to assess the robustness of the algorithms.
+
 \end{flushleft}
 \end{abstract}
 
@@ -141,10 +152,12 @@ Our results on three image databases indicate that machine learning algorithms a
 %% \begin{dedication}
 %% \end{dedication}
 
-%% Optional
-% \begin{acknowledgments}
-% %  Acknowledgments here
-% \end{acknowledgments}
+% Optional
+\begin{acknowledgments}
+I am extremely grateful to my advisor Dr. Harvey Siy for his continued advice and support. This thesis would not be possible without his help and guidance. He provided incredible insight and encouragement throughout this process. I would also like to thank the members of the thesis committee, Dr. Matthew Hale and Dr. Myoungkyu Song, for serving on the committee and providing valuable recommendations, insightful comments, and hard questions.
+
+Finally, I would like to extend my deepest gratitude to my parents for providing me with unfailing support and continuous encouragement throughout my years of study. This accomplishment would not have been possible without them. Thank you.
+\end{acknowledgments}
 
 %% Optional
 %% \begin{grantinfo}

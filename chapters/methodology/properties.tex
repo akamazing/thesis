@@ -1,5 +1,7 @@
-\section{Identifying Metamorphic Relations} \label{identifyingMR}
-To answer our first research question, we implemented some affine transformations on the datasets as possible candidates for metamorphic properties. We observed that applying these affine transformations on the dataset to a very small degree produced similar accuracy as that of the original dataset. Thus we selected these five transformations as metamorphic properties for each dataset: rotate, shear, shade, shift the image along $x$-axis, and shift the image along $y$-axis. Each image in the testing dataset (MNIST, Fashion-MNIST, and EMNIST-Letter) was transformed using these five metamorphic properties. We used Keras image preprocessing functions to apply these transformations to the test data in each dataset to generate new data to measure robustness.
+\section{Identifying Metamorphic Transformations} \label{identifyingMR}
+Some common problems with images are that they can have some small random rotations, or they could be located a bit off from the center, or the exposure of the picture could be high. These problems with images prompted us to look into affine transformations as a possible set of transformations to use for this project. To answer our first research question, we implemented some affine transformations on the datasets as possible candidates for metamorphic properties. We observed that applying these affine transformations on the dataset to a very small degree produced similar accuracy as that of the original dataset. Thus we selected these five transformations as metamorphic properties for each dataset: rotate, shear, shade, shift the image along $x$-axis, and shift the image along $y$-axis. It should be noted that there more affine transformations than the five we identified, and they can be used as metamorphic transformation as well. However, these transformations appear to be the most common ways one can manipulate image datasets. Each image in the testing dataset (MNIST, Fashion-MNIST, and EMNIST-Letter) was transformed using these five metamorphic properties. We used Keras image preprocessing functions to apply these transformations to the test data in each dataset to generate new data to measure robustness.
+
+After some primary investigation using the transformed datasets and some standard machine learning algorithms, we saw that the machine learning algorithms produced very similar accuracies on datasets, which were very similar to the original dataset. Thus, we defined our metamorphic relation as "a small change in the input from a known test case should lead to a similarly small change (or no change) in the output." We use this metamorphic relation for all the transformations.
 
 There are $10000$ test images in the MNIST dataset. There are $10$ class labels from $0$ to $9$, and each class label has $1000$ samples. We applied the following metamorphic properties to each test image.
 \subsection{Rotate}
@@ -38,19 +40,19 @@ We represent the pixels of the MNIST images as floating point numbers between 0 
         \begin{subfigure}[b]{.3\textwidth}
             \centering
             \includegraphics[width=\linewidth]{images/shade1.png}
-            \caption{Value: 0}
+            \caption{Shading Value: 0}
             \label{fig:Rotate-misclass0}
         \end{subfigure}%
         \begin{subfigure}[b]{.3\textwidth}
             \centering
             \includegraphics[width=\textwidth]{images/shade2.png}
-            \caption{Value: 80}
+            \caption{Shading Value: 0.80}
             \label{fig:Rotate-misclass0}
         \end{subfigure}%
         \begin{subfigure}[b]{.3\textwidth}
             \centering
             \includegraphics[width=\linewidth]{images/shade3.png}
-            \caption{Value: 99}
+            \caption{Shading Value: 0. 99}
             \label{fig:Rotate-misclass0}
         \end{subfigure}
         
@@ -93,19 +95,19 @@ Since the images are $28$ pixels wide, shifting the images by more than 28 pixel
         \begin{subfigure}[b]{.3\textwidth}
             \centering
             \includegraphics[width=\linewidth]{images/shiftx1.png}
-            \caption{Value: 10}
+            \caption{Pixel shift: 10}
             \label{fig:Rotate-misclass0}
         \end{subfigure}%
         \begin{subfigure}[b]{.3\textwidth}
             \centering
             \includegraphics[width=\textwidth]{images/shiftx2.png}
-            \caption{Value: 0}
+            \caption{Pixel shift: 0}
             \label{fig:Rotate-misclass0}
         \end{subfigure}%
         \begin{subfigure}[b]{.3\textwidth}
             \centering
             \includegraphics[width=\linewidth]{images/shiftx3.png}
-            \caption{Value: -10}
+            \caption{Pixel shift: -10}
             \label{fig:Rotate-misclass0}
         \end{subfigure}
         
@@ -121,19 +123,19 @@ The last metamorphic property we identified was shifting the images on the Y-axi
         \begin{subfigure}[b]{.3\textwidth}
             \centering
             \includegraphics[width=\linewidth]{images/shifty1.png}
-            \caption{Value: -10}
+            \caption{Pixel shift: -10}
             \label{fig:Rotate-misclass0}
         \end{subfigure}%
         \begin{subfigure}[b]{.3\textwidth}
             \centering
             \includegraphics[width=\textwidth]{images/shifty2.png}
-            \caption{Value: 0}
+            \caption{Pixel shift: 0}
             \label{fig:Rotate-misclass0}
         \end{subfigure}%
         \begin{subfigure}[b]{.3\textwidth}
             \centering
             \includegraphics[width=\linewidth]{images/shifty3.png}
-            \caption{Value: 10}
+            \caption{Pixel shift: 10}
             \label{fig:Rotate-misclass0}
         \end{subfigure}
         
